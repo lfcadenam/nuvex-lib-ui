@@ -1,0 +1,61 @@
+# =============================================================================
+# Nuvex UI - Configuración del Registro Privado Verdaccio
+# =============================================================================
+storage: /verdaccio/storage
+plugins: /verdaccio/plugins
+
+web:
+  title: Nuvex UI - Registro Privado NPM
+  logo: ''
+  primary_color: '#00C975'
+  scope: '@nuvex'
+
+auth:
+  htpasswd:
+    file: /verdaccio/storage/htpasswd
+    # Permite registrar los primeros usuarios desarrolladores de Nuvex
+    max_users: 1000
+
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+    cache: true
+
+packages:
+  'nuvex-ui':
+    # Paquete principal de la librería Nuvex
+    access: $all
+    publish: $authenticated
+    unpublish: $authenticated
+
+  '@nuvex/*':
+    # Soporte para paquetes con scope @nuvex/
+    access: $all
+    publish: $authenticated
+    unpublish: $authenticated
+
+  '@*/*':
+    # Fallback para paquetes scoped públicos de NPM
+    access: $all
+    publish: $authenticated
+    unpublish: $authenticated
+    proxy: npmjs
+
+  '**':
+    # Fallback para paquetes públicos de NPM
+    access: $all
+    publish: $authenticated
+    unpublish: $authenticated
+    proxy: npmjs
+
+server:
+  keepAliveTimeout: 60
+
+middlewares:
+  audit:
+    enabled: true
+
+logs:
+  type: stdout
+  format: pretty
+  level: http

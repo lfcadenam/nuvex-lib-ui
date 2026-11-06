@@ -4,13 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve showcase",
-    "build": "ng build",
+    "build": "ng build showcase",
     "build:lib": "ng build nuvex-ui",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test nuvex-ui --watch=false",
-    "test:lib": "ng test nuvex-ui --watch=false",
-    "test:watch": "ng test nuvex-ui",
-    "serve:ssr:showcase": "node dist/showcase/server/server.mjs"
+    "build:showcase": "ng build showcase",
+    "build:all": "npm run build:lib && npm run build:showcase"
   },
   "private": true,
   "packageManager": "npm@11.19.1",

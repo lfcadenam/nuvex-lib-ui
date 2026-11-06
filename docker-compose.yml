@@ -1,0 +1,52 @@
+services:
+  # =========================================================================
+  # 1. Registro Privado NPM (Verdaccio)
+  # =========================================================================
+  verdaccio:
+    image: verdaccio/verdaccio:5
+    container_name: nuvex-npm-registry
+    restart: unless-stopped
+    environment:
+      - VIRTUAL_HOST=npm.nuvex-tecnologia.com
+      - LETSENCRYPT_HOST=npm.nuvex-tecnologia.com
+      - LETSENCRYPT_EMAIL=admin@nuvex-tecnologia.com
+      - VIRTUAL_PORT=4873
+    volumes:
+      - ./docker/verdaccio/config.yaml:/verdaccio/conf/config.yaml:ro
+      - verdaccio-storage:/verdaccio/storage
+      - verdaccio-plugins:/verdaccio/plugins
+    networks:
+      - proxy-network
+
+  # =========================================================================
+  # 2. Catálogo y Documentación Visual (Showcase Nuvex UI SPA)
+  # =========================================================================
+  showcase:
+    build:
+      context: .
+      dockerfile: docker/showcase/Dockerfile
+    container_name: nuvex-ui-showcase
+    restart: unless-stopped
+    environment:
+      - VIRTUAL_HOST=ui.nuvex-tecnologia.com
+      - LETSENCRYPT_HOST=ui.nuvex-tecnologia.com
+      - LETSENCRYPT_EMAIL=admin@nuvex-tecnologia.com
+      - VIRTUAL_PORT=80
+    networks:
+      - proxy-network
+
+# =========================================================================
+# Redes Externas (Proxy Nginx existente en VPS) y Volúmenes Persistentes
+# =========================================================================
+networks:
+  proxy-network:
+    external: true
+    name: elan_default
+
+volumes:
+  verdaccio-storage:
+    name: nuvex-verdaccio-storage
+    driver: local
+  verdaccio-plugins:
+    name: nuvex-verdaccio-plugins
+    driver: local
