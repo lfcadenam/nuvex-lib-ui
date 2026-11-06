@@ -1,0 +1,97 @@
+<div class="doc-page">
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag">Estructura Nuvex Capsule</span>
+      <span class="doc-version">nuvex-ui/topbar</span>
+    </div>
+    <h1 class="doc-title">Topbar</h1>
+    <p class="doc-description">
+      Cabecera horizontal flotante con navegación en píldora translúcida (backdrop-blur-md), indicador de actividad en vivo y menú de usuario oficial con las 4 opciones autorizadas de Nuvex.
+    </p>
+
+    <!-- Selector de vista -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+        Vista Previa
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'code'"
+        (click)="activeTab.set('code')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+        Código Fuente
+      </button>
+    </div>
+  </header>
+
+  @if (activeTab() === 'preview') {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Topbar Completa en Funcionamiento</h3>
+        <p class="doc-sub">Prueba hacer click en las pestañas y en el avatar de usuario para ver el menú oficial en cápsula.</p>
+
+        <div class="demo-display" style="padding: 1.25rem 1.5rem; background-color: var(--nvl-surface-100); width: 100%; max-width: 100%; box-sizing: border-box; overflow-x: auto;">
+          <nuvex-topbar
+            brandTitle="Nuvex Cloud"
+            [tabs]="tabs"
+            [(activeTabId)]="selectedTabId"
+            liveMetric="1.2k live now"
+            [user]="demoUser"
+            (onMenuSelect)="handleMenuOption($event)"
+          >
+            <!-- Logo personalizado en ranura de marca -->
+            <div slot="brand" style="width: 2.25rem; height: 2.25rem; border-radius: 0.75rem; background: #111215; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800;">
+              N
+            </div>
+          </nuvex-topbar>
+        </div>
+
+        @if (lastSelectedOption()) {
+          <div style="margin-top: 1rem; padding: 0.75rem 1.25rem; border-radius: 0.75rem; background-color: rgba(0, 201, 117, 0.1); border: 1px solid rgba(0, 201, 117, 0.2); font-size: 0.8125rem; color: #00c975; font-weight: 600;">
+            Opción de sesión seleccionada: <strong>{{ lastSelectedOption() }}</strong>
+          </div>
+        }
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Estándar de Sesión Oficial Nuvex</h3>
+        <div style="font-size: 0.875rem; line-height: 1.6; color: var(--nvl-text-muted-color);">
+          <p style="margin: 0 0 0.5rem 0;">
+            El menú de usuario se despliega exclusivamente en el botón de usuario de la barra superior en forma de cápsula suave con <strong>únicamente 4 opciones autorizadas</strong>:
+          </p>
+          <ol style="padding-left: 1.25rem; margin: 0; display: flex; flex-direction: column; gap: 0.375rem;">
+            <li><strong>Perfil:</strong> Datos del usuario, rol técnico y avatar.</li>
+            <li><strong>Facturas:</strong> Historial de comprobantes y plan contratado.</li>
+            <li><strong>Clave:</strong> Cambio seguro de contraseña.</li>
+            <li><strong>Cerrar sesión:</strong> Finalización de sesión destacada en rojo suave.</li>
+          </ol>
+        </div>
+      </section>
+    </div>
+  } @else {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Importar el componente</h3>
+        <app-code-snippet [code]="importSnippet" language="typescript" title="TypeScript Component" />
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Implementación en Template</h3>
+        <app-code-snippet [code]="usageSnippet" language="html" title="HTML Template" />
+      </section>
+    </div>
+  }
+</div>

@@ -1,0 +1,153 @@
+<div class="doc-page">
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag">Estándar Maestro Nuvex</span>
+      <span class="doc-version">nuvex-ui/drawer</span>
+    </div>
+    <h1 class="doc-title">Slide-Over Drawer</h1>
+    <p class="doc-description">
+      El contenedor lateral oficial de Nuvex para formularios de captura, edición y fichas técnicas. Sustituye los modales centrados garantizando cabecera fija, scroll interno y sticky footer.
+    </p>
+
+    <!-- Selector de vista -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+        Vista Previa
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'code'"
+        (click)="activeTab.set('code')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+        Código Fuente
+      </button>
+    </div>
+  </header>
+
+  @if (activeTab() === 'preview') {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Disparadores Interactivos</h3>
+        <p class="doc-sub">Haz click para abrir el Drawer lateral con formulario y acciones fijas.</p>
+        <div class="demo-display items-center">
+          <nuvex-button variant="primary" (click)="openDrawer('md')" (onClick)="openDrawer('md')">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="width: 1rem; height: 1rem; margin-right: 0.375rem;">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+            </svg>
+            Abrir Drawer Estándar (md - 580px)
+          </nuvex-button>
+
+          <nuvex-button variant="secondary" (click)="openDrawer('sm')" (onClick)="openDrawer('sm')">
+            Abrir Compacto (sm - 440px)
+          </nuvex-button>
+
+          <nuvex-button variant="ghost" (click)="openDrawer('lg')" (onClick)="openDrawer('lg')">
+            Abrir Amplio (lg - 760px)
+          </nuvex-button>
+        </div>
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Reglas del Estándar Nuvex</h3>
+        <div style="font-size: 0.875rem; line-height: 1.6; color: var(--nvl-text-muted-color);">
+          <ul style="padding-left: 1.25rem; margin: 0; display: flex; flex-direction: column; gap: 0.5rem;">
+            <li><strong>Prohibido usar modales flotantes centrados:</strong> Toda edición o captura compleja debe vivir en el Slide-Over Drawer.</li>
+            <li><strong>Cabecera Fija:</strong> Icono o avatar en cápsula tenue, título de la entidad, metadatos y botón de salida.</li>
+            <li><strong>Sticky Footer:</strong> Acciones críticas siempre visibles sin necesidad de que el usuario haga scroll hasta el final del formulario.</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <!-- COMPONENTE DRAWER EN ACCIÓN -->
+    <nuvex-drawer
+      [(isOpen)]="drawerOpen"
+      [size]="selectedSize()"
+      title="Nuevo Registro de Cliente"
+      subtitle="ID Generado: CLI-9482 · Sede Principal"
+    >
+      <!-- Icono en Cabecera -->
+      <div slot="header-icon">
+        <svg style="width: 1.25rem; height: 1.25rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+        </svg>
+      </div>
+
+      <!-- CUERPO DEL FORMULARIO -->
+      <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+        <span style="font-size: 0.75rem; font-weight: 700; color: #00c975; text-transform: uppercase; letter-spacing: 0.05em;">
+          Información Básica
+        </span>
+
+        <nuvex-input
+          label="Razón Social o Nombre Completo"
+          placeholder="Ej: Distribuidora Nuvex SAS"
+          [required]="true"
+        />
+
+        <nuvex-input
+          label="Identificación Fiscal / NIT"
+          placeholder="Ej: 900.123.456-7"
+          [required]="true"
+        />
+
+        <nuvex-input
+          label="Correo de Notificaciones"
+          type="email"
+          placeholder="facturacion@empresa.com"
+          helperText="Se enviarán comprobantes y avisos de cobro"
+        />
+
+        <span style="font-size: 0.75rem; font-weight: 700; color: #00c975; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.5rem;">
+          Preferencias de Cuenta
+        </span>
+
+        <nuvex-switch
+          label="Habilitar facturación electrónica directa"
+          [checked]="true"
+        />
+
+        <nuvex-switch
+          label="Notificar por WhatsApp en tiempo real"
+          [checked]="false"
+        />
+      </div>
+
+      <!-- STICKY FOOTER -->
+      <div slot="footer">
+        <nuvex-button variant="secondary" (click)="drawerOpen.set(false)" (onClick)="drawerOpen.set(false)">
+          Cancelar
+        </nuvex-button>
+        <nuvex-button variant="primary" (click)="saveData()" (onClick)="saveData()">
+          Guardar Cliente
+        </nuvex-button>
+      </div>
+    </nuvex-drawer>
+
+  } @else {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Importar el componente</h3>
+        <app-code-snippet [code]="importSnippet" language="typescript" title="TypeScript Component" />
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Implementación en Template</h3>
+        <app-code-snippet [code]="usageSnippet" language="html" title="HTML Template" />
+      </section>
+    </div>
+  }
+</div>

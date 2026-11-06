@@ -1,0 +1,58 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.nuvex-sparkline-svg {
+  overflow: visible;
+  display: block;
+}
+
+.nuvex-sparkline-path {
+  transition: stroke 0.2s ease;
+}
+
+.nuvex-sparkline-animated {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: nuvex-sparkline-draw 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.nuvex-sparkline-fill-animated {
+  opacity: 0;
+  animation: nuvex-sparkline-fade 0.6s ease-out 0.3s forwards;
+}
+
+@keyframes nuvex-sparkline-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes nuvex-sparkline-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.nuvex-sparkline-pulse {
+  animation: nuvex-pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes nuvex-pulse-ring {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}

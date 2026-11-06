@@ -1,0 +1,93 @@
+<div class="doc-page">
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag">Feedback</span>
+      <span class="doc-version">nuvex-ui/spinner</span>
+    </div>
+    <h1 class="doc-title">Spinner</h1>
+    <p class="doc-description">
+      Indicador de carga circular SVG con rotación continua suave, líneas finas y sobriedad iconográfica para procesos asíncronos.
+    </p>
+
+    <!-- Selector de vista -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+        Vista Previa
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'code'"
+        (click)="activeTab.set('code')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+        Código Fuente
+      </button>
+    </div>
+  </header>
+
+  @if (activeTab() === 'preview') {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>Escalas de Tamaño</h3>
+        <p class="doc-sub">Configurable a través del input <code>size</code>: <code>sm</code> (16px), <code>md</code> (20px), <code>lg</code> (28px).</p>
+        <div class="demo-display items-center">
+          <div class="demo-box">
+            <span class="demo-box-label">Small (sm)</span>
+            <nuvex-spinner size="sm" variant="primary" />
+          </div>
+          <div class="demo-box">
+            <span class="demo-box-label">Medium (md)</span>
+            <nuvex-spinner size="md" variant="primary" />
+          </div>
+          <div class="demo-box">
+            <span class="demo-box-label">Large (lg)</span>
+            <nuvex-spinner size="lg" variant="primary" />
+          </div>
+        </div>
+      </section>
+
+      <section class="doc-section">
+        <h3>Variantes de Color</h3>
+        <p class="doc-sub">Se adaptan al color primario o heredan el color de texto circundante mediante <code>current</code>.</p>
+        <div class="demo-display items-center">
+          <div class="demo-box">
+            <span class="demo-box-label">primary</span>
+            <nuvex-spinner size="md" variant="primary" />
+          </div>
+          <div class="demo-box">
+            <span class="demo-box-label">secondary</span>
+            <nuvex-spinner size="md" variant="secondary" />
+          </div>
+          <div class="demo-box" style="background-color: #111215; color: white;">
+            <span class="demo-box-label" style="color: #94a3b8;">white (en fondo oscuro)</span>
+            <nuvex-spinner size="md" variant="white" />
+          </div>
+        </div>
+      </section>
+    </div>
+  } @else {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Importar el componente</h3>
+        <app-code-snippet [code]="importSnippet" language="typescript" title="TypeScript Component" />
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Ejemplos de Implementación</h3>
+        <app-code-snippet [code]="usageSnippet" language="html" title="HTML Template" />
+      </section>
+    </div>
+  }
+</div>

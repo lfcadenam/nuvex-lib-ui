@@ -1,0 +1,54 @@
+<svg
+  class="nuvex-sparkline-svg w-full"
+  [style.width]="width()"
+  [style.height]="computedHeight()"
+  viewBox="0 0 100 30"
+  preserveAspectRatio="none"
+>
+  <defs>
+    <linearGradient [id]="gradientId" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" [attr.stop-color]="resolvedFill()" stop-opacity="0.25" />
+      <stop offset="100%" [attr.stop-color]="resolvedFill()" stop-opacity="0.0" />
+    </linearGradient>
+  </defs>
+
+  @if (filled() && areaPath()) {
+    <path
+      [attr.d]="areaPath()"
+      [attr.fill]="'url(#' + gradientId + ')'"
+      class="nuvex-sparkline-fill"
+      [class.nuvex-sparkline-fill-animated]="animated()"
+    />
+  }
+
+  @if (linePath()) {
+    <path
+      [attr.d]="linePath()"
+      fill="none"
+      [attr.stroke]="resolvedStroke()"
+      [attr.stroke-width]="strokeWidth()"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="nuvex-sparkline-path"
+      [class.nuvex-sparkline-animated]="animated()"
+    />
+  }
+
+  @if (showLastPoint() && lastPoint(); as pt) {
+    <g class="nuvex-sparkline-last-point">
+      <circle
+        [attr.cx]="pt.x"
+        [attr.cy]="pt.y"
+        r="3.5"
+        [attr.fill]="resolvedStroke()"
+        class="nuvex-sparkline-pulse"
+      />
+      <circle
+        [attr.cx]="pt.x"
+        [attr.cy]="pt.y"
+        r="1.8"
+        [attr.fill]="resolvedStroke()"
+      />
+    </g>
+  }
+</svg>

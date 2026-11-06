@@ -1,0 +1,55 @@
+@if (isOpen()) {
+  <!-- BACKDROP CON DESENFOQUE SUAVE -->
+  <div
+    class="nuvex-drawer__backdrop"
+    (click)="onBackdropClick()"
+    aria-hidden="true"
+  ></div>
+
+  <!-- PANEL SLIDE-OVER DERECHO -->
+  <div
+    class="nuvex-drawer__panel"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="title() || 'Panel lateral'"
+  >
+    <!-- 1. CABECERA FIJA -->
+    <header class="nuvex-drawer__header">
+      <div class="nuvex-drawer__header-left">
+        <div class="nuvex-drawer__header-icon">
+          <ng-content select="[slot=header-icon]"></ng-content>
+        </div>
+        <div class="nuvex-drawer__header-text">
+          @if (title()) {
+            <h2 class="nuvex-drawer__title">{{ title() }}</h2>
+          }
+          @if (subtitle()) {
+            <p class="nuvex-drawer__subtitle">{{ subtitle() }}</p>
+          }
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="nuvex-drawer__close-btn"
+        (click)="close()"
+        title="Cerrar panel (Esc)"
+        aria-label="Cerrar"
+      >
+        <svg class="nuvex-drawer__close-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- 2. CUERPO CON SCROLL INTERNO -->
+    <div class="nuvex-drawer__body">
+      <ng-content></ng-content>
+    </div>
+
+    <!-- 3. PIE FIJO (STICKY FOOTER) -->
+    <footer class="nuvex-drawer__footer">
+      <ng-content select="[slot=footer]"></ng-content>
+    </footer>
+  </div>
+}

@@ -1,0 +1,116 @@
+<div class="doc-page">
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag">Superficie Nuvex Modern Curve</span>
+      <span class="doc-version">nuvex-ui/card</span>
+    </div>
+    <h1 class="doc-title">Card</h1>
+    <p class="doc-description">
+      Contenedor elevado con curvatura orgánica amplia (28px - 32px), elevación multicapa soft-clay y variante Hero invertida en grafito/obsidiana.
+    </p>
+
+    <!-- Selector de vista -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+        Vista Previa
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'code'"
+        (click)="activeTab.set('code')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+        Código Fuente
+      </button>
+    </div>
+  </header>
+
+  @if (activeTab() === 'preview') {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Comparativa de Variantes (KPI Cards)</h3>
+        <p class="doc-sub">La tarjeta <code>variant="hero"</code> destaca la métrica estrella con fondo oscuro y alto contraste.</p>
+        <div class="cards-grid">
+          
+          <!-- TARJETA HERO INVERTIDA -->
+          <nuvex-card variant="hero" [hoverable]="true">
+            <div slot="header">
+              <nuvex-badge variant="success" size="sm">↑ 8.1% vs anterior</nuvex-badge>
+            </div>
+            <div>
+              <span style="font-size: 0.8125rem; font-weight: 600; color: #9ca3af;">Ingresos Totales</span>
+              <div style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.03em; margin: 0.25rem 0 0.5rem 0;">
+                $37,163 USD
+              </div>
+              <p style="font-size: 0.75rem; color: #6b7280; margin: 0;">Periodo mensual actual activo</p>
+            </div>
+          </nuvex-card>
+
+          <!-- TARJETA ESTÁNDAR (LIGHT/DARK ADAPTIVE) -->
+          <nuvex-card variant="default" [hoverable]="true">
+            <div slot="header">
+              <nuvex-badge variant="info" size="sm">532 órdenes</nuvex-badge>
+            </div>
+            <div>
+              <span style="font-size: 0.8125rem; font-weight: 600; color: var(--nvl-text-muted-color);">Ticket Promedio</span>
+              <div style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.03em; margin: 0.25rem 0 0.5rem 0;">
+                $69.87 USD
+              </div>
+              <p style="font-size: 0.75rem; color: var(--nvl-text-muted-color); margin: 0;">↑ 0.3% respecto a la semana pasada</p>
+            </div>
+          </nuvex-card>
+
+        </div>
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Tarjeta con Título, Subtítulo y Acciones</h3>
+        <p class="doc-sub">Ideal para módulos de configuración, resúmenes o bloques de información.</p>
+        <div style="max-width: 640px;">
+          <nuvex-card
+            title="Suscripción Empresarial Cloud"
+            subtitle="Plan activo renovado automáticamente"
+            padding="lg"
+          >
+            <div slot="header">
+              <nuvex-button size="sm" variant="secondary">Administrar</nuvex-button>
+            </div>
+
+            <p style="font-size: 0.875rem; line-height: 1.6; color: var(--nvl-text-color); margin: 0 0 1.25rem 0;">
+              Tu cuenta tiene asignados 12 asientos con roles técnicos de desarrollador y acceso multi-sede activado.
+            </p>
+
+            <div slot="footer" style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+              <nuvex-button variant="ghost" size="sm">Descargar Factura</nuvex-button>
+              <nuvex-button variant="primary" size="sm">Aumentar Capacidad</nuvex-button>
+            </div>
+          </nuvex-card>
+        </div>
+      </section>
+    </div>
+  } @else {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Importar el componente</h3>
+        <app-code-snippet [code]="importSnippet" language="typescript" title="TypeScript Component" />
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Ejemplos de Implementación</h3>
+        <app-code-snippet [code]="usageSnippet" language="html" title="HTML Template" />
+      </section>
+    </div>
+  }
+</div>

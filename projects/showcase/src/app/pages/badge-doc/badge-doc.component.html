@@ -1,0 +1,99 @@
+<div class="doc-page">
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag">Componente Base</span>
+      <span class="doc-version">nuvex-ui/badge</span>
+    </div>
+    <h1 class="doc-title">Badge</h1>
+    <p class="doc-description">
+      Indicador de estado, etiquetas numéricas y badges en formato cápsula (pill) para destacar elementos, conteos o alertas.
+    </p>
+
+    <!-- Selector de vista -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+        Vista Previa
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'code'"
+        (click)="activeTab.set('code')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+        Código Fuente
+      </button>
+    </div>
+  </header>
+
+  @if (activeTab() === 'preview') {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>Variantes Semánticas</h3>
+        <p class="doc-sub">Seis variantes con alto contraste WCAG para representar estados de negocio.</p>
+        <div class="demo-display items-center">
+          <nuvex-badge variant="primary">Primary</nuvex-badge>
+          <nuvex-badge variant="secondary">Secondary</nuvex-badge>
+          <nuvex-badge variant="success">Completado</nuvex-badge>
+          <nuvex-badge variant="warning">Pendiente</nuvex-badge>
+          <nuvex-badge variant="danger">Rechazado</nuvex-badge>
+          <nuvex-badge variant="info">En Revisión</nuvex-badge>
+        </div>
+      </section>
+
+      <section class="doc-section">
+        <h3>Tamaños</h3>
+        <p class="doc-sub">Escalas <code>sm</code>, <code>md</code> y <code>lg</code> para adecuarse a tablas, botones o encabezados.</p>
+        <div class="demo-display items-center">
+          <nuvex-badge size="sm" variant="primary">Small (sm)</nuvex-badge>
+          <nuvex-badge size="md" variant="primary">Medium (md)</nuvex-badge>
+          <nuvex-badge size="lg" variant="primary">Large (lg)</nuvex-badge>
+        </div>
+      </section>
+
+      <section class="doc-section">
+        <h3>Incrustado dentro de Botones</h3>
+        <p class="doc-sub">Combinación típica para contadores de notificaciones o estado de conexión.</p>
+        <div class="demo-display items-center">
+          <nuvex-button variant="secondary">
+            Notificaciones
+            <nuvex-badge variant="danger" size="sm">7</nuvex-badge>
+          </nuvex-button>
+
+          <nuvex-button variant="ghost">
+            Servidor Cloud
+            <nuvex-badge variant="success" size="sm">Online</nuvex-badge>
+          </nuvex-button>
+
+          <nuvex-button variant="primary">
+            Mensajes
+            <nuvex-badge variant="secondary" size="sm">24</nuvex-badge>
+          </nuvex-button>
+        </div>
+      </section>
+    </div>
+  } @else {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Importar el componente</h3>
+        <app-code-snippet [code]="importSnippet" language="typescript" title="TypeScript Component" />
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Ejemplos de Implementación</h3>
+        <app-code-snippet [code]="usageSnippet" language="html" title="HTML Template" />
+      </section>
+    </div>
+  }
+</div>

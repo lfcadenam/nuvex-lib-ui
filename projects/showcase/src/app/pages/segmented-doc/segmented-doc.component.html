@@ -1,0 +1,94 @@
+<div class="doc-page">
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag">Controles Nuvex Capsule</span>
+      <span class="doc-version">nuvex-ui/segmented</span>
+    </div>
+    <h1 class="doc-title">Segmented</h1>
+    <p class="doc-description">
+      Control segmentado tipo píldora horizontal para selección de rangos de tiempo, filtros categóricos y estados con respuesta táctil física.
+    </p>
+
+    <!-- Selector de vista -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+        Vista Previa
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'code'"
+        (click)="activeTab.set('code')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+        Código Fuente
+      </button>
+    </div>
+  </header>
+
+  @if (activeTab() === 'preview') {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Filtro Temporal de Rango (Estándar Dashboard)</h3>
+        <p class="doc-sub">El clásico selector de periodo de analítica en Nuvex (7 días, 30 días, etc.).</p>
+        <div class="demo-display items-center" style="justify-content: space-between;">
+          <nuvex-segmented
+            [options]="['7D', '30D', '90D', '12M']"
+            [(value)]="selectedPeriod"
+          />
+          <span style="font-size: 0.8125rem; font-weight: 600; color: var(--nvl-primary-color);">
+            Periodo seleccionado: {{ selectedPeriod() }}
+          </span>
+        </div>
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Filtro de Canales o Categorías</h3>
+        <p class="doc-sub">Para segmentar listas por origen de datos.</p>
+        <div class="demo-display items-center" style="justify-content: space-between;">
+          <nuvex-segmented
+            [options]="['Todos', 'En Línea', 'Tienda Física', 'Mayoristas']"
+            [(value)]="selectedChannel"
+          />
+          <span style="font-size: 0.8125rem; font-weight: 600; color: var(--nvl-primary-color);">
+            Canal activo: {{ selectedChannel() }}
+          </span>
+        </div>
+      </section>
+
+      <section class="doc-section">
+        <h3>3. Escala Compacta (sm)</h3>
+        <p class="doc-sub">Ideal para barras de herramientas compactas o cabeceras de tablas.</p>
+        <div class="demo-display items-center">
+          <nuvex-segmented
+            size="sm"
+            [options]="['Día', 'Semana', 'Mes', 'Año']"
+          />
+        </div>
+      </section>
+    </div>
+  } @else {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Importar el componente</h3>
+        <app-code-snippet [code]="importSnippet" language="typescript" title="TypeScript Component" />
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Ejemplos de Implementación</h3>
+        <app-code-snippet [code]="usageSnippet" language="html" title="HTML Template" />
+      </section>
+    </div>
+  }
+</div>

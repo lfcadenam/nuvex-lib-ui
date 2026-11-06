@@ -1,0 +1,94 @@
+<div class="doc-page">
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag">Formulario</span>
+      <span class="doc-version">nuvex-ui/switch</span>
+    </div>
+    <h1 class="doc-title">Switch</h1>
+    <p class="doc-description">
+      Conmutador booleano tipo pastilla (pill) para alternar estados activos/inactivos con física de transición táctil suave y accesibilidad.
+    </p>
+
+    <!-- Selector de vista -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+        Vista Previa
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'code'"
+        (click)="activeTab.set('code')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+        Código Fuente
+      </button>
+    </div>
+  </header>
+
+  @if (activeTab() === 'preview') {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>Switches Interactivos</h3>
+        <p class="doc-sub">Conmutación reactiva con soporte para labels laterales clicables.</p>
+        <div class="demo-display items-center">
+          <nuvex-switch
+            label="vs previous period"
+            [(checked)]="demoVsPeriod"
+          />
+
+          <nuvex-switch
+            label="Notificaciones en tiempo real"
+            [(checked)]="demoNotif"
+          />
+
+          <nuvex-switch
+            label="Deshabilitado"
+            [disabled]="true"
+            [checked]="true"
+          />
+        </div>
+      </section>
+
+      <section class="doc-section">
+        <h3>Tamaños</h3>
+        <p class="doc-sub">Tamaño <code>sm</code> compacto para barras de herramientas y <code>md</code> estándar.</p>
+        <div class="demo-display items-center">
+          <nuvex-switch
+            size="sm"
+            label="Compact Switch (sm)"
+            [checked]="true"
+          />
+          <nuvex-switch
+            size="md"
+            label="Medium Switch (md - default)"
+            [checked]="true"
+          />
+        </div>
+      </section>
+    </div>
+  } @else {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Importar el componente</h3>
+        <app-code-snippet [code]="importSnippet" language="typescript" title="TypeScript Component" />
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Ejemplos de Implementación</h3>
+        <app-code-snippet [code]="usageSnippet" language="html" title="HTML Template" />
+      </section>
+    </div>
+  }
+</div>

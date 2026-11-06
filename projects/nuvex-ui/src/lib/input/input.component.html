@@ -1,0 +1,38 @@
+@if (label()) {
+  <label class="nuvex-input__label">
+    {{ label() }}
+    @if (required()) {
+      <span class="nuvex-input__required" aria-hidden="true">*</span>
+    }
+  </label>
+}
+
+<div class="nuvex-input__wrapper" [class.nuvex-input__wrapper--focused]="isFocused()">
+  <span class="nuvex-input__prefix">
+    <ng-content select="[slot=prefix]"></ng-content>
+  </span>
+
+  <input
+    #nativeInput
+    class="nuvex-input__field"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [value]="value()"
+    [disabled]="disabled()"
+    [readOnly]="readonly()"
+    [attr.aria-invalid]="invalid()"
+    (input)="onInputChange($event)"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+  />
+
+  <span class="nuvex-input__suffix">
+    <ng-content select="[slot=suffix]"></ng-content>
+  </span>
+</div>
+
+@if (errorMessage() && invalid()) {
+  <span class="nuvex-input__error-msg">{{ errorMessage() }}</span>
+} @else if (helperText()) {
+  <span class="nuvex-input__helper">{{ helperText() }}</span>
+}

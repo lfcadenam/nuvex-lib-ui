@@ -1,0 +1,52 @@
+.nuvex-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.nuvex-spinner__svg {
+  animation: nuvex-spinner-rotate 0.8s linear infinite;
+}
+
+/* Tamaños */
+.nuvex-spinner--sm .nuvex-spinner__svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.nuvex-spinner--md .nuvex-spinner__svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.nuvex-spinner--lg .nuvex-spinner__svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+/* Variantes */
+.nuvex-spinner--primary {
+  color: var(--nvl-primary-color, #2563eb);
+}
+
+.nuvex-spinner--secondary {
+  color: var(--nvl-text-muted-color, #6b7280);
+}
+
+.nuvex-spinner--white {
+  color: #ffffff;
+}
+
+.nuvex-spinner--current {
+  color: currentColor;
+}
+
+@keyframes nuvex-spinner-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

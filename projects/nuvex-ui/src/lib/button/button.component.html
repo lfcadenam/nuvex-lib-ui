@@ -1,0 +1,12 @@
+@if (loading()) {
+  <span class="nuvex-button__spinner">
+    <nuvex-spinner [size]="size() === 'lg' ? 'md' : 'sm'" variant="current" />
+  </span>
+} @else if (icon()) {
+  <span class="nuvex-button__icon">
+    <ng-content select="[slot=icon]"></ng-content>
+  </span>
+}
+<span class="nuvex-button__label">
+  <ng-content></ng-content>
+</span>

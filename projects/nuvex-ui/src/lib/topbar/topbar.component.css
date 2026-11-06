@@ -1,0 +1,285 @@
+.nuvex-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 100%;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+/* 1. MARCA / LOGO */
+.nuvex-topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.nuvex-topbar__brand-title {
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--nvl-text-color, #111827);
+  white-space: nowrap;
+}
+
+/* 2. PESTAÑAS CENTRALES EN PÍLDORA TRANSLÚCIDA */
+.nuvex-topbar__nav-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 9999px;
+  padding: 0.3125rem;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+  max-width: 100%;
+  scrollbar-width: none;
+}
+
+.nuvex-topbar__nav-pill::-webkit-scrollbar {
+  display: none;
+}
+
+.nuvex-topbar__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.4375rem 1.125rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--nvl-text-muted-color, #4b5563);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.nuvex-topbar__tab:hover {
+  color: var(--nvl-text-color, #111827);
+}
+
+.nuvex-topbar__tab--active {
+  background-color: #111215 !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nuvex-topbar__tab-badge {
+  background-color: var(--nvl-surface-100, #f3f4f6);
+  color: var(--nvl-text-color, #374151);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
+  border-radius: 9999px;
+}
+
+.nuvex-topbar__tab--active .nuvex-topbar__tab-badge {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+/* 3. ACCIONES DERECHAS */
+.nuvex-topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Live Activity Pill */
+.nuvex-topbar__live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--nvl-surface-0, #ffffff);
+  padding: 0.375rem 0.875rem;
+  border-radius: 9999px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--nvl-surface-100, #f3f4f6);
+}
+
+.nuvex-topbar__live-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: #00c975;
+  animation: nuvex-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.nuvex-topbar__live-text {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--nvl-text-color, #111827);
+}
+
+@keyframes nuvex-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.15);
+  }
+}
+
+/* User Container & Trigger */
+.nuvex-topbar__user-container {
+  position: relative;
+}
+
+.nuvex-topbar__user-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--nvl-surface-0, #ffffff);
+  border: 1px solid var(--nvl-surface-200, #e5e7eb);
+  padding: 0.25rem 0.75rem 0.25rem 0.375rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  transition: all 0.15s ease;
+}
+
+.nuvex-topbar__user-trigger:hover {
+  background-color: var(--nvl-surface-50, #f9fafb);
+  border-color: var(--nvl-surface-300, #d1d5db);
+}
+
+.nuvex-topbar__user-avatar {
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #00c975 0%, #0d9488 100%);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nuvex-topbar__user-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--nvl-text-color, #374151);
+}
+
+.nuvex-topbar__chevron {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--nvl-text-muted-color, #9ca3af);
+}
+
+/* Dropdown Oficial en Cápsula (4 Botones) */
+.nuvex-topbar__user-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  width: 14rem;
+  background-color: var(--nvl-surface-0, #ffffff);
+  border: 1px solid var(--nvl-surface-200, #e5e7eb);
+  border-radius: 1.5rem; /* 24px - Cápsula Suave */
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08), 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+  padding: 0.5rem;
+  z-index: 1000;
+  animation: nuvex-dropdown-enter 0.15s ease forwards;
+}
+
+@keyframes nuvex-dropdown-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.nuvex-topbar__dropdown-header {
+  padding: 0.625rem 0.875rem;
+  border-bottom: 1px solid var(--nvl-surface-100, #f3f4f6);
+  margin-bottom: 0.375rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.nuvex-topbar__dropdown-name {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--nvl-text-color, #111827);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nuvex-topbar__dropdown-role {
+  font-size: 0.6875rem;
+  color: var(--nvl-text-muted-color, #6b7280);
+}
+
+.nuvex-topbar__dropdown-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--nvl-text-color, #374151);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.nuvex-topbar__dropdown-item:hover {
+  background-color: var(--nvl-surface-50, #f9fafb);
+  color: #00c975;
+}
+
+.nuvex-topbar__dropdown-icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--nvl-text-muted-color, #9ca3af);
+}
+
+.nuvex-topbar__dropdown-item:hover .nuvex-topbar__dropdown-icon {
+  color: #00c975;
+}
+
+.nuvex-topbar__dropdown-divider {
+  height: 1px;
+  background-color: var(--nvl-surface-100, #f3f4f6);
+  margin: 0.375rem 0;
+}
+
+/* Cerrar sesión */
+.nuvex-topbar__dropdown-item--logout {
+  color: #e11d48 !important;
+  font-weight: 600;
+}
+
+.nuvex-topbar__dropdown-item--logout:hover {
+  background-color: #fff1f2 !important;
+  color: #be123c !important;
+}
+
+.nuvex-topbar__dropdown-icon--danger {
+  color: #e11d48 !important;
+}

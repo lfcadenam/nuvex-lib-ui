@@ -1,0 +1,85 @@
+<div class="showcase-layout">
+
+  <!-- SIDEBAR IZQUIERDO -->
+  <aside class="showcase-sidebar">
+    <!-- Header del Sidebar -->
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="brand-avatar">N</div>
+        <div class="brand-info">
+          <div class="brand-title">Nuvex UI</div>
+          <div class="brand-subtitle">Design System · v0.1</div>
+        </div>
+      </div>
+      <span class="brand-badge">Angular 22</span>
+    </div>
+
+    <!-- Buscador de componentes -->
+    <div class="sidebar-search">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+      </svg>
+      <input
+        type="text"
+        placeholder="Buscar componente..."
+        [ngModel]="searchQuery()"
+        (ngModelChange)="searchQuery.set($event)"
+      />
+    </div>
+
+    <!-- Menú de navegación categorizado -->
+    <nav class="sidebar-nav">
+      @for (category of filteredCategories(); track category.title) {
+        <div class="nav-category">
+          <div class="category-title">{{ category.title }}</div>
+          <div class="category-items">
+            @for (item of category.items; track item.name) {
+              @if (item.disabled) {
+                <div class="nav-link nav-link--disabled">
+                  <span class="nav-link-name">{{ item.name }}</span>
+                  @if (item.badge) {
+                    <span class="nav-soon-badge">{{ item.badge }}</span>
+                  }
+                </div>
+              } @else {
+                <a
+                  [routerLink]="item.route"
+                  routerLinkActive="nav-link--active"
+                  class="nav-link"
+                >
+                  <span class="nav-link-name">{{ item.name }}</span>
+                  @if (item.tag) {
+                    <span class="nav-item-tag">{{ item.tag }}</span>
+                  }
+                </a>
+              }
+            }
+          </div>
+        </div>
+      }
+    </nav>
+
+    <!-- Footer del Sidebar con Dark Mode Switch -->
+    <div class="sidebar-footer">
+      <button type="button" class="theme-toggle-btn" (click)="toggleDark()">
+        @if (isDark()) {
+          <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          <span>Modo Claro</span>
+        } @else {
+          <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+          <span>Modo Oscuro</span>
+        }
+      </button>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="showcase-main">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

@@ -1,0 +1,415 @@
+<div class="doc-page">
+  <!-- Encabezado de Documentación -->
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag">Fase 5 · Visualización</span>
+      <span class="doc-version">nuvex-ui/sparkline</span>
+    </div>
+    <h1 class="doc-title">Sparkline</h1>
+    <p class="doc-description">
+      Minigráfico vectorial ultraligero y continuo con suavizado Bézier (Catmull-Rom) diseñado para el pie de las tarjetas KPI en <strong>Nuvex Modern Curve UI</strong>. Transmite la tendencia instantánea de la métrica sin saturar con ejes o números invasivos.
+    </p>
+
+    <!-- Pestañas de Vista Previa / Código -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+        Vista Previa Interactiva
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'code'"
+        (click)="activeTab.set('code')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+        Código & API
+      </button>
+    </div>
+  </header>
+
+  @if (activeTab() === 'preview') {
+    <div class="doc-content">
+      <!-- SECCIÓN 1: PLAYGROUND INTERACTIVO -->
+      <section class="doc-section">
+        <h3>1. Laboratorio Interactivo de Curvatura</h3>
+        <p class="doc-sub">
+          Experimenta con el cálculo matemático de Bézier, sombreado de gradiente, pulso dinámico y colorimetría Nuvex.
+        </p>
+
+        <div class="sparkline-lab-card">
+          <!-- Visualizador Principal -->
+          <div class="sparkline-preview-stage">
+            <div class="sparkline-stage-inner">
+              <div class="sparkline-stage-header">
+                <span>Muestra en tiempo real</span>
+                <span class="sparkline-stage-dataset">
+                  Dataset: {{ activeDatasetKey() | uppercase }} ({{ sampleDatasets[activeDatasetKey()].length }} pts)
+                </span>
+              </div>
+
+              <!-- COMPONENTE SPARKLINE EN VIVO -->
+              <div class="sparkline-canvas-box">
+                <nuvex-sparkline
+                  [data]="sampleDatasets[activeDatasetKey()]"
+                  [color]="selectedColor()"
+                  [filled]="isFilled()"
+                  [curved]="isCurved()"
+                  [showLastPoint]="showLastPoint()"
+                  [animated]="isAnimated()"
+                  [height]="currentHeight()"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel de Controles -->
+          <div class="sparkline-controls-grid">
+            <!-- Colores -->
+            <div class="control-group">
+              <h4 class="control-title">Variante de Color</h4>
+              <div class="pill-group">
+                <button
+                  type="button"
+                  class="pill-btn"
+                  [class.pill-btn--emerald-active]="selectedColor() === 'emerald'"
+                  (click)="selectedColor.set('emerald')"
+                >
+                  Emerald
+                </button>
+                <button
+                  type="button"
+                  class="pill-btn"
+                  [class.pill-btn--obsidian-active]="selectedColor() === 'obsidian'"
+                  (click)="selectedColor.set('obsidian')"
+                >
+                  Obsidian
+                </button>
+                <button
+                  type="button"
+                  class="pill-btn"
+                  [class.pill-btn--neutral-active]="selectedColor() === 'neutral'"
+                  (click)="selectedColor.set('neutral')"
+                >
+                  Neutral
+                </button>
+                <button
+                  type="button"
+                  class="pill-btn"
+                  [class.pill-btn--rose-active]="selectedColor() === 'rose'"
+                  (click)="selectedColor.set('rose')"
+                >
+                  Rose
+                </button>
+                <button
+                  type="button"
+                  class="pill-btn"
+                  [class.pill-btn--sky-active]="selectedColor() === 'sky'"
+                  (click)="selectedColor.set('sky')"
+                >
+                  Sky
+                </button>
+              </div>
+            </div>
+
+            <!-- Datasets -->
+            <div class="control-group">
+              <h4 class="control-title">Serie de Datos</h4>
+              <div class="pill-group">
+                @for (ds of ['bullish', 'growth', 'volatile', 'bearish']; track ds) {
+                  <button
+                    type="button"
+                    class="pill-btn"
+                    [class.pill-btn--ds-active]="activeDatasetKey() === ds"
+                    (click)="setDataset(ds)"
+                  >
+                    {{ ds }}
+                  </button>
+                }
+                <button
+                  type="button"
+                  class="pill-btn pill-btn--random"
+                  (click)="randomizeData()"
+                  title="Generar nueva serie aleatoria"
+                >
+                  ↻ Random
+                </button>
+              </div>
+            </div>
+
+            <!-- Opciones Booleanas -->
+            <div class="control-group">
+              <h4 class="control-title">Modos Visuales</h4>
+              <div class="checkbox-list">
+                <label class="checkbox-label">
+                  <input
+                    type="checkbox"
+                    class="checkbox-input"
+                    [checked]="isFilled()"
+                    (change)="isFilled.set(!isFilled())"
+                  />
+                  <span>Relleno Gradiente (Filled)</span>
+                </label>
+                <label class="checkbox-label">
+                  <input
+                    type="checkbox"
+                    class="checkbox-input"
+                    [checked]="isCurved()"
+                    (change)="isCurved.set(!isCurved())"
+                  />
+                  <span>Curvatura Bézier (Curved)</span>
+                </label>
+                <label class="checkbox-label">
+                  <input
+                    type="checkbox"
+                    class="checkbox-input"
+                    [checked]="showLastPoint()"
+                    (change)="showLastPoint.set(!showLastPoint())"
+                  />
+                  <span>Punto Final con Pulso</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Altura Slider -->
+            <div class="control-group">
+              <div class="slider-header">
+                <h4 class="control-title">Altura SVG</h4>
+                <span class="slider-val">{{ currentHeight() }}px</span>
+              </div>
+              <input
+                type="range"
+                min="20"
+                max="64"
+                step="4"
+                class="slider-input"
+                [value]="currentHeight()"
+                (input)="currentHeight.set(+$any($event.target).value)"
+              />
+              <div class="slider-scale">
+                <span>20px (Compact)</span>
+                <span>40px (Hero)</span>
+                <span>64px</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 2: INTEGRACIÓN OFICIAL EN TARJETAS KPI -->
+      <section class="doc-section">
+        <h3>2. Composición Oficial en Tarjetas KPI</h3>
+        <p class="doc-sub">
+          Demostración del estándar Nuvex: curvatura amplia (<code>rounded-[30px]</code>), tarjeta Hero invertida en obsidiana, y sparklines continuos al pie de cada métrica.
+        </p>
+
+        <div class="kpi-cards-grid">
+          <!-- KPI 1: Tarjeta Hero Invertida (Obsidiana) -->
+          <nuvex-card variant="hero" [hoverable]="true">
+            <div class="kpi-card-content">
+              <div>
+                <div class="kpi-card-header">
+                  <span class="kpi-card-title kpi-card-title--hero">Ingresos Totales</span>
+                  <nuvex-badge variant="success" size="sm">↑ 14.8%</nuvex-badge>
+                </div>
+                <div class="kpi-card-metric kpi-card-metric--hero">
+                  $37,163 <span class="kpi-card-unit">USD</span>
+                </div>
+                <div class="kpi-card-delta kpi-card-delta--hero">
+                  <strong style="color: #00C975;">+$4,820</strong> vs periodo anterior
+                </div>
+              </div>
+
+              <!-- Sparkline Blanco con Pulso -->
+              <div class="kpi-card-sparkline">
+                <nuvex-sparkline
+                  [data]="sampleDatasets['bullish']"
+                  color="white"
+                  [filled]="true"
+                  [showLastPoint]="true"
+                  [height]="36"
+                />
+              </div>
+            </div>
+          </nuvex-card>
+
+          <!-- KPI 2: Pedidos Totales (Tarjeta Blanca Clásica) -->
+          <nuvex-card [hoverable]="true">
+            <div class="kpi-card-content">
+              <div>
+                <div class="kpi-card-header">
+                  <span class="kpi-card-title">Volumen Pedidos</span>
+                  <nuvex-badge variant="info" size="sm">532 órdenes</nuvex-badge>
+                </div>
+                <div class="kpi-card-metric">
+                  532
+                </div>
+                <div class="kpi-card-delta">
+                  <strong style="color: #00C975;">↑ 7.8%</strong> vs periodo anterior
+                </div>
+              </div>
+
+              <div class="kpi-card-sparkline">
+                <nuvex-sparkline
+                  [data]="sampleDatasets['growth']"
+                  color="emerald"
+                  [filled]="true"
+                  [showLastPoint]="true"
+                  [height]="36"
+                />
+              </div>
+            </div>
+          </nuvex-card>
+
+          <!-- KPI 3: Ticket Promedio -->
+          <nuvex-card [hoverable]="true">
+            <div class="kpi-card-content">
+              <div>
+                <div class="kpi-card-header">
+                  <span class="kpi-card-title">Ticket Promedio</span>
+                  <nuvex-badge variant="secondary" size="sm">Estable</nuvex-badge>
+                </div>
+                <div class="kpi-card-metric">
+                  $69.87
+                </div>
+                <div class="kpi-card-delta">
+                  <strong style="color: #0284C7;">↑ 0.3%</strong> vs periodo anterior
+                </div>
+              </div>
+
+              <div class="kpi-card-sparkline">
+                <nuvex-sparkline
+                  [data]="sampleDatasets['volatile']"
+                  color="sky"
+                  [filled]="true"
+                  [showLastPoint]="true"
+                  [height]="36"
+                />
+              </div>
+            </div>
+          </nuvex-card>
+
+          <!-- KPI 4: Cancelaciones / Churn -->
+          <nuvex-card [hoverable]="true">
+            <div class="kpi-card-content">
+              <div>
+                <div class="kpi-card-header">
+                  <span class="kpi-card-title">Tasa de Devolución</span>
+                  <nuvex-badge variant="danger" size="sm">Alerta</nuvex-badge>
+                </div>
+                <div class="kpi-card-metric">
+                  1.82%
+                </div>
+                <div class="kpi-card-delta">
+                  <strong style="color: #F43F5E;">↓ -0.4 pt</strong> vs periodo anterior
+                </div>
+              </div>
+
+              <div class="kpi-card-sparkline">
+                <nuvex-sparkline
+                  [data]="sampleDatasets['bearish']"
+                  color="rose"
+                  [filled]="true"
+                  [showLastPoint]="true"
+                  [height]="36"
+                />
+              </div>
+            </div>
+          </nuvex-card>
+        </div>
+      </section>
+    </div>
+  } @else {
+    <div class="doc-content">
+      <!-- PESTAÑA DE CÓDIGO Y API -->
+      <section class="doc-section">
+        <h3>1. Instalación e Importación</h3>
+        <p class="doc-sub">Importa el componente standalone directamente en tu vista de Angular 22:</p>
+        <app-code-snippet [code]="importSnippet" language="typescript" filename="mi-dashboard.component.ts" />
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Ejemplo de Uso en Plantilla</h3>
+        <p class="doc-sub">Configuración del sparkline dentro de una tarjeta KPI con gradiente y pulso dinámico:</p>
+        <app-code-snippet [code]="usageSnippet" language="html" filename="mi-dashboard.component.html" />
+      </section>
+
+      <section class="doc-section">
+        <h3>3. Referencia de Propiedades (API)</h3>
+        
+        <div class="api-table-wrapper">
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Propiedad</th>
+                <th>Tipo</th>
+                <th>Por Defecto</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="api-prop-name">data</td>
+                <td class="api-prop-type">number[]</td>
+                <td class="api-prop-default">[]</td>
+                <td>Arreglo numérico de coordenadas. Calcula automáticamente el rango y la escala SVG.</td>
+              </tr>
+              <tr>
+                <td class="api-prop-name">color</td>
+                <td class="api-prop-type">'emerald' | 'obsidian' | 'neutral' | 'rose' | 'sky' | 'white' | 'custom'</td>
+                <td class="api-prop-default">'emerald'</td>
+                <td>Esquema semántico oficial Nuvex o color personalizado.</td>
+              </tr>
+              <tr>
+                <td class="api-prop-name">filled</td>
+                <td class="api-prop-type">boolean</td>
+                <td class="api-prop-default">false</td>
+                <td>Añade un sombreado degradado suave debajo de la línea hacia la base.</td>
+              </tr>
+              <tr>
+                <td class="api-prop-name">curved</td>
+                <td class="api-prop-type">boolean</td>
+                <td class="api-prop-default">true</td>
+                <td>Aplica interpolación Bézier (Catmull-Rom) continua o trazo recto angular.</td>
+              </tr>
+              <tr>
+                <td class="api-prop-name">showLastPoint</td>
+                <td class="api-prop-type">boolean</td>
+                <td class="api-prop-default">false</td>
+                <td>Dibuja un círculo indicador en la coordenada final con anillo de pulso suave.</td>
+              </tr>
+              <tr>
+                <td class="api-prop-name">height</td>
+                <td class="api-prop-type">number | string</td>
+                <td class="api-prop-default">32</td>
+                <td>Altura del contenedor SVG en píxeles o unidades CSS.</td>
+              </tr>
+              <tr>
+                <td class="api-prop-name">strokeWidth</td>
+                <td class="api-prop-type">number</td>
+                <td class="api-prop-default">2</td>
+                <td>Grosor del trazo vectorial. Cumple la directiva de sobriedad Nuvex (2px).</td>
+              </tr>
+              <tr>
+                <td class="api-prop-name">animated</td>
+                <td class="api-prop-type">boolean</td>
+                <td class="api-prop-default">true</td>
+                <td>Animación de trazado SVG suave al montarse en el DOM.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  }
+</div>

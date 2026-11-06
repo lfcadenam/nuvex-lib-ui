@@ -1,0 +1,174 @@
+.nuvex-drawer {
+  display: contents;
+}
+
+/* BACKDROP */
+.nuvex-drawer__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background-color: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: nuvex-drawer-fade-in 0.2s ease forwards;
+}
+
+/* PANEL SLIDE-OVER */
+.nuvex-drawer__panel {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--nvl-surface-0, #ffffff);
+  color: var(--nvl-text-color, #111827);
+  box-shadow: -10px 0 35px -5px rgba(0, 0, 0, 0.15);
+  animation: nuvex-drawer-slide-in 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-sizing: border-box;
+}
+
+@keyframes nuvex-drawer-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes nuvex-drawer-slide-in {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+/* Tamaños de Panel */
+.nuvex-drawer--sm .nuvex-drawer__panel {
+  width: 100%;
+  max-width: 440px;
+}
+
+.nuvex-drawer--md .nuvex-drawer__panel {
+  width: 100%;
+  max-width: 580px;
+}
+
+.nuvex-drawer--lg .nuvex-drawer__panel {
+  width: 100%;
+  max-width: 760px;
+}
+
+.nuvex-drawer--full .nuvex-drawer__panel {
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* 1. CABECERA FIJA */
+.nuvex-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--nvl-surface-200, #e5e7eb);
+  background-color: var(--nvl-surface-0, #ffffff);
+  flex-shrink: 0;
+  gap: 1rem;
+}
+
+.nuvex-drawer__header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  overflow: hidden;
+}
+
+.nuvex-drawer__header-icon:empty {
+  display: none;
+}
+
+.nuvex-drawer__header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.875rem;
+  background-color: rgba(0, 201, 117, 0.1);
+  color: #00c975;
+  flex-shrink: 0;
+}
+
+.nuvex-drawer__header-text {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.nuvex-drawer__title {
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--nvl-text-color, #111827);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nuvex-drawer__subtitle {
+  font-size: 0.75rem;
+  color: var(--nvl-text-muted-color, #6b7280);
+  margin: 0.15rem 0 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nuvex-drawer__close-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--nvl-text-muted-color, #6b7280);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.nuvex-drawer__close-btn:hover {
+  background-color: var(--nvl-surface-100, #f3f4f6);
+  color: var(--nvl-text-color, #111827);
+}
+
+.nuvex-drawer__close-svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+/* 2. CUERPO CON SCROLL */
+.nuvex-drawer__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* 3. PIE FIJO (STICKY FOOTER) */
+.nuvex-drawer__footer {
+  padding: 1.125rem 1.5rem;
+  border-top: 1px solid var(--nvl-surface-200, #e5e7eb);
+  background-color: var(--nvl-surface-0, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.nuvex-drawer__footer:empty {
+  display: none;
+}

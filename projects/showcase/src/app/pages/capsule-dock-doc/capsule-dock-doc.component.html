@@ -1,0 +1,112 @@
+<div class="doc-page">
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag">Estructura Nuvex Capsule</span>
+      <span class="doc-version">nuvex-ui/capsule-dock</span>
+    </div>
+    <h1 class="doc-title">Capsule Dock</h1>
+    <p class="doc-description">
+      Sidebar vertical desacoplado en cápsula flotante oscura (obsidiana mate #111215) con microinteracciones táctiles, badges numéricos discretos y control de tema en la base.
+    </p>
+
+    <!-- Selector de vista -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+        Vista Previa
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'code'"
+        (click)="activeTab.set('code')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+        Código Fuente
+      </button>
+    </div>
+  </header>
+
+  @if (activeTab() === 'preview') {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Dock Vertical en Funcionamiento</h3>
+        <p class="doc-sub">Haz click en los iconos para cambiar de módulo activo y probar los badges de notificación.</p>
+        
+        <div class="demo-display" style="justify-content: center; padding: 2.5rem; background-color: var(--nvl-surface-100);">
+          
+          <nuvex-capsule-dock
+            [items]="dockItems"
+            [(activeId)]="selectedDockId"
+            (onSelect)="handleDockSelect($event)"
+          >
+            <!-- Slot Superior (Buscador rápido o logo) -->
+            <div slot="top">
+              <button
+                type="button"
+                style="background: transparent; border: none; color: #9ca3af; cursor: pointer; padding: 0.5rem;"
+                title="Buscar global (Ctrl+K)"
+              >
+                <svg style="width: 1.25rem; height: 1.25rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Slot Inferior (Toggle de Modo Oscuro) -->
+            <div slot="bottom">
+              <button
+                type="button"
+                (click)="toggleTheme()"
+                style="background: transparent; border: none; color: #9ca3af; cursor: pointer; padding: 0.5rem;"
+                title="Alternar Modo Oscuro"
+              >
+                <svg style="width: 1.25rem; height: 1.25rem;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                </svg>
+              </button>
+            </div>
+          </nuvex-capsule-dock>
+
+        </div>
+
+        <div style="margin-top: 1rem; text-align: center; font-size: 0.8125rem; color: var(--nvl-text-muted-color);">
+          Módulo activo: <strong>{{ selectedDockId() }}</strong>
+        </div>
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Principios del Dock Nuvex</h3>
+        <div style="font-size: 0.875rem; line-height: 1.6; color: var(--nvl-text-muted-color);">
+          <ul style="padding-left: 1.25rem; margin: 0; display: flex; flex-direction: column; gap: 0.5rem;">
+            <li><strong>Desacoplado de la ventana:</strong> Flota de manera autónoma con margen perimetral.</li>
+            <li><strong>Sobriedad Iconográfica:</strong> Solo trazos lineales monocromáticos finos (1.75px). Cero emojis o stickers decorativos.</li>
+            <li><strong>Gestión de Sesión Prohibida en el Dock:</strong> Siguiendo el estándar Nuvex, el menú de perfil y logout se ubica exclusivamente en el <code>nuvex-topbar</code>.</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  } @else {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Importar el componente</h3>
+        <app-code-snippet [code]="importSnippet" language="typescript" title="TypeScript Component" />
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Implementación en Template</h3>
+        <app-code-snippet [code]="usageSnippet" language="html" title="HTML Template" />
+      </section>
+    </div>
+  }
+</div>

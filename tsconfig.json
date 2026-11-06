@@ -1,0 +1,32 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "paths": {
+      "nuvex-ui": ["./projects/nuvex-ui/src/public-api.ts"],
+      "nuvex-ui/*": ["./projects/nuvex-ui/src/lib/*/public-api.ts"],
+      "nuvex-ui/src/lib/*": ["./projects/nuvex-ui/src/lib/*/public-api.ts"]
+    },
+    "target": "ES2022",
+    "module": "preserve"
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true
+  },
+  "files": [],
+  "references": [
+    { "path": "./projects/nuvex-ui/tsconfig.lib.json" },
+    { "path": "./projects/nuvex-ui/tsconfig.spec.json" },
+    { "path": "./projects/showcase/tsconfig.app.json" },
+    { "path": "./projects/showcase/tsconfig.spec.json" }
+  ]
+}

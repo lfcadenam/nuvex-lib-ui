@@ -1,0 +1,90 @@
+import { Routes } from '@angular/router';
+
+export const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'button',
+  },
+  {
+    path: 'button',
+    loadComponent: () =>
+      import('./pages/button-doc/button-doc.component').then(
+        (m) => m.ButtonDocComponent
+      ),
+  },
+  {
+    path: 'badge',
+    loadComponent: () =>
+      import('./pages/badge-doc/badge-doc.component').then(
+        (m) => m.BadgeDocComponent
+      ),
+  },
+  {
+    path: 'spinner',
+    loadComponent: () =>
+      import('./pages/spinner-doc/spinner-doc.component').then(
+        (m) => m.SpinnerDocComponent
+      ),
+  },
+  {
+    path: 'input',
+    loadComponent: () =>
+      import('./pages/input-doc/input-doc.component').then(
+        (m) => m.InputDocComponent
+      ),
+  },
+  {
+    path: 'switch',
+    loadComponent: () =>
+      import('./pages/switch-doc/switch-doc.component').then(
+        (m) => m.SwitchDocComponent
+      ),
+  },
+  {
+    path: 'card',
+    loadComponent: () =>
+      import('./pages/card-doc/card-doc.component').then(
+        (m) => m.CardDocComponent
+      ),
+  },
+  {
+    path: 'segmented',
+    loadComponent: () =>
+      import('./pages/segmented-doc/segmented-doc.component').then(
+        (m) => m.SegmentedDocComponent
+      ),
+  },
+  {
+    path: 'drawer',
+    loadComponent: () =>
+      import('./pages/drawer-doc/drawer-doc.component').then(
+        (m) => m.DrawerDocComponent
+      ),
+  },
+  {
+    path: 'capsule-dock',
+    loadComponent: () =>
+      import('./pages/capsule-dock-doc/capsule-dock-doc.component').then(
+        (m) => m.CapsuleDockDocComponent
+      ),
+  },
+  {
+    path: 'topbar',
+    loadComponent: () =>
+      import('./pages/topbar-doc/topbar-doc.component').then(
+        (m) => m.TopbarDocComponent
+      ),
+  },
+  {
+    path: 'sparkline',
+    loadComponent: () =>
+      import('./pages/sparkline-doc/sparkline-doc.component').then(
+        (m) => m.SparklineDocComponent
+      ),
+  },
+  {
+    path: '**',
+    redirectTo: 'button',
+  },
+];

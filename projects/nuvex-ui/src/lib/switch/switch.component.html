@@ -1,0 +1,18 @@
+<button
+  type="button"
+  role="switch"
+  class="nuvex-switch__track"
+  [class.nuvex-switch__track--checked]="checked()"
+  [attr.aria-checked]="checked()"
+  [disabled]="disabled()"
+  (click)="toggle()"
+  (keydown.space)="onSpaceKey($event)"
+>
+  <span class="nuvex-switch__thumb" [class.nuvex-switch__thumb--checked]="checked()"></span>
+</button>
+
+@if (label()) {
+  <span class="nuvex-switch__label" (click)="toggle()">
+    {{ label() }}
+  </span>
+}

@@ -1,0 +1,111 @@
+<div class="doc-page">
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag">Componente Base</span>
+      <span class="doc-version">nuvex-ui/button</span>
+    </div>
+    <h1 class="doc-title">Button</h1>
+    <p class="doc-description">
+      Botón interactivo versátil con soporte de variantes visuales, estados de carga accesibles, tamaños y uso como directiva en elementos nativos.
+    </p>
+
+    <!-- Selector de vista: Preview vs Code -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+        Vista Previa
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'code'"
+        (click)="activeTab.set('code')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+        Código Fuente
+      </button>
+    </div>
+  </header>
+
+  @if (activeTab() === 'preview') {
+    <!-- VISTA PREVIA -->
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>Variantes Visuales</h3>
+        <p class="doc-sub">Variantes semánticas adaptadas al sistema de tokens.</p>
+        <div class="demo-display">
+          <nuvex-button variant="primary">Primary Button</nuvex-button>
+          <nuvex-button variant="secondary">Secondary Button</nuvex-button>
+          <nuvex-button variant="danger">Danger Button</nuvex-button>
+          <nuvex-button variant="ghost">Ghost Button</nuvex-button>
+        </div>
+      </section>
+
+      <section class="doc-section">
+        <h3>Tamaños</h3>
+        <p class="doc-sub">Tres escalas disponibles para densidades alta, normal o destacada.</p>
+        <div class="demo-display items-center">
+          <nuvex-button size="sm">Small (sm)</nuvex-button>
+          <nuvex-button size="md">Medium (md)</nuvex-button>
+          <nuvex-button size="lg">Large (lg)</nuvex-button>
+        </div>
+      </section>
+
+      <section class="doc-section">
+        <h3>Estados de Carga y Deshabilitado</h3>
+        <p class="doc-sub">El estado loading integra automáticamente el <code>nuvex-spinner</code>.</p>
+        <div class="demo-display items-center">
+          <nuvex-button [loading]="isLoading()" variant="primary">
+            Guardar Cambios
+          </nuvex-button>
+          <nuvex-button [loading]="isLoading()" variant="secondary">
+            Exportar Informe
+          </nuvex-button>
+          <nuvex-button [disabled]="true">
+            Deshabilitado
+          </nuvex-button>
+          <nuvex-button (click)="toggleLoading()" variant="ghost" size="sm">
+            Alternar Loading ({{ isLoading() ? 'Activo' : 'Inactivo' }})
+          </nuvex-button>
+        </div>
+      </section>
+
+      <section class="doc-section">
+        <h3>Directiva en Elementos Nativos</h3>
+        <p class="doc-sub">Aplica el estilo sin alterar la semántica HTML de botones o enlaces.</p>
+        <div class="demo-display items-center">
+          <button type="button" nuvexButton variant="primary">Botón Nativo &lt;button&gt;</button>
+          <a href="#" nuvexButton variant="secondary">Enlace Estilizado &lt;a&gt;</a>
+        </div>
+      </section>
+    </div>
+  } @else {
+    <!-- CÓDIGO FUENTE -->
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Importar el componente</h3>
+        <app-code-snippet [code]="importSnippet" language="typescript" title="TypeScript Component" />
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Ejemplos de Implementación en Template</h3>
+        <app-code-snippet [code]="usageSnippet" language="html" title="HTML Template" />
+      </section>
+
+      <section class="doc-section">
+        <h3>3. Uso con Iconos o Loading Dinámico</h3>
+        <app-code-snippet [code]="advancedSnippet" language="html" title="HTML Avanzado" />
+      </section>
+    </div>
+  }
+</div>

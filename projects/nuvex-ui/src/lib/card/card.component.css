@@ -1,0 +1,108 @@
+.nuvex-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.75rem; /* 28px - Estándar Nuvex Modern Curve */
+  background-color: var(--nvl-surface-0, #ffffff);
+  color: var(--nvl-text-color, #111827);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04), 0 20px 40px -10px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Hoverable */
+.nuvex-card--hoverable:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.08), 0 24px 48px -12px rgba(0, 0, 0, 0.08);
+}
+
+/* Variante Hero Invertida (Obsidiana) */
+.nuvex-card--hero {
+  background-color: #161719 !important;
+  color: #ffffff !important;
+  box-shadow: 0 12px 36px -4px rgba(0, 0, 0, 0.35);
+}
+
+.nuvex-card--hero .nuvex-card__title {
+  color: #ffffff !important;
+}
+
+.nuvex-card--hero .nuvex-card__subtitle {
+  color: #9ca3af !important;
+}
+
+/* Variante Outlined */
+.nuvex-card--outlined {
+  box-shadow: none;
+  border: 1px solid var(--nvl-surface-200, #e5e7eb);
+}
+
+/* Paddings */
+.nuvex-card--padding-none .nuvex-card__header,
+.nuvex-card--padding-none .nuvex-card__body,
+.nuvex-card--padding-none .nuvex-card__footer {
+  padding: 0;
+}
+
+.nuvex-card--padding-sm .nuvex-card__header,
+.nuvex-card--padding-sm .nuvex-card__body,
+.nuvex-card--padding-sm .nuvex-card__footer {
+  padding: 1rem;
+}
+
+.nuvex-card--padding-md .nuvex-card__header,
+.nuvex-card--padding-md .nuvex-card__body,
+.nuvex-card--padding-md .nuvex-card__footer {
+  padding: 1.5rem;
+}
+
+.nuvex-card--padding-lg .nuvex-card__header,
+.nuvex-card--padding-lg .nuvex-card__body,
+.nuvex-card--padding-lg .nuvex-card__footer {
+  padding: 2rem;
+}
+
+/* Header */
+.nuvex-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.5rem !important;
+}
+
+.nuvex-card__header-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.nuvex-card__title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--nvl-text-color, #111827);
+}
+
+.nuvex-card__subtitle {
+  font-size: 0.8125rem;
+  color: var(--nvl-text-muted-color, #6b7280);
+  margin: 0.25rem 0 0 0;
+}
+
+.nuvex-card__header-actions:empty {
+  display: none;
+}
+
+/* Body */
+.nuvex-card__body {
+  flex: 1;
+}
+
+/* Footer */
+.nuvex-card__footer:empty {
+  display: none;
+}
+.nuvex-card__footer {
+  padding-top: 0 !important;
+}

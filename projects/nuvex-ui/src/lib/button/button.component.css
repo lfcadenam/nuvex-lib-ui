@@ -1,0 +1,83 @@
+.nuvex-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  line-height: 1.25rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  user-select: none;
+}
+
+.nuvex-button:focus-visible {
+  outline: 2px solid var(--nvl-primary-color, #2563eb);
+  outline-offset: 2px;
+}
+
+/* Primary */
+.nuvex-button--primary {
+  background-color: var(--nvl-primary-color, #2563eb);
+  color: var(--nvl-surface-0, #ffffff);
+}
+.nuvex-button--primary:hover {
+  background-color: var(--nvl-primary-hover-color, #1d4ed8);
+}
+
+/* Secondary */
+.nuvex-button--secondary {
+  background-color: var(--nvl-surface-50, #f9fafb);
+  color: var(--nvl-text-color, #374151);
+  border-color: var(--nvl-surface-200, #e5e7eb);
+}
+.nuvex-button--secondary:hover {
+  background-color: var(--nvl-surface-100, #f3f4f6);
+}
+
+/* Danger */
+.nuvex-button--danger {
+  background-color: var(--nvl-danger-color, #ef4444);
+  color: #ffffff;
+}
+.nuvex-button--danger:hover {
+  background-color: var(--nvl-danger-hover-color, #dc2626);
+}
+
+/* Ghost */
+.nuvex-button--ghost {
+  background-color: transparent;
+  color: var(--nvl-text-color, #374151);
+}
+.nuvex-button--ghost:hover {
+  background-color: var(--nvl-surface-50, #f9fafb);
+}
+
+/* Sizes */
+.nuvex-button--sm {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8125rem;
+}
+.nuvex-button--lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+/* States */
+.nuvex-button:disabled,
+.nuvex-button[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Icon & Spinner slots */
+.nuvex-button__icon,
+.nuvex-button__spinner {
+  display: inline-flex;
+  align-items: center;
+}

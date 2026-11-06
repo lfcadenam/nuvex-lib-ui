@@ -1,0 +1,105 @@
+<div class="doc-page">
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag">Formulario</span>
+      <span class="doc-version">nuvex-ui/input</span>
+    </div>
+    <h1 class="doc-title">Input</h1>
+    <p class="doc-description">
+      Campo de entrada de texto moderno con focus ring de marca Nuvex, etiquetas, validación de error integrada y soporte para ControlValueAccessor.
+    </p>
+
+    <!-- Selector de vista -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+        Vista Previa
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'code'"
+        (click)="activeTab.set('code')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+        Código Fuente
+      </button>
+    </div>
+  </header>
+
+  @if (activeTab() === 'preview') {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>Inputs Estándar y Estados</h3>
+        <p class="doc-sub">Campos con labels, ayuda contextual y estados reactivos.</p>
+        <div class="demo-grid-inputs">
+          <nuvex-input
+            label="Correo corporativo"
+            type="email"
+            placeholder="colaborador@nuvex.co"
+            [required]="true"
+            helperText="Ingresa tu cuenta asignada"
+            [(value)]="demoEmail"
+          />
+
+          <nuvex-input
+            label="Campo con error de validación"
+            placeholder="Escribe tu dato"
+            [invalid]="true"
+            errorMessage="Este campo no cumple con el formato requerido"
+            [(value)]="demoError"
+          />
+        </div>
+      </section>
+
+      <section class="doc-section">
+        <h3>Escalas de Tamaño</h3>
+        <p class="doc-sub">Variantes <code>sm</code>, <code>md</code> y <code>lg</code> para diversas densidades de pantalla.</p>
+        <div class="demo-grid-inputs">
+          <nuvex-input
+            size="sm"
+            label="Tamaño Small (sm)"
+            placeholder="Campo compacto"
+          />
+          <nuvex-input
+            size="lg"
+            label="Tamaño Large (lg)"
+            placeholder="Campo prominente"
+          />
+        </div>
+      </section>
+
+      <section class="doc-section">
+        <h3>Directiva en Input Nativo</h3>
+        <p class="doc-sub">Para inputs HTML puros usando <code>&lt;input nuvexInput /&gt;</code>.</p>
+        <div class="demo-display">
+          <div style="width: 100%;">
+            <input type="text" nuvexInput placeholder="<input type='text' nuvexInput />" />
+          </div>
+        </div>
+      </section>
+    </div>
+  } @else {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Importar el componente o directiva</h3>
+        <app-code-snippet [code]="importSnippet" language="typescript" title="TypeScript Component" />
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Ejemplos de Implementación en Template</h3>
+        <app-code-snippet [code]="usageSnippet" language="html" title="HTML Template" />
+      </section>
+    </div>
+  }
+</div>

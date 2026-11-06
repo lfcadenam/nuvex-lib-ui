@@ -1,0 +1,161 @@
+<div class="demo-container">
+
+  <!-- Header con dark mode toggle -->
+  <div class="demo-header">
+    <div>
+      <h1>Nuvex UI — Showcase</h1>
+      <p class="demo-subtitle">Catálogo de componentes oficiales Angular 22 & Nuvex Design System</p>
+    </div>
+    <button class="dark-toggle" (click)="toggleDark()" type="button">
+      @if (isDark()) {
+        ☀️ Light mode
+      } @else {
+        🌙 Dark mode
+      }
+    </button>
+  </div>
+
+  <!-- 1. SPINNER -->
+  <section>
+    <h2>Spinner (`nuvex-spinner`)</h2>
+    <div class="row items-center">
+      <div class="demo-box">
+        <span class="demo-label">sm</span>
+        <nuvex-spinner size="sm" variant="primary" />
+      </div>
+      <div class="demo-box">
+        <span class="demo-label">md (default)</span>
+        <nuvex-spinner size="md" variant="primary" />
+      </div>
+      <div class="demo-box">
+        <span class="demo-label">lg</span>
+        <nuvex-spinner size="lg" variant="primary" />
+      </div>
+      <div class="demo-box">
+        <span class="demo-label">secondary</span>
+        <nuvex-spinner size="md" variant="secondary" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. BUTTONS CON SPINNER INTEGRADO -->
+  <section>
+    <h2>Button — Variantes y Spinner Integrado</h2>
+    <div class="row items-center">
+      <nuvex-button variant="primary">Primary</nuvex-button>
+      <nuvex-button variant="secondary">Secondary</nuvex-button>
+      <nuvex-button variant="danger">Danger</nuvex-button>
+      <nuvex-button variant="ghost">Ghost</nuvex-button>
+    </div>
+    <div class="row items-center" style="margin-top: 1rem;">
+      <nuvex-button [loading]="isSimulatedLoading()" variant="primary">
+        Guardando datos
+      </nuvex-button>
+      <nuvex-button [loading]="isSimulatedLoading()" variant="secondary">
+        Procesando
+      </nuvex-button>
+      <nuvex-button (click)="toggleLoading()" variant="ghost" size="sm">
+        Alternar estado loading
+      </nuvex-button>
+    </div>
+  </section>
+
+  <!-- 3. INPUTS -->
+  <section>
+    <h2>Input (`nuvex-input`)</h2>
+    <div class="input-grid">
+      <nuvex-input
+        label="Correo corporativo"
+        type="email"
+        placeholder="usuario@nuvex.co"
+        [required]="true"
+        helperText="Usa tu dirección de trabajo asignada"
+        [(value)]="demoUser"
+      />
+
+      <nuvex-input
+        label="Campo con error de validación"
+        placeholder="Escribe algo..."
+        [invalid]="true"
+        errorMessage="El valor ingresado no cumple con el formato requerido"
+        [(value)]="demoErrorInput"
+      />
+
+      <nuvex-input
+        label="Tamaño Small (sm)"
+        size="sm"
+        placeholder="Input compacto"
+      />
+
+      <nuvex-input
+        label="Tamaño Large (lg)"
+        size="lg"
+        placeholder="Input destacado"
+      />
+
+      <nuvex-input
+        label="Campo deshabilitado"
+        placeholder="No editable"
+        [disabled]="true"
+        value="Valor bloqueado"
+      />
+
+      <div style="display: flex; flex-direction: column; gap: 0.375rem;">
+        <label class="nuvex-input__label">Directiva en input nativo (nuvexInput)</label>
+        <input type="text" nuvexInput placeholder="<input nuvexInput /> nativo directo" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. SWITCH -->
+  <section>
+    <h2>Switch (`nuvex-switch`)</h2>
+    <div class="row items-center">
+      <nuvex-switch
+        label="vs previous period"
+        [(checked)]="demoVsPeriod"
+      />
+
+      <nuvex-switch
+        label="Notificaciones en vivo"
+        [(checked)]="demoNotifications"
+      />
+
+      <nuvex-switch
+        size="sm"
+        label="Compact switch (sm)"
+        [checked]="true"
+      />
+
+      <nuvex-switch
+        label="Deshabilitado"
+        [disabled]="true"
+        [checked]="true"
+      />
+    </div>
+  </section>
+
+  <!-- 5. BADGE -->
+  <section>
+    <h2>Badge — Variantes y Combinaciones</h2>
+    <div class="row items-center">
+      <nuvex-badge variant="primary">Primary</nuvex-badge>
+      <nuvex-badge variant="secondary">Secondary</nuvex-badge>
+      <nuvex-badge variant="success">Success</nuvex-badge>
+      <nuvex-badge variant="warning">Warning</nuvex-badge>
+      <nuvex-badge variant="danger">Danger</nuvex-badge>
+      <nuvex-badge variant="info">Info</nuvex-badge>
+    </div>
+    <div class="row items-center" style="margin-top: 1rem;">
+      <nuvex-button variant="secondary">
+        Bandeja de entrada
+        <nuvex-badge variant="primary" size="sm">12</nuvex-badge>
+      </nuvex-button>
+      <nuvex-button variant="ghost">
+        Servicio Cloud
+        <nuvex-badge variant="success" size="sm">Online</nuvex-badge>
+      </nuvex-button>
+    </div>
+  </section>
+
+</div>

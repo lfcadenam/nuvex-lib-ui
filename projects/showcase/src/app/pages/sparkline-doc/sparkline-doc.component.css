@@ -1,0 +1,338 @@
+/* ==========================================================================
+   SPARKLINE SHOWCASE COMPONENT STYLES (Nuvex Modern Curve UI)
+   ========================================================================== */
+
+/* 1. Laboratorio Interactivo */
+.sparkline-lab-card {
+  background-color: var(--nvl-surface-0, #ffffff);
+  border: 1px solid var(--nvl-surface-200, #e5e7eb);
+  border-radius: 1.5rem; /* 24px */
+  padding: 1.75rem;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04), 0 20px 40px -10px rgba(0, 0, 0, 0.04);
+}
+
+.sparkline-preview-stage {
+  background-color: var(--nvl-surface-50, #f8fafc);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  border-radius: 1.25rem;
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sparkline-stage-inner {
+  width: 100%;
+  max-width: 600px;
+}
+
+.sparkline-stage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--nvl-text-muted-color, #64748b);
+  margin-bottom: 0.75rem;
+}
+
+.sparkline-stage-dataset {
+  font-family: ui-monospace, monospace;
+  font-size: 0.75rem;
+  background-color: var(--nvl-surface-200, #e2e8f0);
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  color: var(--nvl-text-color, #1e293b);
+  font-weight: 700;
+}
+
+.sparkline-canvas-box {
+  background-color: var(--nvl-surface-0, #ffffff);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* 2. Controles */
+.sparkline-controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--nvl-surface-200, #e5e7eb);
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.control-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--nvl-text-muted-color, #64748b);
+  margin: 0;
+}
+
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  background-color: var(--nvl-surface-50, #f8fafc);
+  color: var(--nvl-text-color, #334155);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-transform: capitalize;
+}
+
+.pill-btn:hover {
+  background-color: var(--nvl-surface-200, #e2e8f0);
+  color: var(--nvl-text-color, #0f172a);
+}
+
+/* Active Pill States */
+.pill-btn--emerald-active {
+  background-color: #00C975 !important;
+  color: #ffffff !important;
+  border-color: #00C975 !important;
+  font-weight: 700;
+}
+
+.pill-btn--obsidian-active {
+  background-color: #111215 !important;
+  color: #ffffff !important;
+  border-color: #111215 !important;
+  font-weight: 700;
+}
+
+.pill-btn--neutral-active {
+  background-color: #64748B !important;
+  color: #ffffff !important;
+  border-color: #64748B !important;
+  font-weight: 700;
+}
+
+.pill-btn--rose-active {
+  background-color: #F43F5E !important;
+  color: #ffffff !important;
+  border-color: #F43F5E !important;
+  font-weight: 700;
+}
+
+.pill-btn--sky-active {
+  background-color: #0284C7 !important;
+  color: #ffffff !important;
+  border-color: #0284C7 !important;
+  font-weight: 700;
+}
+
+.pill-btn--ds-active {
+  background-color: #111215 !important;
+  color: #ffffff !important;
+  border-color: #111215 !important;
+  font-weight: 700;
+}
+
+.pill-btn--random {
+  background-color: #ecfdf5;
+  color: #059669;
+  border-color: #a7f3d0;
+}
+
+.pill-btn--random:hover {
+  background-color: #d1fae5;
+  color: #047857;
+}
+
+/* Checkboxes */
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--nvl-text-color, #1e293b);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #00C975;
+  cursor: pointer;
+}
+
+/* Slider */
+.slider-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.slider-val {
+  font-family: ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #00C975;
+}
+
+.slider-input {
+  width: 100%;
+  accent-color: #00C975;
+  cursor: pointer;
+  margin: 0.25rem 0;
+}
+
+.slider-scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.6875rem;
+  font-family: ui-monospace, monospace;
+  color: var(--nvl-text-muted-color, #94a3b8);
+}
+
+/* 3. Tarjetas KPI Grid */
+.kpi-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.kpi-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 160px;
+}
+
+.kpi-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.375rem;
+}
+
+.kpi-card-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--nvl-text-muted-color, #64748b);
+}
+
+.kpi-card-title--hero {
+  color: #9ca3af;
+}
+
+.kpi-card-metric {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--nvl-text-color, #0f172a);
+  margin: 0.25rem 0 0.125rem 0;
+  line-height: 1.1;
+}
+
+.kpi-card-metric--hero {
+  color: #ffffff;
+}
+
+.kpi-card-unit {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--nvl-text-muted-color, #94a3b8);
+}
+
+.kpi-card-delta {
+  font-size: 0.75rem;
+  color: var(--nvl-text-muted-color, #64748b);
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-bottom: 0.875rem;
+}
+
+.kpi-card-delta--hero {
+  color: #9ca3af;
+}
+
+.kpi-card-sparkline {
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+/* 4. Tabla de Referencia API */
+.api-table-wrapper {
+  overflow-x: auto;
+  border-radius: 1rem;
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  background-color: var(--nvl-surface-0, #ffffff);
+}
+
+.api-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.8125rem;
+}
+
+.api-table th {
+  background-color: var(--nvl-surface-50, #f8fafc);
+  border-bottom: 1px solid var(--nvl-surface-200, #e2e8f0);
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--nvl-text-muted-color, #64748b);
+}
+
+.api-table td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--nvl-surface-100, #f1f5f9);
+  color: var(--nvl-text-color, #334155);
+}
+
+.api-table tr:last-child td {
+  border-bottom: none;
+}
+
+.api-prop-name {
+  font-family: ui-monospace, monospace;
+  font-weight: 700;
+  color: #00C975;
+}
+
+.api-prop-type {
+  font-family: ui-monospace, monospace;
+  color: #6366f1;
+}
+
+.api-prop-default {
+  font-family: ui-monospace, monospace;
+  color: #64748b;
+}
