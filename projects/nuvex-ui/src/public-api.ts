@@ -19,6 +19,7 @@ export * from './lib/switch/public-api';
 export * from './lib/card/public-api';
 export * from './lib/segmented/public-api';
 export * from './lib/drawer/public-api';
+export * from './lib/modal/public-api';
 
 // Navegación & Estructura Capsule UI
 export * from './lib/capsule-dock/public-api';

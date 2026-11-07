@@ -1,0 +1,70 @@
+@if (isOpen()) {
+  <!-- BACKDROP CON DESENFOQUE SUAVE -->
+  <div
+    class="nuvex-modal__backdrop"
+    (click)="onBackdropClick()"
+    aria-hidden="true"
+  ></div>
+
+  <!-- CONTENEDOR FLEX PARA CENTRADO O POSICIONAMIENTO -->
+  <div
+    class="nuvex-modal__wrapper"
+    [class.nuvex-modal__wrapper--centered]="centered()"
+    (click)="onBackdropClick()"
+  >
+    <!-- CAJA DEL DIÁLOGO MODAL -->
+    <div
+      class="nuvex-modal__dialog"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-label]="title() || 'Diálogo modal'"
+      (click)="$event.stopPropagation()"
+    >
+      <!-- 1. CABECERA -->
+      @if (title() || subtitle() || closable()) {
+        <header class="nuvex-modal__header">
+          <div class="nuvex-modal__header-left">
+            <div class="nuvex-modal__header-icon">
+              <ng-content select="[slot=header-icon]"></ng-content>
+            </div>
+            <div class="nuvex-modal__header-text">
+              @if (title()) {
+                <h2 class="nuvex-modal__title">{{ title() }}</h2>
+              }
+              @if (subtitle()) {
+                <p class="nuvex-modal__subtitle">{{ subtitle() }}</p>
+              }
+            </div>
+          </div>
+
+          @if (closable()) {
+            <button
+              type="button"
+              class="nuvex-modal__close-btn"
+              (click)="close()"
+              title="Cerrar modal (Esc)"
+              aria-label="Cerrar modal"
+            >
+              <svg class="nuvex-modal__close-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          }
+        </header>
+      }
+
+      <!-- 2. CUERPO -->
+      <div
+        class="nuvex-modal__body"
+        [class.nuvex-modal__body--scrollable]="scrollable()"
+      >
+        <ng-content></ng-content>
+      </div>
+
+      <!-- 3. PIE DE ACCIONES -->
+      <footer class="nuvex-modal__footer">
+        <ng-content select="[slot=footer]"></ng-content>
+      </footer>
+    </div>
+  </div>
+}

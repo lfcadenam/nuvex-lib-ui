@@ -70,6 +70,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'modal',
+    loadComponent: () =>
+      import('./pages/modal-doc/modal-doc.component').then(
+        (m) => m.ModalDocComponent
+      ),
+  },
+  {
     path: 'capsule-dock',
     loadComponent: () =>
       import('./pages/capsule-dock-doc/capsule-dock-doc.component').then(

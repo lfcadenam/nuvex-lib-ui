@@ -1,0 +1,277 @@
+<div class="doc-page">
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag">Superficie Nuvex Modern Curve</span>
+      <span class="doc-version">v0.0.3</span>
+      <span class="doc-tag" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border-color: rgba(16, 185, 129, 0.3);">Nuevo</span>
+    </div>
+    <h1 class="doc-title">Modal</h1>
+    <p class="doc-description">
+      Diálogo emergente elevado con curvatura orgánica amplia (24px), animación suave de pop-in, desenfoque de fondo (backdrop-blur) y soporte multi-tamaño para formularios y confirmaciones.
+    </p>
+
+    <!-- Selector de vista -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+        Vista Previa Interactivas
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'code'"
+        (click)="activeTab.set('code')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+        Código Fuente
+      </button>
+    </div>
+  </header>
+
+  @if (activeTab() === 'preview') {
+    <div class="doc-content">
+      <!-- 1. Demos Interactivos -->
+      <section class="doc-section">
+        <h3>1. Disparadores Interactivos</h3>
+        <p class="doc-sub">Haz clic en los botones para abrir las distintas variantes y tamaños de diálogo modal.</p>
+        
+        <div class="demo-buttons-row">
+          <button nuvexButton variant="primary" (click)="isStandardOpen.set(true)">
+            Abrir Modal Formulario (MD)
+          </button>
+          
+          <button nuvexButton variant="danger" (click)="isConfirmOpen.set(true)">
+            Abrir Modal Confirmación (SM)
+          </button>
+
+          <button nuvexButton variant="secondary" (click)="isLargeOpen.set(true)">
+            Abrir Modal Extendido (LG)
+          </button>
+
+          <button nuvexButton variant="ghost" (click)="isScrollOpen.set(true)">
+            Abrir Modal con Scroll Largo
+          </button>
+        </div>
+      </section>
+
+      <!-- 2. Tabla de Especificación de API -->
+      <section class="doc-section">
+        <h3>2. Especificación de Inputs y Outputs</h3>
+        <p class="doc-sub">Propiedades configurables para el componente <code>&lt;nuvex-modal&gt;</code>:</p>
+        
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--nvl-border-color); color: var(--nvl-text-muted-color);">
+                <th style="padding: 0.75rem 1rem;">Propiedad</th>
+                <th style="padding: 0.75rem 1rem;">Tipo</th>
+                <th style="padding: 0.75rem 1rem;">Por defecto</th>
+                <th style="padding: 0.75rem 1rem;">Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid var(--nvl-border-color);">
+                <td style="padding: 0.75rem 1rem;"><code>isOpen</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>model&lt;boolean&gt;</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>false</code></td>
+                <td style="padding: 0.75rem 1rem;">Control bidireccional de visibilidad (admite <code>[(isOpen)]="variable"</code>).</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--nvl-border-color);">
+                <td style="padding: 0.75rem 1rem;"><code>title</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>string</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>''</code></td>
+                <td style="padding: 0.75rem 1rem;">Título principal de la cabecera.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--nvl-border-color);">
+                <td style="padding: 0.75rem 1rem;"><code>subtitle</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>string</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>''</code></td>
+                <td style="padding: 0.75rem 1rem;">Subtítulo descriptivo o metadato explicativo.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--nvl-border-color);">
+                <td style="padding: 0.75rem 1rem;"><code>size</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>ModalSize</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>'md'</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>'sm' (420px) | 'md' (540px) | 'lg' (720px) | 'xl' (920px) | 'full'</code></td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--nvl-border-color);">
+                <td style="padding: 0.75rem 1rem;"><code>closeOnBackdrop</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>boolean</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>true</code></td>
+                <td style="padding: 0.75rem 1rem;">Permite cerrar al hacer clic en el fondo difuminado.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--nvl-border-color);">
+                <td style="padding: 0.75rem 1rem;"><code>closeOnEscape</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>boolean</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>true</code></td>
+                <td style="padding: 0.75rem 1rem;">Permite cerrar al presionar la tecla Esc.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--nvl-border-color);">
+                <td style="padding: 0.75rem 1rem;"><code>closable</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>boolean</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>true</code></td>
+                <td style="padding: 0.75rem 1rem;">Muestra u oculta el botón circular de cerrar en la esquina superior.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--nvl-border-color);">
+                <td style="padding: 0.75rem 1rem;"><code>centered</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>boolean</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>true</code></td>
+                <td style="padding: 0.75rem 1rem;">Centra verticalmente el modal en la pantalla.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--nvl-border-color);">
+                <td style="padding: 0.75rem 1rem;"><code>onClose</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>output&lt;void&gt;</code></td>
+                <td style="padding: 0.75rem 1rem;">-</td>
+                <td style="padding: 0.75rem 1rem;">Evento emitido cuando el modal se cierra por cualquier medio.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  } @else {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Importar el componente</h3>
+        <app-code-snippet [code]="importSnippet" language="typescript" title="TypeScript Component" />
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Ejemplos de Implementación</h3>
+        <app-code-snippet [code]="usageSnippet" language="html" title="HTML Template" />
+      </section>
+    </div>
+  }
+</div>
+
+<!-- ========================================================================= -->
+<!-- INSTANCIAS DE MODALES DE PRUEBA -->
+<!-- ========================================================================= -->
+
+<!-- 1. Modal Formulario Estándar (size="md") -->
+<nuvex-modal
+  [(isOpen)]="isStandardOpen"
+  title="Crear Nueva Caja"
+  subtitle="Caja de dinero independiente para control de efectivo menor"
+  size="md"
+>
+  <div slot="header-icon">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+    </svg>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Nombre de la Caja *</label>
+    <input type="text" placeholder="Ej: Caja Chica Principal" class="form-input" />
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Saldo Inicial</label>
+    <input type="number" placeholder="500000" class="form-input" />
+    <span style="font-size: 0.75rem; color: var(--nvl-text-muted-color); margin-top: 0.25rem;">Dinero físico con el que inicia la operación.</span>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Color de Identificación</label>
+    <select class="form-input">
+      <option>Púrpura Nuvex</option>
+      <option>Verde Esmeralda</option>
+      <option>Azul Océano</option>
+      <option>Ámbar Cauteloso</option>
+    </select>
+  </div>
+
+  <div slot="footer" style="display: flex; gap: 0.75rem;">
+    <button nuvexButton variant="secondary" (click)="isStandardOpen.set(false)">Cancelar</button>
+    <button nuvexButton variant="primary" (click)="isStandardOpen.set(false)">Crear Caja</button>
+  </div>
+</nuvex-modal>
+
+<!-- 2. Modal de Confirmación (size="sm") -->
+<nuvex-modal
+  [(isOpen)]="isConfirmOpen"
+  title="¿Eliminar esta caja?"
+  subtitle="Esta acción requiere confirmación"
+  size="sm"
+>
+  <div slot="header-icon" style="background-color: rgba(239, 68, 68, 0.1); color: #ef4444;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+    </svg>
+  </div>
+
+  <p style="font-size: 0.875rem; line-height: 1.5; color: var(--nvl-text-muted-color); margin: 0;">
+    Se eliminará el registro de la caja seleccionada. Esta acción no se puede revertir si existen movimientos asociados.
+  </p>
+
+  <div slot="footer" style="display: flex; gap: 0.75rem;">
+    <button nuvexButton variant="secondary" (click)="isConfirmOpen.set(false)">Cancelar</button>
+    <button nuvexButton variant="danger" (click)="isConfirmOpen.set(false)">Sí, eliminar</button>
+  </div>
+</nuvex-modal>
+
+<!-- 3. Modal Extendido (size="lg") -->
+<nuvex-modal
+  [(isOpen)]="isLargeOpen"
+  title="Detalle Consolidado de Cuenta"
+  subtitle="Vista de auditoría financiera multi-criterio"
+  size="lg"
+>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+    <div style="padding: 1rem; border-radius: 1rem; background: var(--nvl-surface-100); border: 1px solid var(--nvl-border-color);">
+      <span style="font-size: 0.75rem; color: var(--nvl-text-muted-color); font-weight: 600;">Ingresos Totales</span>
+      <div style="font-size: 1.5rem; font-weight: 800; color: #10b981; margin-top: 0.25rem;">$124,500.00</div>
+    </div>
+    <div style="padding: 1rem; border-radius: 1rem; background: var(--nvl-surface-100); border: 1px solid var(--nvl-border-color);">
+      <span style="font-size: 0.75rem; color: var(--nvl-text-muted-color); font-weight: 600;">Egresos Totales</span>
+      <div style="font-size: 1.5rem; font-weight: 800; color: #ef4444; margin-top: 0.25rem;">$38,200.00</div>
+    </div>
+    <div style="padding: 1rem; border-radius: 1rem; background: var(--nvl-surface-100); border: 1px solid var(--nvl-border-color);">
+      <span style="font-size: 0.75rem; color: var(--nvl-text-muted-color); font-weight: 600;">Balance Neto</span>
+      <div style="font-size: 1.5rem; font-weight: 800; color: var(--nvl-text-color); margin-top: 0.25rem;">+$86,300.00</div>
+    </div>
+  </div>
+
+  <p style="font-size: 0.875rem; color: var(--nvl-text-color); line-height: 1.6; margin: 0;">
+    Este modal utiliza la variante extendida (<code>size="lg"</code>, 720px) ideal para reportes analíticos, tablas complejas o configuraciones avanzadas.
+  </p>
+
+  <div slot="footer" style="display: flex; gap: 0.75rem;">
+    <button nuvexButton variant="secondary" (click)="isLargeOpen.set(false)">Cerrar</button>
+    <button nuvexButton variant="primary" (click)="isLargeOpen.set(false)">Exportar PDF</button>
+  </div>
+</nuvex-modal>
+
+<!-- 4. Modal con Scroll Largo -->
+<nuvex-modal
+  [(isOpen)]="isScrollOpen"
+  title="Términos y Condiciones de Servicio"
+  subtitle="Contrato de licencia de software Nuvex Cloud"
+  size="md"
+>
+  @for (item of [1, 2, 3, 4, 5, 6, 7]; track item) {
+    <div style="margin-bottom: 1rem;">
+      <h4 style="font-size: 0.875rem; font-weight: 700; margin: 0 0 0.25rem 0;">Cláusula {{ item }}. Uso y Protección de Datos</h4>
+      <p style="font-size: 0.8125rem; color: var(--nvl-text-muted-color); line-height: 1.5; margin: 0;">
+        El usuario se compromete a salvaguardar las credenciales de acceso institucional conforme a la normativa vigente de protección de datos personales. Nuvex Tecnología garantiza la encriptación de datos en tránsito y en reposo mediante infraestructura ISO-27001.
+      </p>
+    </div>
+  }
+
+  <div slot="footer" style="display: flex; gap: 0.75rem;">
+    <button nuvexButton variant="secondary" (click)="isScrollOpen.set(false)">Rechazar</button>
+    <button nuvexButton variant="primary" (click)="isScrollOpen.set(false)">Aceptar Términos</button>
+  </div>
+</nuvex-modal>

@@ -1,0 +1,200 @@
+.nuvex-modal {
+  display: contents;
+}
+
+/* BACKDROP */
+.nuvex-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background-color: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: nuvex-modal-fade-in 0.2s ease forwards;
+}
+
+/* CONTENEDOR FLEX PARA EL DIÁLOGO */
+.nuvex-modal__wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1.25rem;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.nuvex-modal__wrapper--centered {
+  align-items: center;
+}
+
+/* DIÁLOGO / SUPERFICIE ELEVADA */
+.nuvex-modal__dialog {
+  position: relative;
+  width: 100%;
+  border-radius: 24px;
+  background-color: var(--nvl-surface-0, #ffffff);
+  color: var(--nvl-text-color, #0f172a);
+  border: 1px solid var(--nvl-border-color, rgba(226, 232, 240, 0.8));
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  animation: nuvex-modal-pop-in 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin: auto 0;
+}
+
+@keyframes nuvex-modal-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes nuvex-modal-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* TAMAÑOS */
+.nuvex-modal--sm .nuvex-modal__dialog {
+  max-width: 420px;
+}
+
+.nuvex-modal--md .nuvex-modal__dialog {
+  max-width: 540px;
+}
+
+.nuvex-modal--lg .nuvex-modal__dialog {
+  max-width: 720px;
+}
+
+.nuvex-modal--xl .nuvex-modal__dialog {
+  max-width: 920px;
+}
+
+.nuvex-modal--full .nuvex-modal__dialog {
+  max-width: calc(100vw - 2.5rem);
+  max-height: calc(100vh - 2.5rem);
+}
+
+/* 1. CABECERA */
+.nuvex-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--nvl-border-color, #f1f5f9);
+  background-color: var(--nvl-surface-0, #ffffff);
+  flex-shrink: 0;
+  gap: 1rem;
+}
+
+.nuvex-modal__header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  overflow: hidden;
+}
+
+.nuvex-modal__header-icon:empty {
+  display: none;
+}
+
+.nuvex-modal__header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.875rem;
+  background-color: rgba(0, 201, 117, 0.1);
+  color: #00c975;
+  flex-shrink: 0;
+}
+
+.nuvex-modal__header-text {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.nuvex-modal__title {
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--nvl-text-color, #0f172a);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nuvex-modal__subtitle {
+  font-size: 0.8125rem;
+  color: var(--nvl-text-muted-color, #64748b);
+  margin: 0.2rem 0 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nuvex-modal__close-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--nvl-text-muted-color, #64748b);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.nuvex-modal__close-btn:hover {
+  background-color: var(--nvl-surface-100, #f1f5f9);
+  color: var(--nvl-text-color, #0f172a);
+}
+
+.nuvex-modal__close-svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+/* 2. CUERPO */
+.nuvex-modal__body {
+  flex: 1;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.nuvex-modal__body--scrollable {
+  max-height: calc(85vh - 140px);
+  overflow-y: auto;
+}
+
+/* 3. PIE */
+.nuvex-modal__footer {
+  padding: 1.125rem 1.5rem;
+  border-top: 1px solid var(--nvl-border-color, #f1f5f9);
+  background-color: var(--nvl-surface-50, #f8fafc);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.nuvex-modal__footer:empty {
+  display: none;
+}
