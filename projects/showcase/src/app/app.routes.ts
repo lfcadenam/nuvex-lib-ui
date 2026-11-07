@@ -49,6 +49,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'kpi-card',
+    loadComponent: () =>
+      import('./pages/kpi-card-doc/kpi-card-doc.component').then(
+        (m) => m.KpiCardDocComponent
+      ),
+  },
+  {
     path: 'segmented',
     loadComponent: () =>
       import('./pages/segmented-doc/segmented-doc.component').then(

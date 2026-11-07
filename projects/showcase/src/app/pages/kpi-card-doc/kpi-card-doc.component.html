@@ -1,0 +1,193 @@
+<div class="doc-page">
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag">Nuvex Modern Curve</span>
+      <span class="doc-version">v0.0.2</span>
+      <span class="doc-tag" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border-color: rgba(16, 185, 129, 0.3);">Nuevo</span>
+    </div>
+    <h1 class="doc-title">KPI Card</h1>
+    <p class="doc-description">
+      Tarjeta analítica especializada para métricas clave de dashboards, estadísticas financieras y KPIs con badge de tendencia, micro-indicadores y curvatura orgánica de 24px.
+    </p>
+
+    <!-- Selector de vista -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+        Vista Previa
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'code'"
+        (click)="activeTab.set('code')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+        Código Fuente
+      </button>
+    </div>
+  </header>
+
+  @if (activeTab() === 'preview') {
+    <div class="doc-content">
+      <!-- 1. Todas las Variantes -->
+      <section class="doc-section">
+        <h3>1. Galería de Variantes</h3>
+        <p class="doc-sub">Variantes temáticas adaptativas para estructurar jerarquías visuales en paneles financieros y operativos.</p>
+        
+        <div class="kpi-grid">
+          <!-- Hero Invertida -->
+          <nuvex-kpi-card
+            label="Saldo Total Cuentas"
+            value="$1,240,500"
+            helperText="Consolidado de 6 cuentas bancarias"
+            trend="+12.4%"
+            trendDirection="up"
+            trendLabel="vs mes ant."
+            variant="hero"
+          />
+
+          <!-- Purple -->
+          <nuvex-kpi-card
+            label="Cajas Operativas"
+            value="4 activas"
+            helperText="Caja Chica, Tesorería y Puntos de Venta"
+            badgeText="En línea"
+            variant="purple"
+          />
+
+          <!-- Emerald -->
+          <nuvex-kpi-card
+            label="Ingresos Mes"
+            value="$48,250"
+            helperText="Meta mensual cumplida al 104%"
+            trend="+8.1%"
+            trendDirection="up"
+            variant="emerald"
+          />
+
+          <!-- Blue -->
+          <nuvex-kpi-card
+            label="Clientes Nuevos"
+            value="342"
+            helperText="Registrados en el ciclo actual"
+            trend="+15.8%"
+            trendDirection="up"
+            variant="blue"
+          />
+
+          <!-- Amber -->
+          <nuvex-kpi-card
+            label="Cuentas por Cobrar"
+            value="$12,800"
+            helperText="5 vencidas mayores a 30 días"
+            trend="-3.2%"
+            trendDirection="down"
+            variant="amber"
+          />
+
+          <!-- Default Light/Dark -->
+          <nuvex-kpi-card
+            label="Transacciones Hoy"
+            value="182 ops"
+            helperText="Promedio $145.20 por ticket"
+            trend="0.0%"
+            trendDirection="neutral"
+            variant="default"
+          />
+        </div>
+      </section>
+
+      <!-- 2. Guía de Propiedades (API Reference) -->
+      <section class="doc-section">
+        <h3>2. Especificación de Inputs</h3>
+        <p class="doc-sub">Propiedades configurables para el componente <code>&lt;nuvex-kpi-card&gt;</code>:</p>
+        
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--nvl-border-color); color: var(--nvl-text-muted-color);">
+                <th style="padding: 0.75rem 1rem;">Propiedad</th>
+                <th style="padding: 0.75rem 1rem;">Tipo</th>
+                <th style="padding: 0.75rem 1rem;">Por defecto</th>
+                <th style="padding: 0.75rem 1rem;">Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid var(--nvl-border-color);">
+                <td style="padding: 0.75rem 1rem;"><code>label</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>string</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>''</code></td>
+                <td style="padding: 0.75rem 1rem;">Título o etiqueta superior de la métrica.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--nvl-border-color);">
+                <td style="padding: 0.75rem 1rem;"><code>value</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>string | number</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>''</code></td>
+                <td style="padding: 0.75rem 1rem;">Cifra o valor principal resaltado.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--nvl-border-color);">
+                <td style="padding: 0.75rem 1rem;"><code>variant</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>KpiCardVariant</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>'default'</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>'default' | 'hero' | 'emerald' | 'purple' | 'blue' | 'amber' | 'outlined'</code></td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--nvl-border-color);">
+                <td style="padding: 0.75rem 1rem;"><code>trend</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>string | number | null</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>null</code></td>
+                <td style="padding: 0.75rem 1rem;">Valor del badge comparativo (ej: <code>+12.4%</code>).</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--nvl-border-color);">
+                <td style="padding: 0.75rem 1rem;"><code>trendDirection</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>KpiTrendDirection</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>'auto'</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>'up' | 'down' | 'neutral' | 'auto'</code> (calcula flecha automáticamente según signo).</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--nvl-border-color);">
+                <td style="padding: 0.75rem 1rem;"><code>helperText</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>string | null</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>null</code></td>
+                <td style="padding: 0.75rem 1rem;">Texto descriptivo o comparativo al pie de la cifra.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--nvl-border-color);">
+                <td style="padding: 0.75rem 1rem;"><code>badgeText</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>string | null</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>null</code></td>
+                <td style="padding: 0.75rem 1rem;">Badge pill alternativo en la esquina superior si no se usa <code>trend</code>.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--nvl-border-color);">
+                <td style="padding: 0.75rem 1rem;"><code>hoverable</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>boolean</code></td>
+                <td style="padding: 0.75rem 1rem;"><code>true</code></td>
+                <td style="padding: 0.75rem 1rem;">Aplica micro-elevación translateY(-2px) al pasar el cursor.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  } @else {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Importar el componente</h3>
+        <app-code-snippet [code]="importSnippet" language="typescript" title="TypeScript Component" />
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Ejemplos de Implementación</h3>
+        <app-code-snippet [code]="usageSnippet" language="html" title="HTML Template" />
+      </section>
+    </div>
+  }
+</div>

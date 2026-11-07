@@ -48,6 +48,7 @@ export class App {
       title: 'Nuvex Modern Curve',
       items: [
         { name: 'Card', route: '/card', tag: '32px' },
+        { name: 'KPI Card', route: '/kpi-card', tag: 'Nuevo v0.0.2' },
         { name: 'Segmented', route: '/segmented', tag: 'Pill' },
         { name: 'Drawer', route: '/drawer', tag: 'Slide-Over' },
         { name: 'Sparkline', route: '/sparkline', tag: 'Bézier SVG' },
