@@ -1,0 +1,232 @@
+.nuvex-kpi-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 1.5rem; /* 24px - Estándar Nuvex Modern Curve */
+  background-color: var(--nvl-surface-0, #ffffff);
+  color: var(--nvl-text-color, #0f172a);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.03), 0 20px 40px -10px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hoverable */
+.nuvex-kpi-card--hoverable:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.06), 0 24px 48px -12px rgba(0, 0, 0, 0.06);
+}
+
+/* Encabezado Superior (Label + Badge/Icon Slot) */
+.nuvex-kpi-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.nuvex-kpi-card__label-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.nuvex-kpi-card__label {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--nvl-text-muted-color, #64748b);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nuvex-kpi-card__badge-slot {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  flex-shrink: 0;
+}
+
+.nuvex-kpi-card__badge-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  background-color: var(--nvl-surface-100, #f1f5f9);
+  color: var(--nvl-text-muted-color, #475569);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+}
+
+/* Cifra Principal y Tendencia */
+.nuvex-kpi-card__value-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.nuvex-kpi-card__value {
+  font-size: 1.75rem;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--nvl-text-color, #0f172a);
+}
+
+/* Tendencia (Píldora comparativa) */
+.nuvex-kpi-card__trend {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.nuvex-kpi-card__trend-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.125rem 0.4375rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1rem;
+}
+
+.nuvex-kpi-card__trend-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+/* Variaciones de Tendencia */
+.nuvex-kpi-card__trend--up .nuvex-kpi-card__trend-pill {
+  background-color: #ecfdf5;
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.nuvex-kpi-card__trend--down .nuvex-kpi-card__trend-pill {
+  background-color: #fef2f2;
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.nuvex-kpi-card__trend--neutral .nuvex-kpi-card__trend-pill {
+  background-color: #f8fafc;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
+.nuvex-kpi-card__trend-label {
+  font-size: 0.6875rem;
+  color: var(--nvl-text-muted-color, #64748b);
+  font-weight: 500;
+}
+
+/* Texto de Ayuda / Subtítulo */
+.nuvex-kpi-card__helper {
+  font-size: 0.75rem;
+  color: var(--nvl-text-muted-color, #64748b);
+  margin: 0.375rem 0 0 0;
+  line-height: 1.25;
+}
+
+/* Slot para Sparklines o Gráficas */
+.nuvex-kpi-card__chart-slot:empty {
+  display: none;
+}
+
+.nuvex-kpi-card__chart-slot {
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* ==========================================================================
+   Variantes de Color Oficiales Nuvex
+   ========================================================================== */
+
+/* Variante Hero (Obsidiana / Grafito Invertido) */
+.nuvex-kpi-card--hero {
+  background-color: #121316 !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 12px 36px -4px rgba(0, 0, 0, 0.45);
+}
+
+.nuvex-kpi-card--hero .nuvex-kpi-card__value {
+  color: #ffffff !important;
+}
+
+.nuvex-kpi-card--hero .nuvex-kpi-card__label,
+.nuvex-kpi-card--hero .nuvex-kpi-card__helper,
+.nuvex-kpi-card--hero .nuvex-kpi-card__trend-label {
+  color: #94a3b8 !important;
+}
+
+.nuvex-kpi-card--hero .nuvex-kpi-card__badge-pill {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.nuvex-kpi-card--hero .nuvex-kpi-card__chart-slot {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Variante Esmeralda Nuvex */
+.nuvex-kpi-card--emerald {
+  background-color: rgba(0, 201, 117, 0.05) !important;
+  border-color: rgba(0, 201, 117, 0.22) !important;
+}
+
+.nuvex-kpi-card--emerald .nuvex-kpi-card__label {
+  color: #00874c !important;
+}
+
+/* Variante Púrpura Nuvex */
+.nuvex-kpi-card--purple {
+  background-color: rgba(81, 67, 154, 0.05) !important;
+  border-color: rgba(81, 67, 154, 0.22) !important;
+}
+
+.nuvex-kpi-card--purple .nuvex-kpi-card__label {
+  color: #51439a !important;
+}
+
+.nuvex-kpi-card--purple .nuvex-kpi-card__value {
+  color: #3b2d77;
+}
+
+/* Variante Azul Océano */
+.nuvex-kpi-card--blue {
+  background-color: rgba(37, 99, 235, 0.05) !important;
+  border-color: rgba(37, 99, 235, 0.22) !important;
+}
+
+.nuvex-kpi-card--blue .nuvex-kpi-card__label {
+  color: #1d4ed8 !important;
+}
+
+/* Variante Ámbar */
+.nuvex-kpi-card--amber {
+  background-color: rgba(217, 119, 6, 0.05) !important;
+  border-color: rgba(217, 119, 6, 0.22) !important;
+}
+
+.nuvex-kpi-card--amber .nuvex-kpi-card__label {
+  color: #b45309 !important;
+}
+
+/* Variante Outlined */
+.nuvex-kpi-card--outlined {
+  box-shadow: none;
+  background-color: transparent;
+}

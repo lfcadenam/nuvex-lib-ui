@@ -26,5 +26,6 @@ export * from './lib/topbar/public-api';
 
 // Métricas & Visualización
 export * from './lib/sparkline/public-api';
+export * from './lib/kpi-card/public-api';
 
 export * from './lib/nuvex-ui';

@@ -1,0 +1,58 @@
+<div class="nuvex-kpi-card__top">
+  <div class="nuvex-kpi-card__label-group">
+    @if (label()) {
+      <span class="nuvex-kpi-card__label">{{ label() }}</span>
+    }
+    <ng-content select="[slot=label]"></ng-content>
+  </div>
+
+  <div class="nuvex-kpi-card__badge-slot">
+    <ng-content select="[slot=icon], [slot=badge]"></ng-content>
+    @if (badgeText()) {
+      <span class="nuvex-kpi-card__badge-pill">{{ badgeText() }}</span>
+    }
+  </div>
+</div>
+
+<div class="nuvex-kpi-card__value-group">
+  <div class="nuvex-kpi-card__value">
+    @if (value() !== undefined && value() !== null && value() !== '') {
+      <span>{{ value() }}</span>
+    }
+    <ng-content></ng-content>
+  </div>
+
+  @if (trend() !== null && trend() !== undefined && trend() !== '') {
+    <div
+      class="nuvex-kpi-card__trend"
+      [class.nuvex-kpi-card__trend--up]="effectiveDirection() === 'up'"
+      [class.nuvex-kpi-card__trend--down]="effectiveDirection() === 'down'"
+      [class.nuvex-kpi-card__trend--neutral]="effectiveDirection() === 'neutral'"
+    >
+      <span class="nuvex-kpi-card__trend-pill">
+        @if (effectiveDirection() === 'up') {
+          <svg class="nuvex-kpi-card__trend-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="18 15 12 9 6 15"></polyline>
+          </svg>
+        } @else if (effectiveDirection() === 'down') {
+          <svg class="nuvex-kpi-card__trend-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        }
+        <span>{{ trend() }}</span>
+      </span>
+
+      @if (trendLabel()) {
+        <span class="nuvex-kpi-card__trend-label">{{ trendLabel() }}</span>
+      }
+    </div>
+  }
+
+  @if (helperText()) {
+    <p class="nuvex-kpi-card__helper">{{ helperText() }}</p>
+  }
+</div>
+
+<div class="nuvex-kpi-card__chart-slot">
+  <ng-content select="[slot=chart], [slot=sparkline], [slot=footer]"></ng-content>
+</div>
