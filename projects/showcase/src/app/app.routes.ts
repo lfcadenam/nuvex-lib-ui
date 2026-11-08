@@ -126,6 +126,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'tabs',
+    loadComponent: () =>
+      import('./pages/tabs-doc/tabs-doc.component').then(
+        (m) => m.TabsDocComponent
+      ),
+  },
+  {
     path: 'sparkline',
     loadComponent: () =>
       import('./pages/sparkline-doc/sparkline-doc.component').then(

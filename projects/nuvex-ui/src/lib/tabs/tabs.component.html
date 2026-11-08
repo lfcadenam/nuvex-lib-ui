@@ -1,0 +1,33 @@
+<!-- Nuvex Tabs Component -->
+<div class="nuvex-tabs-nav" role="tablist">
+  <button
+    *ngFor="let tab of headerItems(); let i = index"
+    type="button"
+    class="nuvex-tabs-tab"
+    [class.nuvex-tabs-tab--active]="tab.id === value()"
+    [class.nuvex-tabs-tab--disabled]="tab.disabled"
+    [disabled]="tab.disabled"
+    role="tab"
+    [attr.aria-selected]="tab.id === value()"
+    [attr.tabindex]="tab.id === value() ? 0 : -1"
+    (click)="selectTab(tab)"
+    (keydown)="onKeyDown($event, i)"
+  >
+    <span class="nuvex-tabs-tab__label">{{ tab.label }}</span>
+    <span class="nuvex-tabs-tab__badge" *ngIf="tab.badge !== undefined && tab.badge !== null">
+      {{ tab.badge }}
+    </span>
+  </button>
+</div>
+
+<!-- Contenedor del Panel Activo -->
+<div class="nuvex-tabs-panels">
+  <ng-container *ngIf="activeProjectedTab() as current">
+    <div class="nuvex-tabs-panel" role="tabpanel" [attr.aria-labelledby]="current.id()">
+      <ng-container *ngTemplateOutlet="current.contentTemplate" />
+    </div>
+  </ng-container>
+
+  <!-- Proyección libre para modo declarativo -->
+  <ng-content />
+</div>

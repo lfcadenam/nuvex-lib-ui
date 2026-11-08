@@ -29,6 +29,7 @@ export * from './lib/toast/public-api';
 // Navegación & Estructura Capsule UI
 export * from './lib/capsule-dock/public-api';
 export * from './lib/topbar/public-api';
+export * from './lib/tabs/public-api';
 
 // Métricas & Visualización
 export * from './lib/sparkline/public-api';

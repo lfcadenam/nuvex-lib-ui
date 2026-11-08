@@ -65,13 +65,14 @@ export class App {
       items: [
         { name: 'Capsule Dock', route: '/capsule-dock', tag: 'Obsidian' },
         { name: 'Topbar', route: '/topbar', tag: 'Pill Nav' },
+        { name: 'Tabs', route: '/tabs', tag: 'Pill / Line' },
       ],
     },
     {
       title: 'Infraestructura & QA',
       items: [
-        { name: 'Vitest (23 Tests)', route: '#', badge: '100% Pass', disabled: true },
-        { name: 'Build FESM/DTS', route: '#', badge: '12 Bundles', disabled: true },
+        { name: 'Vitest (66 Tests)', route: '#', badge: '100% Pass', disabled: true },
+        { name: 'Build FESM/DTS', route: '#', badge: '17 Bundles', disabled: true },
       ],
     },
   ];

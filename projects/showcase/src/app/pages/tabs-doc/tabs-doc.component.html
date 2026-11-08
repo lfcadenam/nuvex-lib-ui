@@ -1,0 +1,233 @@
+<div class="doc-page">
+  <!-- Header -->
+  <header class="doc-header">
+    <div class="doc-header__badge-row">
+      <span class="doc-pill">Navegación & Estructura</span>
+      <span class="doc-pill doc-pill--new">Nuevo v0.0.4</span>
+    </div>
+    <h1 class="doc-title">Tabs (Pestañas Sobrias)</h1>
+    <p class="doc-description">
+      Navegación modular por pestañas con curvas suaves Nuvex Modern Curve UI, soporte para variantes
+      pill (cápsula), underline (línea minimalista) y card, badges sutiles y accesibilidad por teclado completa.
+    </p>
+  </header>
+
+  <!-- Playground Interactivo -->
+  <section class="doc-section">
+    <div class="doc-tabs">
+      <button
+        class="doc-tab"
+        [class.doc-tab--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        Vista Previa Interactiva
+      </button>
+      <button
+        class="doc-tab"
+        [class.doc-tab--active]="activeTab() === 'code'"
+        (click)="activeTab.set('code')"
+      >
+        Código TypeScript & Template
+      </button>
+    </div>
+
+    <!-- Panel de Preview -->
+    <div class="doc-preview" *ngIf="activeTab() === 'preview'">
+      <!-- Controles Dinámicos -->
+      <div class="doc-controls" style="margin-bottom: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; background: var(--nvl-surface-50, #f8fafc); padding: 1rem 1.25rem; border-radius: 1rem; border: 1px solid var(--nvl-surface-200, #e2e8f0);">
+        <!-- Variante -->
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="font-size: 0.8125rem; font-weight: 500; color: var(--nvl-text-secondary, #64748b);">Variante:</span>
+          <select
+            [value]="currentVariant()"
+            (change)="currentVariant.set($any($event.target).value)"
+            style="padding: 0.35rem 0.65rem; border-radius: 0.5rem; border: 1px solid var(--nvl-surface-200, #cbd5e1); font-size: 0.8125rem;"
+          >
+            <option value="pill">Pill (Cápsula Nuvex)</option>
+            <option value="underline">Underline (Línea)</option>
+            <option value="card">Card (Tarjeta)</option>
+          </select>
+        </div>
+
+        <!-- Tamaño -->
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="font-size: 0.8125rem; font-weight: 500; color: var(--nvl-text-secondary, #64748b);">Tamaño:</span>
+          <select
+            [value]="currentSize()"
+            (change)="currentSize.set($any($event.target).value)"
+            style="padding: 0.35rem 0.65rem; border-radius: 0.5rem; border: 1px solid var(--nvl-surface-200, #cbd5e1); font-size: 0.8125rem;"
+          >
+            <option value="sm">Small (sm)</option>
+            <option value="md">Medium (md)</option>
+            <option value="lg">Large (lg)</option>
+          </select>
+        </div>
+
+        <!-- Full Width Toggle -->
+        <label style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8125rem; cursor: pointer;">
+          <input
+            type="checkbox"
+            [checked]="isFullWidth()"
+            (change)="isFullWidth.set($any($event.target).checked)"
+          />
+          <span>Ancho Completo (Full Width)</span>
+        </label>
+      </div>
+
+      <!-- Componente Tabs en Vivo con Contenido Proyectado -->
+      <nuvex-card style="width: 100%;">
+        <nuvex-tabs
+          [(value)]="selectedMainTab"
+          [variant]="currentVariant()"
+          [size]="currentSize()"
+          [fullWidth]="isFullWidth()"
+        >
+          <!-- Pestaña 1: Citas Activas -->
+          <nuvex-tab id="citas" label="Citas del Día" badge="6">
+            <div style="padding: 1rem 0; display: flex; flex-direction: column; gap: 0.75rem;">
+              <h3 style="font-size: 1rem; font-weight: 600; margin: 0; color: var(--nvl-text-color, #0f172a);">
+                Agenda Diaria de Turnos
+              </h3>
+              <p style="font-size: 0.875rem; color: var(--nvl-text-secondary, #64748b); margin: 0;">
+                Se registran 6 citas programadas para hoy. Todos los recordatorios automáticos de WhatsApp Meta Cloud API han sido enviados con PIN de confirmación.
+              </p>
+            </div>
+          </nuvex-tab>
+
+          <!-- Pestaña 2: Especialistas -->
+          <nuvex-tab id="especialistas" label="Especialistas">
+            <div style="padding: 1rem 0; display: flex; flex-direction: column; gap: 0.75rem;">
+              <h3 style="font-size: 1rem; font-weight: 600; margin: 0; color: var(--nvl-text-color, #0f172a);">
+                Equipo Profesional Activo
+              </h3>
+              <p style="font-size: 0.875rem; color: var(--nvl-text-secondary, #64748b); margin: 0;">
+                Gestión de turnos de la Dra. Paola Aguilera (Master Balayage), Camila Restrepo (Manicura Rusa) y Valentina Gómez (Cosmetología).
+              </p>
+            </div>
+          </nuvex-tab>
+
+          <!-- Pestaña 3: Servicios -->
+          <nuvex-tab id="servicios" label="Catálogo & Tarifas" badge="14">
+            <div style="padding: 1rem 0; display: flex; flex-direction: column; gap: 0.75rem;">
+              <h3 style="font-size: 1rem; font-weight: 600; margin: 0; color: var(--nvl-text-color, #0f172a);">
+                Servicios Disponibles
+              </h3>
+              <p style="font-size: 0.875rem; color: var(--nvl-text-secondary, #64748b); margin: 0;">
+                Listado de 14 tratamientos capilares, faciales y de uñas con precios, duraciones y asignación por especialista.
+              </p>
+            </div>
+          </nuvex-tab>
+
+          <!-- Pestaña 4: Ajustes Avanzados (Deshabilitada) -->
+          <nuvex-tab id="ajustes" label="Integración Fiscal" [disabled]="true">
+            <div style="padding: 1rem 0;">
+              <p>Módulo no disponible en tu plan actual.</p>
+            </div>
+          </nuvex-tab>
+        </nuvex-tabs>
+      </nuvex-card>
+    </div>
+
+    <!-- Panel de Código -->
+    <div class="doc-code" *ngIf="activeTab() === 'code'">
+      <app-code-snippet [code]="basicUsageCode" language="typescript" />
+    </div>
+  </section>
+
+  <!-- Especificación de la API -->
+  <section class="doc-section">
+    <h2 class="doc-section-title">Propiedades de nuvex-tabs (API)</h2>
+    <div class="doc-table-wrapper">
+      <table class="doc-api-table">
+        <thead>
+          <tr>
+            <th>Propiedad</th>
+            <th>Tipo</th>
+            <th>Default</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>value</code></td>
+            <td><code>string</code></td>
+            <td><code>''</code></td>
+            <td>ID de la pestaña activa (signal model bidireccional).</td>
+          </tr>
+          <tr>
+            <td><code>variant</code></td>
+            <td><code>'pill' | 'underline' | 'card'</code></td>
+            <td><code>'pill'</code></td>
+            <td>Estilo visual de la barra de navegación.</td>
+          </tr>
+          <tr>
+            <td><code>size</code></td>
+            <td><code>'sm' | 'md' | 'lg'</code></td>
+            <td><code>'md'</code></td>
+            <td>Escala visual y relleno de los botones de pestaña.</td>
+          </tr>
+          <tr>
+            <td><code>fullWidth</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Distribuye equitativamente las pestañas al 100% del ancho.</td>
+          </tr>
+          <tr>
+            <td><code>items</code></td>
+            <td><code>TabItem[]</code></td>
+            <td><code>[]</code></td>
+            <td>Lista declarativa alternativa cuando no se usa proyección &lt;nuvex-tab&gt;.</td>
+          </tr>
+          <tr>
+            <td><code>(tabChange)</code></td>
+            <td><code>string</code></td>
+            <td>-</td>
+            <td>Evento emitido al seleccionar una pestaña con su ID correspondiente.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="doc-section">
+    <h2 class="doc-section-title">Propiedades de nuvex-tab</h2>
+    <div class="doc-table-wrapper">
+      <table class="doc-api-table">
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Tipo</th>
+            <th>Default</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>id</code></td>
+            <td><code>string</code></td>
+            <td><strong>Requerido</strong></td>
+            <td>Identificador único de la pestaña.</td>
+          </tr>
+          <tr>
+            <td><code>label</code></td>
+            <td><code>string</code></td>
+            <td><strong>Requerido</strong></td>
+            <td>Texto mostrado en la cabecera.</td>
+          </tr>
+          <tr>
+            <td><code>badge</code></td>
+            <td><code>string | number | null</code></td>
+            <td><code>null</code></td>
+            <td>Badge numérico o píldora complementaria.</td>
+          </tr>
+          <tr>
+            <td><code>disabled</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Deshabilita la selección de la pestaña.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
