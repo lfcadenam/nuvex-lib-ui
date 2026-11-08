@@ -1,0 +1,134 @@
+<div class="nuvex-spotlight-card__inner">
+  <!-- Cabecera: Badge de estado y Navegación Carrusel -->
+  <header class="nuvex-spotlight-card__header">
+    <div class="nuvex-spotlight-card__badge-wrap">
+      @if (badgeText()) {
+        <span
+          class="nuvex-spotlight-card__badge-pill"
+          [class]="'nuvex-spotlight-card__badge-pill--' + badgeVariant()"
+        >
+          {{ badgeText() }}
+        </span>
+      }
+      <ng-content select="[spotlight-badge]"></ng-content>
+    </div>
+
+    @if (showNavigation()) {
+      <div class="nuvex-spotlight-card__nav">
+        @if (counterText()) {
+          <span class="nuvex-spotlight-card__counter">{{ counterText() }}</span>
+        }
+        <button
+          type="button"
+          class="nuvex-spotlight-card__nav-btn"
+          [disabled]="!canNavigatePrev()"
+          (click)="onPrev()"
+          aria-label="Perfil anterior"
+        >
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path
+              fill-rule="evenodd"
+              d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+        <button
+          type="button"
+          class="nuvex-spotlight-card__nav-btn"
+          [disabled]="!canNavigateNext()"
+          (click)="onNext()"
+          aria-label="Perfil siguiente"
+        >
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path
+              fill-rule="evenodd"
+              d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+      </div>
+    }
+  </header>
+
+  <!-- Cuerpo central: Avatar Prominente e Identidad -->
+  <div class="nuvex-spotlight-card__body">
+    <div class="nuvex-spotlight-card__avatar-wrap">
+      <ng-content select="nuvex-avatar, [spotlight-avatar]"></ng-content>
+
+      @if (avatarImage() || avatarLabel() || name()) {
+        <div class="nuvex-spotlight-card__avatar">
+          @if (avatarImage()) {
+            <img
+              [src]="avatarImage()"
+              [alt]="name()"
+              class="nuvex-spotlight-card__avatar-img"
+              loading="lazy"
+            />
+          } @else {
+            <span class="nuvex-spotlight-card__avatar-label">{{ computedInitials() }}</span>
+          }
+
+          @if (status()) {
+            <span
+              class="nuvex-spotlight-card__status"
+              [class]="'nuvex-spotlight-card__status--' + status()"
+            ></span>
+          }
+        </div>
+      }
+    </div>
+
+    @if (name()) {
+      <h3 class="nuvex-spotlight-card__name">{{ name() }}</h3>
+    }
+
+    @if (role()) {
+      <p class="nuvex-spotlight-card__role">{{ role() }}</p>
+    }
+
+    @if (availability()) {
+      <div class="nuvex-spotlight-card__availability">
+        <svg viewBox="0 0 20 20" fill="currentColor" class="nuvex-spotlight-card__clock-icon" aria-hidden="true">
+          <path
+            fill-rule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        <span>{{ availability() }}</span>
+      </div>
+    }
+
+    <ng-content select="[spotlight-body]"></ng-content>
+  </div>
+
+  <!-- Métricas Estadísticas (Stats Grid) -->
+  @if (stats().length > 0) {
+    <div class="nuvex-spotlight-card__stats">
+      @for (stat of stats(); track stat.label) {
+        <div class="nuvex-spotlight-card__stat-item">
+          <span class="nuvex-spotlight-card__stat-val">{{ stat.value }}</span>
+          <span class="nuvex-spotlight-card__stat-lbl">{{ stat.label }}</span>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Pie: Acción Principal o Slot Personalizado -->
+  @if (actionLabel()) {
+    <footer class="nuvex-spotlight-card__footer">
+      <button
+        type="button"
+        class="nuvex-spotlight-card__action-btn"
+        (click)="onAction()"
+      >
+        <span>{{ actionLabel() }}</span>
+      </button>
+      <ng-content select="[spotlight-footer]"></ng-content>
+    </footer>
+  } @else {
+    <ng-content select="[spotlight-footer]"></ng-content>
+  }
+</div>

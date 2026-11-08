@@ -21,6 +21,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'avatar',
+    loadComponent: () =>
+      import('./pages/avatar-doc/avatar-doc.component').then(
+        (m) => m.AvatarDocComponent
+      ),
+  },
+  {
     path: 'spinner',
     loadComponent: () =>
       import('./pages/spinner-doc/spinner-doc.component').then(
@@ -53,6 +60,13 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/kpi-card-doc/kpi-card-doc.component').then(
         (m) => m.KpiCardDocComponent
+      ),
+  },
+  {
+    path: 'spotlight-card',
+    loadComponent: () =>
+      import('./pages/spotlight-card-doc/spotlight-card-doc.component').then(
+        (m) => m.SpotlightCardDocComponent
       ),
   },
   {

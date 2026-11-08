@@ -1,0 +1,44 @@
+<div class="nuvex-avatar__wrapper">
+  @if (showImage()) {
+    <img
+      [src]="image()"
+      [alt]="alt()"
+      (error)="handleImgError($event)"
+      class="nuvex-avatar__image"
+      loading="lazy"
+    />
+  } @else if (computedInitials()) {
+    <span class="nuvex-avatar__label">{{ computedInitials() }}</span>
+  } @else if (icon()) {
+    <i [class]="icon()" class="nuvex-avatar__icon" aria-hidden="true"></i>
+  } @else {
+    <svg
+      class="nuvex-avatar__placeholder"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path
+        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+      />
+    </svg>
+    <ng-content></ng-content>
+  }
+
+  @if (status()) {
+    <span
+      class="nuvex-avatar__status"
+      [class]="'nuvex-avatar__status--' + status() + ' nuvex-avatar__status--' + statusPosition()"
+      [attr.aria-label]="'Estado: ' + status()"
+    ></span>
+  }
+
+  @if (badge() !== null && badge() !== undefined && badge() !== '') {
+    <span
+      class="nuvex-avatar__badge"
+      [class]="'nuvex-avatar__badge--' + badgePosition()"
+    >
+      {{ badge() }}
+    </span>
+  }
+</div>

@@ -1,0 +1,284 @@
+<div class="doc-page">
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag">Componente Base</span>
+      <span class="doc-version">nuvex-ui/avatar</span>
+    </div>
+    <h1 class="doc-title">Avatar & Avatar Group</h1>
+    <p class="doc-description">
+      Elemento visual para representar perfiles de usuario, clientas, estilistas o grupos de colaboradores, con soporte para fotos, cálculo inteligente de iniciales, indicadores de presencia y solapamiento fluido.
+    </p>
+
+    <!-- Selector de vista -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+        Vista Previa
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'code'"
+        (click)="activeTab.set('code')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+        Código Fuente
+      </button>
+    </div>
+  </header>
+
+  @if (activeTab() === 'preview') {
+    <div class="doc-content">
+      <!-- 1. FOTOS Y TAMAÑOS -->
+      <section class="doc-section">
+        <h3>Escala de Tamaños (xs a 2xl)</h3>
+        <p class="doc-sub">Seis tamaños estándar calibrados para barras de navegación, tablas, listas y perfiles destacados.</p>
+        <div class="demo-display items-center gap-4 flex-wrap">
+          <nuvex-avatar
+            image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160"
+            size="xs"
+            alt="Usuario XS"
+          />
+          <nuvex-avatar
+            image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160"
+            size="sm"
+            alt="Usuario SM"
+          />
+          <nuvex-avatar
+            image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160"
+            size="md"
+            alt="Usuario MD"
+          />
+          <nuvex-avatar
+            image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160"
+            size="lg"
+            alt="Usuario LG"
+          />
+          <nuvex-avatar
+            image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160"
+            size="xl"
+            alt="Usuario XL"
+          />
+          <nuvex-avatar
+            image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160"
+            size="2xl"
+            alt="Usuario 2XL"
+          />
+        </div>
+      </section>
+
+      <!-- 2. INICIALES INTELIGENTES Y PALETAS TONALES -->
+      <section class="doc-section">
+        <h3>Iniciales Automáticas y Paletas Tonales</h3>
+        <p class="doc-sub">Cuando no hay imagen disponible, el componente calcula automáticamente las iniciales y aplica armonías suaves.</p>
+        <div class="demo-display items-center gap-4 flex-wrap">
+          <nuvex-avatar label="Paola Aguilera" variant="emerald" size="lg" />
+          <nuvex-avatar label="Camila Restrepo" variant="primary" size="lg" />
+          <nuvex-avatar label="Vivian Mohnblatt" variant="purple" size="lg" />
+          <nuvex-avatar label="Valentina Gomez" variant="amber" size="lg" />
+          <nuvex-avatar label="Administrador" variant="dark" size="lg" />
+          <nuvex-avatar label="Invitada" variant="neutral" size="lg" />
+        </div>
+      </section>
+
+      <!-- 3. GEOMETRÍAS (SHAPES) -->
+      <section class="doc-section">
+        <h3>Geometría de Borde (Shapes)</h3>
+        <p class="doc-sub">Circular estándar (<code>circle</code>), curva orgánica Nuvex Modern Curve (<code>rounded</code>) o cuadrado suave (<code>square</code>).</p>
+        <div class="demo-display items-center gap-6">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+            <nuvex-avatar
+              image="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=160"
+              shape="circle"
+              size="xl"
+            />
+            <span style="font-size:12px; font-weight:700; color:#64748b;">circle (9999px)</span>
+          </div>
+
+          <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+            <nuvex-avatar
+              image="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=160"
+              shape="rounded"
+              size="xl"
+            />
+            <span style="font-size:12px; font-weight:700; color:#64748b;">rounded (Nuvex Curve)</span>
+          </div>
+
+          <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+            <nuvex-avatar
+              image="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=160"
+              shape="square"
+              size="xl"
+            />
+            <span style="font-size:12px; font-weight:700; color:#64748b;">square (8px)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. INDICADORES DE PRESENCIA Y BADGES -->
+      <section class="doc-section">
+        <h3>Indicadores de Presencia y Badges</h3>
+        <p class="doc-sub">Puntos de estado de disponibilidad (online, away, busy, offline) y badges numéricos o textuales.</p>
+        <div class="demo-display items-center gap-6 flex-wrap">
+          <nuvex-avatar
+            image="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160"
+            status="online"
+            size="lg"
+          />
+          <nuvex-avatar
+            image="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=160"
+            status="busy"
+            size="lg"
+          />
+          <nuvex-avatar
+            label="Natalia M."
+            variant="purple"
+            status="away"
+            size="lg"
+          />
+          <nuvex-avatar
+            label="Laura S."
+            variant="neutral"
+            status="offline"
+            size="lg"
+          />
+          <nuvex-avatar
+            image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160"
+            badge="3"
+            size="lg"
+          />
+          <nuvex-avatar
+            label="Vivian"
+            variant="emerald"
+            badge="VIP"
+            [ring]="true"
+            size="lg"
+          />
+        </div>
+      </section>
+
+      <!-- 5. AVATAR GROUP (EQUIPO / GRUPOS DE USUARIOS) -->
+      <section class="doc-section">
+        <h3>Avatar Group (Solapamiento y Microinteracción)</h3>
+        <p class="doc-sub">Contenedor <code>nuvex-avatar-group</code> con solapamiento suave, borde de separación perimetral y elevación en hover.</p>
+        <div class="demo-display items-center gap-8 flex-wrap">
+          <div>
+            <span style="display:block; font-size:12px; font-weight:700; color:#64748b; margin-bottom:10px;">Espaciado Regular (md):</span>
+            <nuvex-avatar-group spacing="md">
+              <nuvex-avatar image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160" />
+              <nuvex-avatar image="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160" />
+              <nuvex-avatar image="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=160" />
+              <nuvex-avatar label="Sofia D." variant="primary" />
+              <nuvex-avatar label="+5" variant="dark" />
+            </nuvex-avatar-group>
+          </div>
+
+          <div>
+            <span style="display:block; font-size:12px; font-weight:700; color:#64748b; margin-bottom:10px;">Espaciado Compacto (sm) con Curva Nuvex:</span>
+            <nuvex-avatar-group spacing="sm">
+              <nuvex-avatar label="PA" variant="emerald" shape="rounded" />
+              <nuvex-avatar label="CR" variant="purple" shape="rounded" />
+              <nuvex-avatar label="VM" variant="amber" shape="rounded" />
+              <nuvex-avatar label="+2" variant="neutral" shape="rounded" />
+            </nuvex-avatar-group>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. TABLA DE PROPIEDADES (API) -->
+      <section class="doc-section">
+        <h3>Referencia de Propiedades (API)</h3>
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Propiedad</th>
+              <th>Tipo</th>
+              <th>Default</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>image</code></td>
+              <td><code>string | null</code></td>
+              <td><code>null</code></td>
+              <td>URL de la imagen de perfil.</td>
+            </tr>
+            <tr>
+              <td><code>label</code></td>
+              <td><code>string</code></td>
+              <td><code>''</code></td>
+              <td>Texto o nombre completo (calcula iniciales automáticamente si no hay imagen).</td>
+            </tr>
+            <tr>
+              <td><code>size</code></td>
+              <td><code>'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'</code></td>
+              <td><code>'md'</code></td>
+              <td>Escala de tamaño (desde 24px hasta 80px).</td>
+            </tr>
+            <tr>
+              <td><code>shape</code></td>
+              <td><code>'circle' | 'rounded' | 'square'</code></td>
+              <td><code>'circle'</code></td>
+              <td>Geometría de borde (circle: 9999px, rounded: curva orgánica Nuvex).</td>
+            </tr>
+            <tr>
+              <td><code>variant</code></td>
+              <td><code>'default' | 'primary' | 'emerald' | 'purple' | 'amber' | 'neutral' | 'dark'</code></td>
+              <td><code>'default'</code></td>
+              <td>Paleta tonal suave para iniciales o fallback.</td>
+            </tr>
+            <tr>
+              <td><code>status</code></td>
+              <td><code>'online' | 'offline' | 'busy' | 'away' | null</code></td>
+              <td><code>null</code></td>
+              <td>Indicador de presencia del usuario.</td>
+            </tr>
+            <tr>
+              <td><code>badge</code></td>
+              <td><code>string | number | null</code></td>
+              <td><code>null</code></td>
+              <td>Etiqueta o contador en píldora superior/inferior.</td>
+            </tr>
+            <tr>
+              <td><code>ring</code></td>
+              <td><code>boolean</code></td>
+              <td><code>false</code></td>
+              <td>Anillo perimetral esmeralda para destacar perfiles VIP o seleccionados.</td>
+            </tr>
+            <tr>
+              <td><code>clickable</code></td>
+              <td><code>boolean</code></td>
+              <td><code>false</code></td>
+              <td>Habilita cursor pointer y microinteracción de elevación.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  } @else {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Importación</h3>
+        <p class="doc-sub">Importa el componente directamente como Standalone en tu módulo o componente Angular:</p>
+        <app-code-snippet [code]="importSnippet" language="typescript" />
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Ejemplos de Uso</h3>
+        <p class="doc-sub">Diferentes combinaciones de fotos, iniciales, estados y grupos:</p>
+        <app-code-snippet [code]="usageSnippet" language="html" />
+      </section>
+    </div>
+  }
+</div>

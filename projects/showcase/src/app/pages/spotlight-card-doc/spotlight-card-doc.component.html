@@ -1,0 +1,227 @@
+<div class="doc-page">
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag">Nuvex Modern Curve</span>
+      <span class="doc-version">nuvex-ui/spotlight-card</span>
+    </div>
+    <h1 class="doc-title">Spotlight Card</h1>
+    <p class="doc-description">
+      Tarjeta insignia de perfil de usuario, profesional o métrica hero con avatar central prominente, navegación carrusel integrada (&lt; y &gt;), píldoras de disponibilidad y métricas clave resumidas.
+    </p>
+
+    <!-- Selector de vista -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+        Vista Previa
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'code'"
+        (click)="activeTab.set('code')"
+      >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+        Código Fuente
+      </button>
+    </div>
+  </header>
+
+  @if (activeTab() === 'preview') {
+    <div class="doc-content">
+      <!-- 1. DEMO INTERACTIVA CON CARRUSEL -->
+      <section class="doc-section">
+        <h3>Demostración Interactiva con Carrusel</h3>
+        <p class="doc-sub">Usa las flechas <code>&lt;</code> y <code>&gt;</code> para rotar entre los perfiles de especialistas en tiempo real.</p>
+        <div style="max-width: 420px; margin: 0 auto;">
+          <nuvex-spotlight-card
+            [name]="currentProfile().name"
+            [role]="currentProfile().role"
+            [avatarImage]="currentProfile().avatar"
+            [status]="currentProfile().status"
+            [badgeText]="currentProfile().badgeText"
+            [badgeVariant]="currentProfile().badgeVariant"
+            [availability]="currentProfile().availability"
+            [stats]="currentProfile().stats"
+            [actionLabel]="currentProfile().actionLabel"
+            [counterText]="(currentIndex() + 1) + ' / ' + profiles.length"
+            (prev)="prevProfile()"
+            (next)="nextProfile()"
+          />
+        </div>
+      </section>
+
+      <!-- 2. VARIANTES VISUALES -->
+      <section class="doc-section">
+        <h3>Variantes Visuales (Hero & Emerald)</h3>
+        <p class="doc-sub">Estilos optimizados para destacar en dashboards ejecutivos tanto en modo claro como en modo oscuro.</p>
+        <div class="demo-display items-stretch gap-6 flex-wrap">
+          <div style="flex: 1; min-width: 320px; max-width: 400px;">
+            <nuvex-spotlight-card
+              variant="hero"
+              name="Dr. Alejandro Nuñez"
+              role="Director Médico & Cirugía"
+              avatarLabel="AN"
+              badgeText="Destacado del Mes"
+              badgeVariant="warning"
+              availability="Lunes a Viernes (Quirófano)"
+              [stats]="[
+                { label: 'Cirugías', value: '310' },
+                { label: 'Éxito', value: '99.4%' }
+              ]"
+              actionLabel="Ver Ficha Clínica"
+            />
+          </div>
+
+          <div style="flex: 1; min-width: 320px; max-width: 400px;">
+            <nuvex-spotlight-card
+              variant="emerald"
+              name="La Belle Nails VIP"
+              role="Suscripción Premium & Beneficios"
+              avatarLabel="VIP"
+              badgeText="Membresía Activa"
+              badgeVariant="success"
+              availability="Acceso Ilimitado 24/7"
+              [stats]="[
+                { label: 'Descuento', value: '20%' },
+                { label: 'Puntos', value: '1.450' }
+              ]"
+              actionLabel="Gestionar Membresía"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. REFERENCIA DE PROPIEDADES (API) -->
+      <section class="doc-section">
+        <h3>Referencia de Propiedades (API)</h3>
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Propiedad</th>
+              <th>Tipo</th>
+              <th>Default</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>name</code></td>
+              <td><code>string</code></td>
+              <td><code>''</code></td>
+              <td>Nombre completo o título del perfil destacado.</td>
+            </tr>
+            <tr>
+              <td><code>role</code></td>
+              <td><code>string</code></td>
+              <td><code>''</code></td>
+              <td>Especialidad, cargo o descripción del profesional.</td>
+            </tr>
+            <tr>
+              <td><code>avatarImage</code></td>
+              <td><code>string | null</code></td>
+              <td><code>null</code></td>
+              <td>URL de la fotografía para el avatar central.</td>
+            </tr>
+            <tr>
+              <td><code>avatarLabel</code></td>
+              <td><code>string</code></td>
+              <td><code>''</code></td>
+              <td>Texto o iniciales para el avatar si no hay foto.</td>
+            </tr>
+            <tr>
+              <td><code>badgeText</code></td>
+              <td><code>string</code></td>
+              <td><code>''</code></td>
+              <td>Etiqueta en píldora superior izquierda (ej. "Disponible Hoy").</td>
+            </tr>
+            <tr>
+              <td><code>badgeVariant</code></td>
+              <td><code>'primary' | 'success' | 'warning' | ...</code></td>
+              <td><code>'success'</code></td>
+              <td>Paleta de color de la píldora superior.</td>
+            </tr>
+            <tr>
+              <td><code>availability</code></td>
+              <td><code>string</code></td>
+              <td><code>''</code></td>
+              <td>Franja horaria o disponibilidad con icono de reloj.</td>
+            </tr>
+            <tr>
+              <td><code>stats</code></td>
+              <td><code>SpotlightStat[]</code></td>
+              <td><code>[]</code></td>
+              <td>Métricas cuantitativas clave (valor + etiqueta).</td>
+            </tr>
+            <tr>
+              <td><code>actionLabel</code></td>
+              <td><code>string</code></td>
+              <td><code>''</code></td>
+              <td>Texto para el botón de acción principal inferior.</td>
+            </tr>
+            <tr>
+              <td><code>showNavigation</code></td>
+              <td><code>boolean</code></td>
+              <td><code>true</code></td>
+              <td>Muestra u oculta los controles de navegación carrusel.</td>
+            </tr>
+            <tr>
+              <td><code>counterText</code></td>
+              <td><code>string</code></td>
+              <td><code>''</code></td>
+              <td>Texto indicador de posición (ej. "1 / 4").</td>
+            </tr>
+            <tr>
+              <td><code>variant</code></td>
+              <td><code>'default' | 'hero' | 'emerald' | 'outlined'</code></td>
+              <td><code>'default'</code></td>
+              <td>Estilo visual de superficie de la tarjeta.</td>
+            </tr>
+            <tr>
+              <td><code>(prev)</code></td>
+              <td><code>EventEmitter&lt;void&gt;</code></td>
+              <td>-</td>
+              <td>Disparado al presionar la flecha izquierda (&lt;).</td>
+            </tr>
+            <tr>
+              <td><code>(next)</code></td>
+              <td><code>EventEmitter&lt;void&gt;</code></td>
+              <td>-</td>
+              <td>Disparado al presionar la flecha derecha (&gt;).</td>
+            </tr>
+            <tr>
+              <td><code>(actionClick)</code></td>
+              <td><code>EventEmitter&lt;void&gt;</code></td>
+              <td>-</td>
+              <td>Disparado al presionar el botón de acción principal.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  } @else {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Importación</h3>
+        <p class="doc-sub">Importa el componente directamente como Standalone:</p>
+        <app-code-snippet [code]="importSnippet" language="typescript" />
+      </section>
+
+      <section class="doc-section">
+        <h3>2. Ejemplos de Uso</h3>
+        <p class="doc-sub">Configuración con carrusel reactivo y variante Hero:</p>
+        <app-code-snippet [code]="usageSnippet" language="html" />
+      </section>
+    </div>
+  }
+</div>

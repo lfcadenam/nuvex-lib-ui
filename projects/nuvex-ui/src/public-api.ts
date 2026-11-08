@@ -14,12 +14,14 @@ export * from './lib/spinner/public-api';
 export * from './lib/button/public-api';
 export * from './lib/input/public-api';
 export * from './lib/switch/public-api';
+export * from './lib/avatar/public-api';
 
 // Nuvex Modern Curve & Superficies
 export * from './lib/card/public-api';
 export * from './lib/segmented/public-api';
 export * from './lib/drawer/public-api';
 export * from './lib/modal/public-api';
+export * from './lib/spotlight-card/public-api';
 
 // Navegación & Estructura Capsule UI
 export * from './lib/capsule-dock/public-api';

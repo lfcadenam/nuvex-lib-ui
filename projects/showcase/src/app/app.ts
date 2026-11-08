@@ -34,6 +34,7 @@ export class App {
       items: [
         { name: 'Button', route: '/button', tag: 'Interactivo' },
         { name: 'Badge', route: '/badge', tag: 'Pill' },
+        { name: 'Avatar', route: '/avatar', tag: 'Nuevo v0.0.4' },
         { name: 'Spinner', route: '/spinner', tag: 'Feedback' },
       ],
     },
@@ -49,6 +50,7 @@ export class App {
       items: [
         { name: 'Card', route: '/card', tag: '32px' },
         { name: 'KPI Card', route: '/kpi-card', tag: 'Analytics' },
+        { name: 'Spotlight Card', route: '/spotlight-card', tag: 'Hero' },
         { name: 'Segmented', route: '/segmented', tag: 'Pill' },
         { name: 'Drawer', route: '/drawer', tag: 'Slide-Over' },
         { name: 'Modal', route: '/modal', tag: 'Nuevo v0.0.3' },

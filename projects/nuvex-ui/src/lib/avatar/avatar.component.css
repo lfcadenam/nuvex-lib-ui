@@ -1,0 +1,167 @@
+/* ==========================================================================
+   Nuvex Avatar Component Styles
+   ========================================================================== */
+
+:host {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.nuvex-avatar {
+  --nvl-avatar-size: 40px;
+  --nvl-avatar-font-size: 14px;
+  --nvl-avatar-status-size: 10px;
+  --nvl-avatar-badge-font-size: 10px;
+  --nvl-avatar-border-radius: 9999px;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--nvl-avatar-size);
+  height: var(--nvl-avatar-size);
+  font-family: inherit;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.nuvex-avatar__wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--nvl-avatar-border-radius);
+  background-color: var(--nvl-surface-100, #f1f5f9);
+  color: var(--nvl-text-color, #1e293b);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease;
+}
+
+/* Tamaños */
+.nuvex-avatar--xs { --nvl-avatar-size: 24px; --nvl-avatar-font-size: 10px; --nvl-avatar-status-size: 6px; --nvl-avatar-badge-font-size: 8px; }
+.nuvex-avatar--sm { --nvl-avatar-size: 32px; --nvl-avatar-font-size: 12px; --nvl-avatar-status-size: 8px; --nvl-avatar-badge-font-size: 9px; }
+.nuvex-avatar--md { --nvl-avatar-size: 40px; --nvl-avatar-font-size: 14px; --nvl-avatar-status-size: 10px; --nvl-avatar-badge-font-size: 10px; }
+.nuvex-avatar--lg { --nvl-avatar-size: 48px; --nvl-avatar-font-size: 16px; --nvl-avatar-status-size: 12px; --nvl-avatar-badge-font-size: 11px; }
+.nuvex-avatar--xl { --nvl-avatar-size: 64px; --nvl-avatar-font-size: 22px; --nvl-avatar-status-size: 14px; --nvl-avatar-badge-font-size: 12px; }
+.nuvex-avatar--2xl { --nvl-avatar-size: 80px; --nvl-avatar-font-size: 28px; --nvl-avatar-status-size: 16px; --nvl-avatar-badge-font-size: 13px; }
+
+/* Geometría */
+.nuvex-avatar--circle { --nvl-avatar-border-radius: 9999px; }
+.nuvex-avatar--rounded { --nvl-avatar-border-radius: calc(var(--nvl-avatar-size) * 0.32); }
+.nuvex-avatar--square { --nvl-avatar-border-radius: 8px; }
+
+/* Contenido */
+.nuvex-avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--nvl-avatar-border-radius);
+  display: block;
+}
+
+.nuvex-avatar__label {
+  font-size: var(--nvl-avatar-font-size);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.nuvex-avatar__placeholder,
+.nuvex-avatar__icon {
+  width: 55%;
+  height: 55%;
+  display: block;
+  opacity: 0.65;
+}
+
+/* Paletas */
+.nuvex-avatar--default .nuvex-avatar__wrapper { background-color: var(--nvl-surface-100, #f1f5f9); color: var(--nvl-surface-700, #334155); }
+.nuvex-avatar--primary .nuvex-avatar__wrapper { background-color: #eff6ff; color: #2563eb; }
+.nuvex-avatar--emerald .nuvex-avatar__wrapper { background-color: #ecfdf5; color: #059669; }
+.nuvex-avatar--purple .nuvex-avatar__wrapper  { background-color: #f5f3ff; color: #7c3aed; }
+.nuvex-avatar--amber .nuvex-avatar__wrapper   { background-color: #fffbeb; color: #d97706; }
+.nuvex-avatar--neutral .nuvex-avatar__wrapper { background-color: #f8fafc; color: #475569; border: 1px solid var(--nvl-surface-200, #e2e8f0); }
+.nuvex-avatar--dark .nuvex-avatar__wrapper    { background-color: #0f172a; color: #ffffff; }
+
+/* Ring */
+.nuvex-avatar--ring .nuvex-avatar__wrapper {
+  box-shadow: 0 0 0 2px var(--nvl-surface-0, #ffffff), 0 0 0 4px var(--nvl-primary-color, #00C975);
+}
+
+/* Clickable */
+.nuvex-avatar--clickable { cursor: pointer; }
+.nuvex-avatar--clickable:hover .nuvex-avatar__wrapper {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.12);
+}
+.nuvex-avatar--clickable:active .nuvex-avatar__wrapper { transform: translateY(0) scale(0.98); }
+
+/* Indicador de Presencia */
+.nuvex-avatar__status {
+  position: absolute;
+  width: var(--nvl-avatar-status-size);
+  height: var(--nvl-avatar-status-size);
+  border-radius: 9999px;
+  border: 2px solid var(--nvl-surface-0, #ffffff);
+  box-sizing: content-box;
+  z-index: 2;
+}
+
+.nuvex-avatar__status--bottom-right { bottom: 0; right: 0; }
+.nuvex-avatar__status--top-right    { top: 0; right: 0; }
+.nuvex-avatar__status--bottom-left  { bottom: 0; left: 0; }
+.nuvex-avatar__status--top-left     { top: 0; left: 0; }
+
+.nuvex-avatar__status--online  { background-color: #10b981; }
+.nuvex-avatar__status--offline { background-color: #94a3b8; }
+.nuvex-avatar__status--busy    { background-color: #ef4444; }
+.nuvex-avatar__status--away    { background-color: #f59e0b; }
+
+/* Badge Píldora */
+.nuvex-avatar__badge {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 5px;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background-color: #ef4444;
+  color: #ffffff;
+  font-size: var(--nvl-avatar-badge-font-size);
+  font-weight: 800;
+  line-height: 1;
+  border: 2px solid var(--nvl-surface-0, #ffffff);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 3;
+}
+
+.nuvex-avatar__badge--top-right    { top: -4px; right: -6px; }
+.nuvex-avatar__badge--bottom-right { bottom: -4px; right: -6px; }
+.nuvex-avatar__badge--top-left     { top: -4px; left: -6px; }
+.nuvex-avatar__badge--bottom-left  { bottom: -4px; left: -6px; }
+
+/* Dark Mode Overrides */
+:host-context(.dark) .nuvex-avatar__wrapper, .dark .nuvex-avatar__wrapper {
+  background-color: var(--nvl-surface-800, #1e293b);
+  color: var(--nvl-text-color, #f8fafc);
+}
+
+:host-context(.dark) .nuvex-avatar__status, .dark .nuvex-avatar__status,
+:host-context(.dark) .nuvex-avatar__badge,  .dark .nuvex-avatar__badge {
+  border-color: var(--nvl-surface-900, #0f172a);
+}
+
+:host-context(.dark) .nuvex-avatar--ring .nuvex-avatar__wrapper,
+.dark .nuvex-avatar--ring .nuvex-avatar__wrapper {
+  box-shadow: 0 0 0 2px #0f172a, 0 0 0 4px var(--nvl-primary-color, #00C975);
+}
+
+:host-context(.dark) .nuvex-avatar--primary .nuvex-avatar__wrapper, .dark .nuvex-avatar--primary .nuvex-avatar__wrapper { background-color: #1e3a5f; color: #60a5fa; }
+:host-context(.dark) .nuvex-avatar--emerald .nuvex-avatar__wrapper, .dark .nuvex-avatar--emerald .nuvex-avatar__wrapper { background-color: #064e3b; color: #34d399; }
+:host-context(.dark) .nuvex-avatar--purple .nuvex-avatar__wrapper,  .dark .nuvex-avatar--purple .nuvex-avatar__wrapper  { background-color: #3b0764; color: #c084fc; }
+:host-context(.dark) .nuvex-avatar--amber .nuvex-avatar__wrapper,   .dark .nuvex-avatar--amber .nuvex-avatar__wrapper   { background-color: #451a03; color: #fbbf24; }

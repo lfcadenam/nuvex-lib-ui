@@ -1,0 +1,72 @@
+/* ==========================================================================
+   Nuvex Avatar Group Component Styles
+   ========================================================================== */
+
+:host {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.nuvex-avatar-group {
+  --nvl-avatar-group-offset: -12px;
+
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.nuvex-avatar-group__container {
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+/* --------------------------------------------------------------------------
+   Espaciados de solapamiento
+   -------------------------------------------------------------------------- */
+.nuvex-avatar-group--sm {
+  --nvl-avatar-group-offset: -8px;
+}
+
+.nuvex-avatar-group--md {
+  --nvl-avatar-group-offset: -12px;
+}
+
+.nuvex-avatar-group--lg {
+  --nvl-avatar-group-offset: -16px;
+}
+
+/* --------------------------------------------------------------------------
+   Estilos de hijos solapados
+   -------------------------------------------------------------------------- */
+.nuvex-avatar-group .nuvex-avatar {
+  border: 2px solid var(--nvl-surface-0, #ffffff);
+  border-radius: 9999px;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              z-index 0.22s ease,
+              box-shadow 0.22s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.nuvex-avatar-group .nuvex-avatar + .nuvex-avatar,
+.nuvex-avatar-group > * + * {
+  margin-left: var(--nvl-avatar-group-offset);
+}
+
+/* --------------------------------------------------------------------------
+   Efecto Hover
+   -------------------------------------------------------------------------- */
+.nuvex-avatar-group--hoverable .nuvex-avatar:hover {
+  transform: translateY(-3px) scale(1.06);
+  z-index: 10;
+  box-shadow: 0 10px 22px -4px rgba(0, 0, 0, 0.16);
+}
+
+/* --------------------------------------------------------------------------
+   Dark Mode Overrides
+   -------------------------------------------------------------------------- */
+:host-context(.dark) .nuvex-avatar-group .nuvex-avatar,
+.dark .nuvex-avatar-group .nuvex-avatar {
+  border-color: var(--nvl-surface-900, #0f172a);
+}
