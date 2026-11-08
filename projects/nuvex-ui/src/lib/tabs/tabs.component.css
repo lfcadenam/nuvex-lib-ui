@@ -73,24 +73,26 @@
    -------------------------------------------------------------------------- */
 :host(.nuvex-tabs--pill) .nuvex-tabs-nav {
   background-color: var(--nvl-surface-100, #f1f5f9);
-  padding: 0.25rem;
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  padding: 0.3125rem;
   border-radius: 9999px; /* Pill */
   gap: 0.25rem;
 }
 
 :host(.nuvex-tabs--pill) .nuvex-tabs-tab {
   border-radius: 9999px;
+  padding: 0.5rem 1.125rem;
 }
 
 :host(.nuvex-tabs--pill) .nuvex-tabs-tab--active {
-  background-color: var(--nvl-surface-0, #ffffff);
-  color: var(--nvl-text-color, #0f172a);
+  background-color: var(--nvl-surface-0, #ffffff) !important;
+  color: #0f172a !important;
   font-weight: 600;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 :host(.nuvex-tabs--pill) .nuvex-tabs-tab--active .nuvex-tabs-tab__badge {
-  background-color: rgba(0, 201, 117, 0.15);
+  background-color: rgba(0, 201, 117, 0.18);
   color: #00874e;
 }
 

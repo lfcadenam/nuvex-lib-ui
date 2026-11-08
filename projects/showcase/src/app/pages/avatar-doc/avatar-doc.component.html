@@ -2,6 +2,7 @@
   <header class="doc-header">
     <div class="doc-badge-row">
       <span class="doc-tag">Componente Base</span>
+      <span class="doc-tag doc-tag--new">Nuevo v0.0.4</span>
       <span class="doc-version">nuvex-ui/avatar</span>
     </div>
     <h1 class="doc-title">Avatar & Avatar Group</h1>
@@ -197,73 +198,109 @@
 
       <!-- 6. TABLA DE PROPIEDADES (API) -->
       <section class="doc-section">
-        <h3>Referencia de Propiedades (API)</h3>
-        <table class="doc-table">
-          <thead>
-            <tr>
-              <th>Propiedad</th>
-              <th>Tipo</th>
-              <th>Default</th>
-              <th>Descripción</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>image</code></td>
-              <td><code>string | null</code></td>
-              <td><code>null</code></td>
-              <td>URL de la imagen de perfil.</td>
-            </tr>
-            <tr>
-              <td><code>label</code></td>
-              <td><code>string</code></td>
-              <td><code>''</code></td>
-              <td>Texto o nombre completo (calcula iniciales automáticamente si no hay imagen).</td>
-            </tr>
-            <tr>
-              <td><code>size</code></td>
-              <td><code>'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'</code></td>
-              <td><code>'md'</code></td>
-              <td>Escala de tamaño (desde 24px hasta 80px).</td>
-            </tr>
-            <tr>
-              <td><code>shape</code></td>
-              <td><code>'circle' | 'rounded' | 'square'</code></td>
-              <td><code>'circle'</code></td>
-              <td>Geometría de borde (circle: 9999px, rounded: curva orgánica Nuvex).</td>
-            </tr>
-            <tr>
-              <td><code>variant</code></td>
-              <td><code>'default' | 'primary' | 'emerald' | 'purple' | 'amber' | 'neutral' | 'dark'</code></td>
-              <td><code>'default'</code></td>
-              <td>Paleta tonal suave para iniciales o fallback.</td>
-            </tr>
-            <tr>
-              <td><code>status</code></td>
-              <td><code>'online' | 'offline' | 'busy' | 'away' | null</code></td>
-              <td><code>null</code></td>
-              <td>Indicador de presencia del usuario.</td>
-            </tr>
-            <tr>
-              <td><code>badge</code></td>
-              <td><code>string | number | null</code></td>
-              <td><code>null</code></td>
-              <td>Etiqueta o contador en píldora superior/inferior.</td>
-            </tr>
-            <tr>
-              <td><code>ring</code></td>
-              <td><code>boolean</code></td>
-              <td><code>false</code></td>
-              <td>Anillo perimetral esmeralda para destacar perfiles VIP o seleccionados.</td>
-            </tr>
-            <tr>
-              <td><code>clickable</code></td>
-              <td><code>boolean</code></td>
-              <td><code>false</code></td>
-              <td>Habilita cursor pointer y microinteracción de elevación.</td>
-            </tr>
-          </tbody>
-        </table>
+        <h3>Referencia de Propiedades — nuvex-avatar</h3>
+        <div class="doc-table-wrapper">
+          <table class="doc-api-table">
+            <thead>
+              <tr>
+                <th>Propiedad</th>
+                <th>Tipo</th>
+                <th>Default</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>image</code></td>
+                <td><code>string | null</code></td>
+                <td><code>null</code></td>
+                <td>URL de la imagen de perfil.</td>
+              </tr>
+              <tr>
+                <td><code>label</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td>Texto o nombre completo (calcula iniciales automáticamente si no hay imagen).</td>
+              </tr>
+              <tr>
+                <td><code>size</code></td>
+                <td><code>'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'</code></td>
+                <td><code>'md'</code></td>
+                <td>Escala de tamaño (desde 24px hasta 80px).</td>
+              </tr>
+              <tr>
+                <td><code>shape</code></td>
+                <td><code>'circle' | 'rounded' | 'square'</code></td>
+                <td><code>'circle'</code></td>
+                <td>Geometría de borde (circle: 9999px, rounded: curva orgánica Nuvex).</td>
+              </tr>
+              <tr>
+                <td><code>variant</code></td>
+                <td><code>'default' | 'primary' | 'emerald' | 'purple' | 'amber' | 'neutral' | 'dark'</code></td>
+                <td><code>'default'</code></td>
+                <td>Paleta tonal suave para iniciales o fallback.</td>
+              </tr>
+              <tr>
+                <td><code>status</code></td>
+                <td><code>'online' | 'offline' | 'busy' | 'away' | null</code></td>
+                <td><code>null</code></td>
+                <td>Indicador de presencia del usuario.</td>
+              </tr>
+              <tr>
+                <td><code>badge</code></td>
+                <td><code>string | number | null</code></td>
+                <td><code>null</code></td>
+                <td>Etiqueta o contador en píldora superior/inferior.</td>
+              </tr>
+              <tr>
+                <td><code>ring</code></td>
+                <td><code>boolean</code></td>
+                <td><code>false</code></td>
+                <td>Anillo perimetral esmeralda para destacar perfiles VIP o seleccionados.</td>
+              </tr>
+              <tr>
+                <td><code>clickable</code></td>
+                <td><code>boolean</code></td>
+                <td><code>false</code></td>
+                <td>Habilita cursor pointer y microinteracción de elevación.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top: 32px;">Referencia de Propiedades — nuvex-avatar-group</h3>
+        <div class="doc-table-wrapper">
+          <table class="doc-api-table">
+            <thead>
+              <tr>
+                <th>Propiedad</th>
+                <th>Tipo</th>
+                <th>Default</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>spacing</code></td>
+                <td><code>'sm' | 'md' | 'lg'</code></td>
+                <td><code>'md'</code></td>
+                <td>Magnitud del solapamiento negativo entre avatares continuos.</td>
+              </tr>
+              <tr>
+                <td><code>max</code></td>
+                <td><code>number | null</code></td>
+                <td><code>null</code></td>
+                <td>Límite visual opcional de elementos a mostrar antes de truncar.</td>
+              </tr>
+              <tr>
+                <td><code>hoverEffect</code></td>
+                <td><code>boolean</code></td>
+                <td><code>true</code></td>
+                <td>Eleva y superpone dinámicamente en el eje Z el avatar al hacer hover.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
     </div>
   } @else {

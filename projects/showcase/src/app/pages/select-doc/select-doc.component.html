@@ -1,236 +1,263 @@
 <div class="doc-page">
-  <!-- Header -->
+  <!-- Header con Pills Nuvex -->
   <header class="doc-header">
-    <div class="doc-header__badge-row">
-      <span class="doc-pill">Formulario & Selección</span>
-      <span class="doc-pill doc-pill--new">Nuevo v0.0.4</span>
+    <div class="doc-badge-row">
+      <span class="doc-tag">Formulario & Selección</span>
+      <span class="doc-version">v0.0.4</span>
+      <span class="doc-tag doc-tag--new">Nuevo</span>
     </div>
     <h1 class="doc-title">Dropdown / Select</h1>
     <p class="doc-description">
-      Selector flotante con soporte para búsqueda insensible a acentos, selección múltiple con tags desmontables,
-      panel curvo con elevación suave, navegación por teclado y soporte bidireccional ControlValueAccessor.
+      Selector flotante con soporte para búsqueda insensible a acentos, selección múltiple con tags
+      desmontables, panel curvo con elevación suave, navegación por teclado y soporte bidireccional ControlValueAccessor.
     </p>
-  </header>
 
-  <!-- Playground Interactivo -->
-  <section class="doc-section">
+    <!-- Selector de Vista (Pill Capsule) -->
     <div class="doc-tabs">
       <button
-        class="doc-tab"
-        [class.doc-tab--active]="activeTab() === 'preview'"
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
         (click)="activeTab.set('preview')"
       >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
         Vista Previa Interactiva
       </button>
       <button
-        class="doc-tab"
-        [class.doc-tab--active]="activeTab() === 'code'"
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'code'"
         (click)="activeTab.set('code')"
       >
-        Código TypeScript & Template
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+        Código Fuente
       </button>
     </div>
+  </header>
 
-    <!-- Panel de Preview -->
-    <div class="doc-preview" *ngIf="activeTab() === 'preview'">
-      <!-- Controles Dinámicos -->
-      <div class="doc-controls" style="margin-bottom: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; background: var(--nvl-surface-50, #f8fafc); padding: 1rem 1.25rem; border-radius: 1rem; border: 1px solid var(--nvl-surface-200, #e2e8f0);">
-        <!-- Tamaño -->
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-          <span style="font-size: 0.8125rem; font-weight: 500; color: var(--nvl-text-secondary, #64748b);">Tamaño:</span>
-          <select
-            [value]="currentSize()"
-            (change)="currentSize.set($any($event.target).value)"
-            style="padding: 0.35rem 0.65rem; border-radius: 0.5rem; border: 1px solid var(--nvl-surface-200, #cbd5e1); font-size: 0.8125rem;"
-          >
-            <option value="sm">Small (sm)</option>
-            <option value="md">Medium (md)</option>
-            <option value="lg">Large (lg)</option>
-          </select>
+  @if (activeTab() === 'preview') {
+    <div class="doc-content">
+      <!-- 1. Playground Interactivo -->
+      <section class="doc-section">
+        <h3>1. Playground Interactivo</h3>
+        <p class="doc-sub">Configura en vivo el tamaño, variante, buscador y estado del selector flotante.</p>
+
+        <!-- Barra de Controles Nuvex Curve -->
+        <div class="doc-controls">
+          <div class="doc-control-group">
+            <span class="doc-control-label">Tamaño:</span>
+            <select
+              class="doc-control-select"
+              [value]="currentSize()"
+              (change)="currentSize.set($any($event.target).value)"
+            >
+              <option value="sm">Small (sm)</option>
+              <option value="md">Medium (md)</option>
+              <option value="lg">Large (lg)</option>
+            </select>
+          </div>
+
+          <div class="doc-control-group">
+            <span class="doc-control-label">Variante:</span>
+            <select
+              class="doc-control-select"
+              [value]="currentVariant()"
+              (change)="currentVariant.set($any($event.target).value)"
+            >
+              <option value="default">Default (16px Curve)</option>
+              <option value="pill">Pill (Cápsula 9999px)</option>
+              <option value="ghost">Ghost (Transparente)</option>
+            </select>
+          </div>
+
+          <label class="doc-control-checkbox">
+            <input
+              type="checkbox"
+              [checked]="currentSearchable()"
+              (change)="currentSearchable.set($any($event.target).checked)"
+            />
+            <span>Buscador Integrado</span>
+          </label>
+
+          <label class="doc-control-checkbox">
+            <input
+              type="checkbox"
+              [checked]="currentClearable()"
+              (change)="currentClearable.set($any($event.target).checked)"
+            />
+            <span>Botón Limpiar</span>
+          </label>
+
+          <label class="doc-control-checkbox">
+            <input
+              type="checkbox"
+              [checked]="currentDisabled()"
+              (change)="currentDisabled.set($any($event.target).checked)"
+            />
+            <span>Deshabilitado</span>
+          </label>
         </div>
 
-        <!-- Variante -->
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-          <span style="font-size: 0.8125rem; font-weight: 500; color: var(--nvl-text-secondary, #64748b);">Variante:</span>
-          <select
-            [value]="currentVariant()"
-            (change)="currentVariant.set($any($event.target).value)"
-            style="padding: 0.35rem 0.65rem; border-radius: 0.5rem; border: 1px solid var(--nvl-surface-200, #cbd5e1); font-size: 0.8125rem;"
-          >
-            <option value="default">Default (16px)</option>
-            <option value="pill">Pill (9999px)</option>
-            <option value="ghost">Ghost</option>
-          </select>
+        <!-- Grid de Ejemplos en Vivo -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+          <!-- Demo 1: Selección Única -->
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; background: var(--nvl-surface-50, #f8fafc); padding: 1.5rem; border-radius: 1.25rem; border: 1px solid var(--nvl-surface-200, #e2e8f0);">
+            <h4 style="font-size: 0.9375rem; font-weight: 700; margin: 0; color: var(--nvl-text-color, #0f172a);">
+              Selección Única (Especialista Asignado)
+            </h4>
+            <p style="font-size: 0.8125rem; color: var(--nvl-text-secondary, #64748b); margin: 0 0 0.5rem 0;">
+              Desplegable con búsqueda normalizada por diacríticos y descripciones de cargo.
+            </p>
+
+            <nuvex-select
+              label="Profesional Asignado"
+              placeholder="Elige un especialista..."
+              [options]="stylistOptions"
+              [(value)]="selectedStylist"
+              [size]="currentSize()"
+              [variant]="currentVariant()"
+              [searchable]="currentSearchable()"
+              [clearable]="currentClearable()"
+              [disabled]="currentDisabled()"
+              helperText="Profesional que atenderá el turno"
+            />
+
+            <div style="margin-top: 0.5rem; padding: 0.5rem 0.75rem; background: var(--nvl-surface-0, #ffffff); border-radius: 0.75rem; border: 1px solid var(--nvl-surface-200, #e2e8f0); font-size: 0.8125rem;">
+              <span style="color: var(--nvl-text-secondary, #64748b);">Valor enlazado:</span>
+              <strong style="color: var(--nvl-primary, #00c975); margin-left: 0.35rem;">{{ selectedStylist() || 'null' }}</strong>
+            </div>
+          </div>
+
+          <!-- Demo 2: Selección Múltiple -->
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; background: var(--nvl-surface-50, #f8fafc); padding: 1.5rem; border-radius: 1.25rem; border: 1px solid var(--nvl-surface-200, #e2e8f0);">
+            <h4 style="font-size: 0.9375rem; font-weight: 700; margin: 0; color: var(--nvl-text-color, #0f172a);">
+              Selección Múltiple (Servicios del Paquete)
+            </h4>
+            <p style="font-size: 0.8125rem; color: var(--nvl-text-secondary, #64748b); margin: 0 0 0.5rem 0;">
+              Chips/tags interactivos desmontables en píldora con checkboxes nativos Nuvex.
+            </p>
+
+            <nuvex-select
+              label="Servicios a Realizar"
+              placeholder="Agregar tratamientos..."
+              [options]="serviceOptions"
+              [(value)]="selectedServices"
+              [multiple]="true"
+              [size]="currentSize()"
+              [variant]="currentVariant()"
+              [searchable]="currentSearchable()"
+              [clearable]="currentClearable()"
+              [disabled]="currentDisabled()"
+              helperText="Puedes seleccionar varios tratamientos"
+            />
+
+            <div style="margin-top: 0.5rem; padding: 0.5rem 0.75rem; background: var(--nvl-surface-0, #ffffff); border-radius: 0.75rem; border: 1px solid var(--nvl-surface-200, #e2e8f0); font-size: 0.8125rem;">
+              <span style="color: var(--nvl-text-secondary, #64748b);">Seleccionados ({{ selectedServices().length }}):</span>
+              <strong style="color: var(--nvl-primary, #00c975); margin-left: 0.35rem;">{{ selectedServices().join(', ') || '[]' }}</strong>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <!-- Searchable Toggle -->
-        <label style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8125rem; cursor: pointer;">
-          <input
-            type="checkbox"
-            [checked]="currentSearchable()"
-            (change)="currentSearchable.set($any($event.target).checked)"
-          />
-          <span>Buscador Integrado</span>
-        </label>
+      <!-- 2. Especificación de la API -->
+      <section class="doc-section">
+        <h3>2. Propiedades & Inputs (API)</h3>
+        <p class="doc-sub">Parámetros configurables del componente Nuvex Select.</p>
 
-        <!-- Clearable Toggle -->
-        <label style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8125rem; cursor: pointer;">
-          <input
-            type="checkbox"
-            [checked]="currentClearable()"
-            (change)="currentClearable.set($any($event.target).checked)"
-          />
-          <span>Botón Limpiar (Clearable)</span>
-        </label>
-
-        <!-- Disabled Toggle -->
-        <label style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8125rem; cursor: pointer;">
-          <input
-            type="checkbox"
-            [checked]="currentDisabled()"
-            (change)="currentDisabled.set($any($event.target).checked)"
-          />
-          <span>Deshabilitado</span>
-        </label>
-      </div>
-
-      <!-- Grid de Demos -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
-        <!-- Demo 1: Selección Simple con Búsqueda -->
-        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-          <h3 style="font-size: 0.9375rem; font-weight: 600; margin: 0; color: var(--nvl-text-color, #0f172a);">
-            Selección Única (Especialista)
-          </h3>
-          <nuvex-select
-            label="Profesional Asignado"
-            placeholder="Elige un estilista..."
-            [options]="stylistOptions"
-            [(value)]="selectedStylist"
-            [size]="currentSize()"
-            [variant]="currentVariant()"
-            [searchable]="currentSearchable()"
-            [clearable]="currentClearable()"
-            [disabled]="currentDisabled()"
-            helperText="Selecciona el profesional para la cita"
-          />
-          <p style="font-size: 0.8125rem; color: var(--nvl-text-secondary, #64748b); margin: 0;">
-            Valor actual: <strong>{{ selectedStylist() || 'Ninguno' }}</strong>
-          </p>
+        <div class="doc-table-wrapper">
+          <table class="doc-api-table">
+            <thead>
+              <tr>
+                <th>Input / Model</th>
+                <th>Tipo</th>
+                <th>Default</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>options</code></td>
+                <td><code>SelectOption&lt;T&gt;[]</code></td>
+                <td><code>[]</code></td>
+                <td>Lista de opciones con value, label, description y estado disabled.</td>
+              </tr>
+              <tr>
+                <td><code>value</code></td>
+                <td><code>T | T[]</code></td>
+                <td><code>null</code></td>
+                <td>Valor bidireccional (signal model) para enlace <code>[(value)]</code> o <code>formControl</code>.</td>
+              </tr>
+              <tr>
+                <td><code>label</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td>Etiqueta superior descriptiva para formularios.</td>
+              </tr>
+              <tr>
+                <td><code>placeholder</code></td>
+                <td><code>string</code></td>
+                <td><code>'Seleccionar...'</code></td>
+                <td>Texto mostrado cuando no hay ninguna opción elegida.</td>
+              </tr>
+              <tr>
+                <td><code>multiple</code></td>
+                <td><code>boolean</code></td>
+                <td><code>false</code></td>
+                <td>Activa modo multi-selección con checkboxes y tags desmontables.</td>
+              </tr>
+              <tr>
+                <td><code>searchable</code></td>
+                <td><code>boolean</code></td>
+                <td><code>false</code></td>
+                <td>Agrega caja de búsqueda superior insensible a mayúsculas y acentos.</td>
+              </tr>
+              <tr>
+                <td><code>clearable</code></td>
+                <td><code>boolean</code></td>
+                <td><code>false</code></td>
+                <td>Muestra un botón de limpieza rápida para reiniciar el valor.</td>
+              </tr>
+              <tr>
+                <td><code>size</code></td>
+                <td><code>'sm' | 'md' | 'lg'</code></td>
+                <td><code>'md'</code></td>
+                <td>Escala de tamaño visual (small, medium, large).</td>
+              </tr>
+              <tr>
+                <td><code>variant</code></td>
+                <td><code>'default' | 'pill' | 'ghost'</code></td>
+                <td><code>'default'</code></td>
+                <td>Curvatura y estilo del trigger (default 16px, pill 9999px, ghost transparente).</td>
+              </tr>
+              <tr>
+                <td><code>helperText</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td>Mensaje sutil de contexto o ayuda al pie del campo.</td>
+              </tr>
+              <tr>
+                <td><code>errorText</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td>Mensaje de error que aplica resaltado carmesí al trigger.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-
-        <!-- Demo 2: Selección Múltiple con Tags -->
-        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-          <h3 style="font-size: 0.9375rem; font-weight: 600; margin: 0; color: var(--nvl-text-color, #0f172a);">
-            Selección Múltiple (Servicios)
-          </h3>
-          <nuvex-select
-            label="Servicios del Paquete"
-            placeholder="Agregar servicios..."
-            [options]="serviceOptions"
-            [(value)]="selectedServices"
-            [multiple]="true"
-            [size]="currentSize()"
-            [variant]="currentVariant()"
-            [searchable]="currentSearchable()"
-            [clearable]="currentClearable()"
-            [disabled]="currentDisabled()"
-            helperText="Puedes seleccionar uno o varios tratamientos"
-          />
-          <p style="font-size: 0.8125rem; color: var(--nvl-text-secondary, #64748b); margin: 0;">
-            Seleccionados: <strong>{{ selectedServices().join(', ') || 'Ninguno' }}</strong>
-          </p>
-        </div>
-      </div>
+      </section>
     </div>
-
-    <!-- Panel de Código -->
-    <div class="doc-code" *ngIf="activeTab() === 'code'">
-      <app-code-snippet [code]="basicUsageCode" language="typescript" />
+  } @else {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Ejemplo de Implementación</h3>
+        <p class="doc-sub">Uso en formularios reactivos y enlaces bidireccionales con Signals.</p>
+        <app-code-snippet [code]="basicUsageCode" language="typescript" title="TypeScript Component" />
+      </section>
     </div>
-  </section>
-
-  <!-- Especificación de la API -->
-  <section class="doc-section">
-    <h2 class="doc-section-title">Propiedades & Inputs (API)</h2>
-    <div class="doc-table-wrapper">
-      <table class="doc-api-table">
-        <thead>
-          <tr>
-            <th>Input / Model</th>
-            <th>Tipo</th>
-            <th>Default</th>
-            <th>Descripción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>options</code></td>
-            <td><code>SelectOption&lt;T&gt;[]</code></td>
-            <td><code>[]</code></td>
-            <td>Lista de opciones con value, label, description y estado disabled.</td>
-          </tr>
-          <tr>
-            <td><code>value</code></td>
-            <td><code>T | T[]</code></td>
-            <td><code>null</code></td>
-            <td>Valor bidireccional (signal model) para enlace <code>[(value)]</code> o <code>formControl</code>.</td>
-          </tr>
-          <tr>
-            <td><code>label</code></td>
-            <td><code>string</code></td>
-            <td><code>''</code></td>
-            <td>Etiqueta superior descriptiva para formularios.</td>
-          </tr>
-          <tr>
-            <td><code>placeholder</code></td>
-            <td><code>string</code></td>
-            <td><code>'Seleccionar...'</code></td>
-            <td>Texto mostrado cuando no hay ninguna opción elegida.</td>
-          </tr>
-          <tr>
-            <td><code>multiple</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Activa modo multi-selección con checkboxes y tags desmontables.</td>
-          </tr>
-          <tr>
-            <td><code>searchable</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Agrega caja de búsqueda superior insensible a mayúsculas y acentos.</td>
-          </tr>
-          <tr>
-            <td><code>clearable</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Muestra un botón de limpieza rápida para reiniciar el valor.</td>
-          </tr>
-          <tr>
-            <td><code>size</code></td>
-            <td><code>'sm' | 'md' | 'lg'</code></td>
-            <td><code>'md'</code></td>
-            <td>Escala de tamaño visual (small, medium, large).</td>
-          </tr>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'default' | 'pill' | 'ghost'</code></td>
-            <td><code>'default'</code></td>
-            <td>Curvatura y estilo del trigger (default 16px, pill 9999px, ghost transparente).</td>
-          </tr>
-          <tr>
-            <td><code>helperText</code></td>
-            <td><code>string</code></td>
-            <td><code>''</code></td>
-            <td>Mensaje sutil de contexto o ayuda al pie del campo.</td>
-          </tr>
-          <tr>
-            <td><code>errorText</code></td>
-            <td><code>string</code></td>
-            <td><code>''</code></td>
-            <td>Mensaje de error que aplica resaltado carmesí al trigger.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+  }
 </div>

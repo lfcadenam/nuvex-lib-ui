@@ -2,14 +2,13 @@ import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TabsComponent, TabComponent } from 'nuvex-ui/tabs';
 import { TabSize, TabVariant } from 'nuvex-ui/tabs';
-import { CardComponent } from 'nuvex-ui/card';
 import { CodeSnippetComponent } from '../../shared/code-snippet.component';
 
 @Component({
   selector: 'app-tabs-doc',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, TabsComponent, TabComponent, CardComponent, CodeSnippetComponent],
+  imports: [CommonModule, TabsComponent, TabComponent, CodeSnippetComponent],
   templateUrl: './tabs-doc.component.html',
   styleUrl: '../doc-shared.css',
 })

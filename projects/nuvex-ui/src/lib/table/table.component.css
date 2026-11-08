@@ -158,6 +158,21 @@
   position: relative;
   width: 100%;
   overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--nvl-surface-300, #cbd5e1) transparent;
+}
+
+.nuvex-table__scroll-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.nuvex-table__scroll-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.nuvex-table__scroll-wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--nvl-surface-300, #cbd5e1);
+  border-radius: 9999px;
 }
 
 /* Barra de Carga Suave */

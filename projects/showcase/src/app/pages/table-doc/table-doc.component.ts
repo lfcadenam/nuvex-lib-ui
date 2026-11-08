@@ -1,8 +1,16 @@
-import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  signal,
+  ChangeDetectionStrategy,
+  ViewChild,
+  TemplateRef,
+  OnInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TableComponent } from 'nuvex-ui/table';
 import { TableColumn, TableDensity, TableSelectionMode, TableVariant } from 'nuvex-ui/table';
+import { BadgeComponent } from 'nuvex-ui/badge';
 import { ButtonComponent } from 'nuvex-ui/button';
 import { CodeSnippetComponent } from '../../shared/code-snippet.component';
 
@@ -23,13 +31,17 @@ interface OrderItem {
     CommonModule,
     FormsModule,
     TableComponent,
+    BadgeComponent,
     ButtonComponent,
     CodeSnippetComponent,
   ],
   templateUrl: './table-doc.component.html',
   styleUrl: '../doc-shared.css',
 })
-export class TableDocComponent {
+export class TableDocComponent implements OnInit {
+  @ViewChild('statusTemplate', { static: true })
+  statusTemplate!: TemplateRef<any>;
+
   readonly activeTab = signal<'preview' | 'code'>('preview');
 
   // Controles interactivos
@@ -55,9 +67,16 @@ export class TableDocComponent {
       align: 'right',
       formatter: (val) => `$ ${Number(val).toLocaleString('es-CO')}`,
     },
-    { key: 'date', label: 'Fecha Cita', sortable: true, width: '130px' },
+    { key: 'date', label: 'Fecha Cita', sortable: true, width: '120px' },
     { key: 'status', label: 'Estado', width: '130px', align: 'center' },
   ];
+
+  ngOnInit(): void {
+    const statusCol = this.tableColumns.find((c) => c.key === 'status');
+    if (statusCol) {
+      statusCol.cellTemplate = this.statusTemplate;
+    }
+  }
 
   // Datos mock
   readonly ordersData: OrderItem[] = [
@@ -117,17 +136,17 @@ interface Invoice {
     <nuvex-table
       [columns]="columns"
       [data]="invoices"
-      title="Facturación Reciente"
-      subtitle="Historial de citas y cobros atendidos"
+      title="Historial de Facturación"
+      subtitle="Control de servicios y citas atendidas"
       [pageSize]="10"
       [searchable]="true"
-      (rowClick)="onInvoiceSelected($event)"
+      (rowClick)="onRowClick($event)"
     />
   \`,
 })
 export class MyTableComponent {
   columns: TableColumn<Invoice>[] = [
-    { key: 'id', label: 'Factura #', sortable: true },
+    { key: 'id', label: 'ID', sortable: true },
     { key: 'client', label: 'Cliente', sortable: true },
     { key: 'amount', label: 'Monto', sortable: true, align: 'right', formatter: (val) => \`$ \${val}\` },
     { key: 'date', label: 'Fecha' },
@@ -135,8 +154,8 @@ export class MyTableComponent {
 
   invoices: Invoice[] = [ /* ... */ ];
 
-  onInvoiceSelected(row: Invoice) {
-    console.log('Fila seleccionada:', row);
+  onRowClick(row: Invoice) {
+    console.log('Fila:', row);
   }
 }`;
 }

@@ -1,278 +1,300 @@
 <div class="doc-page">
-  <!-- Header -->
+  <!-- Header con Pills Nuvex -->
   <header class="doc-header">
-    <div class="doc-header__badge-row">
-      <span class="doc-pill">Organismo UI</span>
-      <span class="doc-pill doc-pill--new">Nuevo v0.0.4</span>
+    <div class="doc-badge-row">
+      <span class="doc-tag">Organismo UI</span>
+      <span class="doc-version">v0.0.4</span>
+      <span class="doc-tag doc-tag--new">Nuevo</span>
     </div>
     <h1 class="doc-title">Table / Datatable</h1>
     <p class="doc-description">
       Tabla de datos curva Nuvex Modern Curve UI con paginación integrada, buscador reactivo por señales,
       ordenamiento multi-tipo, selección de filas, densidades y sobriedad visual absoluta.
     </p>
-  </header>
 
-  <!-- Playground Interactivo -->
-  <section class="doc-section">
+    <!-- Selector de Vista (Pill Capsule) -->
     <div class="doc-tabs">
       <button
-        class="doc-tab"
-        [class.doc-tab--active]="activeTab() === 'preview'"
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
         (click)="activeTab.set('preview')"
       >
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
         Vista Previa Interactiva
       </button>
       <button
-        class="doc-tab"
-        [class.doc-tab--active]="activeTab() === 'code'"
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'code'"
         (click)="activeTab.set('code')"
       >
-        Código TypeScript & Template
+        <svg class="doc-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        </svg>
+        Código Fuente
       </button>
     </div>
+  </header>
 
-    <!-- Panel de Preview -->
-    <div class="doc-preview" *ngIf="activeTab() === 'preview'">
-      <!-- Controles Dinámicos -->
-      <div class="doc-controls" style="margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; background: var(--nvl-surface-50, #f8fafc); padding: 1rem 1.25rem; border-radius: 1rem; border: 1px solid var(--nvl-surface-200, #e2e8f0);">
-        <!-- Variante -->
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-          <span style="font-size: 0.8125rem; font-weight: 500; color: var(--nvl-text-secondary, #64748b);">Variante:</span>
-          <select
-            [value]="currentVariant()"
-            (change)="currentVariant.set($any($event.target).value)"
-            style="padding: 0.35rem 0.65rem; border-radius: 0.5rem; border: 1px solid var(--nvl-surface-200, #cbd5e1); font-size: 0.8125rem;"
+  <!-- Template personalizado para la columna Estado -->
+  <ng-template #statusTemplate let-val let-row="row">
+    <nuvex-badge [variant]="getStatusBadgeVariant(val)">
+      {{ val | titlecase }}
+    </nuvex-badge>
+  </ng-template>
+
+  @if (activeTab() === 'preview') {
+    <div class="doc-content">
+      <!-- 1. Playground Interactivo -->
+      <section class="doc-section">
+        <h3>1. Playground Interactivo</h3>
+        <p class="doc-sub">Personaliza en tiempo real las variantes, densidades y comportamientos interactivos del Datatable.</p>
+
+        <!-- Controles Pulidos Nuvex Curve -->
+        <div class="doc-controls">
+          <div class="doc-control-group">
+            <span class="doc-control-label">Variante:</span>
+            <select
+              class="doc-control-select"
+              [value]="currentVariant()"
+              (change)="currentVariant.set($any($event.target).value)"
+            >
+              <option value="default">Default (Card Suave)</option>
+              <option value="bordered">Bordered (Borde Sutil)</option>
+              <option value="minimal">Minimal (Plano)</option>
+            </select>
+          </div>
+
+          <div class="doc-control-group">
+            <span class="doc-control-label">Densidad:</span>
+            <select
+              class="doc-control-select"
+              [value]="currentDensity()"
+              (change)="currentDensity.set($any($event.target).value)"
+            >
+              <option value="compact">Compact</option>
+              <option value="normal">Normal</option>
+              <option value="relaxed">Relaxed</option>
+            </select>
+          </div>
+
+          <div class="doc-control-group">
+            <span class="doc-control-label">Selección:</span>
+            <select
+              class="doc-control-select"
+              [value]="currentSelectionMode()"
+              (change)="currentSelectionMode.set($any($event.target).value)"
+            >
+              <option value="multiple">Múltiple</option>
+              <option value="single">Única</option>
+              <option value="none">Sin Selección</option>
+            </select>
+          </div>
+
+          <label class="doc-control-checkbox">
+            <input
+              type="checkbox"
+              [checked]="currentStriped()"
+              (change)="currentStriped.set($any($event.target).checked)"
+            />
+            <span>Rayado (Striped)</span>
+          </label>
+
+          <nuvex-button
+            size="sm"
+            variant="secondary"
+            (click)="toggleLoading()"
           >
-            <option value="default">Default</option>
-            <option value="card">Card</option>
-            <option value="bordered">Bordered</option>
-            <option value="minimal">Minimal</option>
-          </select>
-        </div>
-
-        <!-- Densidad -->
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-          <span style="font-size: 0.8125rem; font-weight: 500; color: var(--nvl-text-secondary, #64748b);">Densidad:</span>
-          <select
-            [value]="currentDensity()"
-            (change)="currentDensity.set($any($event.target).value)"
-            style="padding: 0.35rem 0.65rem; border-radius: 0.5rem; border: 1px solid var(--nvl-surface-200, #cbd5e1); font-size: 0.8125rem;"
-          >
-            <option value="compact">Compact</option>
-            <option value="normal">Normal</option>
-            <option value="relaxed">Relaxed</option>
-          </select>
-        </div>
-
-        <!-- Modo Selección -->
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-          <span style="font-size: 0.8125rem; font-weight: 500; color: var(--nvl-text-secondary, #64748b);">Selección:</span>
-          <select
-            [value]="currentSelectionMode()"
-            (change)="currentSelectionMode.set($any($event.target).value)"
-            style="padding: 0.35rem 0.65rem; border-radius: 0.5rem; border: 1px solid var(--nvl-surface-200, #cbd5e1); font-size: 0.8125rem;"
-          >
-            <option value="multiple">Múltiple</option>
-            <option value="single">Única</option>
-            <option value="none">Sin Selección</option>
-          </select>
-        </div>
-
-        <!-- Striped Toggle -->
-        <label style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8125rem; cursor: pointer;">
-          <input
-            type="checkbox"
-            [checked]="currentStriped()"
-            (change)="currentStriped.set($any($event.target).checked)"
-          />
-          <span>Rayado (Striped)</span>
-        </label>
-
-        <!-- Loading Toggle -->
-        <nuvex-button
-          size="sm"
-          variant="secondary"
-          (click)="toggleLoading()"
-        >
-          {{ currentLoading() ? 'Detener Carga' : 'Simular Loading' }}
-        </nuvex-button>
-      </div>
-
-      <!-- Feedback de Selección o Click -->
-      <div
-        *ngIf="selectedOrders().length > 0 || lastClickedRow()"
-        style="margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; font-size: 0.8125rem;"
-      >
-        <span *ngIf="selectedOrders().length > 0" style="background: rgba(0, 201, 117, 0.1); color: #00874e; padding: 0.25rem 0.75rem; border-radius: 9999px; font-weight: 600;">
-          {{ selectedOrders().length }} fila(s) seleccionada(s)
-        </span>
-        <span *ngIf="lastClickedRow()" style="color: var(--nvl-text-secondary, #64748b);">
-          Último click: <strong>{{ lastClickedRow()?.client }}</strong> ({{ lastClickedRow()?.service }})
-        </span>
-      </div>
-
-      <!-- Componente Tabla en Vivo -->
-      <nuvex-table
-        [columns]="tableColumns"
-        [data]="ordersData"
-        title="Historial de Citas y Facturación"
-        subtitle="Control financiero y servicios registrados del salón"
-        [variant]="currentVariant()"
-        [density]="currentDensity()"
-        [striped]="currentStriped()"
-        [selectionMode]="currentSelectionMode()"
-        [loading]="currentLoading()"
-        [pageSize]="5"
-        [pageSizeOptions]="[5, 10, 20]"
-        (rowClick)="onRowClick($event)"
-        (selectionChange)="onSelectionChange($event)"
-      >
-        <!-- Template de Celda de Estado (via directiva o slot) -->
-        <div table-actions>
-          <nuvex-button size="sm" variant="primary">
-            Exportar CSV
+            {{ currentLoading() ? 'Detener Carga' : 'Simular Loading' }}
           </nuvex-button>
         </div>
-      </nuvex-table>
-    </div>
 
-    <!-- Panel de Código -->
-    <div class="doc-code" *ngIf="activeTab() === 'code'">
-      <app-code-snippet [code]="basicUsageCode" language="typescript" />
-    </div>
-  </section>
+        <!-- Feedback de Selección y Click -->
+        <div
+          *ngIf="selectedOrders().length > 0 || lastClickedRow()"
+          style="margin-bottom: 1.25rem; display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; font-size: 0.8125rem;"
+        >
+          <span *ngIf="selectedOrders().length > 0" style="background: rgba(0, 201, 117, 0.12); color: #00874e; padding: 0.25rem 0.75rem; border-radius: 9999px; font-weight: 600;">
+            {{ selectedOrders().length }} fila(s) seleccionada(s)
+          </span>
+          <span *ngIf="lastClickedRow()" style="color: var(--nvl-text-secondary, #64748b);">
+            Último click: <strong>{{ lastClickedRow()?.client }}</strong> ({{ lastClickedRow()?.service }})
+          </span>
+        </div>
 
-  <!-- Especificación de la API -->
-  <section class="doc-section">
-    <h2 class="doc-section-title">Propiedades & Inputs (API)</h2>
-    <div class="doc-table-wrapper">
-      <table class="doc-api-table">
-        <thead>
-          <tr>
-            <th>Input</th>
-            <th>Tipo</th>
-            <th>Default</th>
-            <th>Descripción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>columns</code></td>
-            <td><code>TableColumn&lt;T&gt;[]</code></td>
-            <td><code>[]</code></td>
-            <td>Definición de columnas con keys, labels, formato y ordenamiento.</td>
-          </tr>
-          <tr>
-            <td><code>data</code></td>
-            <td><code>T[]</code></td>
-            <td><code>[]</code></td>
-            <td>Conjunto de datos o filas a renderizar en la tabla.</td>
-          </tr>
-          <tr>
-            <td><code>title</code></td>
-            <td><code>string</code></td>
-            <td><code>''</code></td>
-            <td>Título superior del encabezado de la tabla.</td>
-          </tr>
-          <tr>
-            <td><code>subtitle</code></td>
-            <td><code>string</code></td>
-            <td><code>''</code></td>
-            <td>Subtítulo descriptivo o contexto del listado.</td>
-          </tr>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'default' | 'card' | 'bordered' | 'minimal'</code></td>
-            <td><code>'default'</code></td>
-            <td>Estilo visual del contenedor y los bordes.</td>
-          </tr>
-          <tr>
-            <td><code>density</code></td>
-            <td><code>'compact' | 'normal' | 'relaxed'</code></td>
-            <td><code>'normal'</code></td>
-            <td>Relleno y espaciado vertical de las celdas y filas.</td>
-          </tr>
-          <tr>
-            <td><code>searchable</code></td>
-            <td><code>boolean</code></td>
-            <td><code>true</code></td>
-            <td>Habilita el buscador reactivo integrado en píldora.</td>
-          </tr>
-          <tr>
-            <td><code>pagination</code></td>
-            <td><code>boolean</code></td>
-            <td><code>true</code></td>
-            <td>Habilita la barra inferior de paginación y rango de filas.</td>
-          </tr>
-          <tr>
-            <td><code>pageSize</code></td>
-            <td><code>number</code></td>
-            <td><code>10</code></td>
-            <td>Cantidad inicial de registros por página.</td>
-          </tr>
-          <tr>
-            <td><code>selectionMode</code></td>
-            <td><code>'none' | 'single' | 'multiple'</code></td>
-            <td><code>'none'</code></td>
-            <td>Modo de selección con checkboxes sobrios Nuvex.</td>
-          </tr>
-          <tr>
-            <td><code>striped</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Alterna sombreado suave en filas pares.</td>
-          </tr>
-          <tr>
-            <td><code>loading</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Muestra la barra animada de progreso superior.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+        <!-- Componente Tabla en Vivo -->
+        <nuvex-table
+          [columns]="tableColumns"
+          [data]="ordersData"
+          title="Historial de Citas y Facturación"
+          subtitle="Control financiero y servicios registrados del salón"
+          [variant]="currentVariant()"
+          [density]="currentDensity()"
+          [striped]="currentStriped()"
+          [selectionMode]="currentSelectionMode()"
+          [loading]="currentLoading()"
+          [pageSize]="5"
+          [pageSizeOptions]="[5, 10, 20]"
+          (rowClick)="onRowClick($event)"
+          (selectionChange)="onSelectionChange($event)"
+        >
+          <div table-actions>
+            <nuvex-button size="sm" variant="primary">
+              Exportar CSV
+            </nuvex-button>
+          </div>
+        </nuvex-table>
+      </section>
 
-  <!-- Eventos y Outputs -->
-  <section class="doc-section">
-    <h2 class="doc-section-title">Eventos & Outputs</h2>
-    <div class="doc-table-wrapper">
-      <table class="doc-api-table">
-        <thead>
-          <tr>
-            <th>Output</th>
-            <th>Tipo Emitido</th>
-            <th>Descripción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>sortChange</code></td>
-            <td><code>TableSortState</code></td>
-            <td>Se emite al hacer clic en una cabecera ordenable (columna y 'asc' | 'desc' | null).</td>
-          </tr>
-          <tr>
-            <td><code>pageChange</code></td>
-            <td><code>TablePaginationState</code></td>
-            <td>Se emite al cambiar de página o de tamaño de filas.</td>
-          </tr>
-          <tr>
-            <td><code>searchChange</code></td>
-            <td><code>string</code></td>
-            <td>Se emite al escribir o limpiar el término de búsqueda.</td>
-          </tr>
-          <tr>
-            <td><code>selectionChange</code></td>
-            <td><code>T[]</code></td>
-            <td>Se emite con la lista actualizada de registros seleccionados.</td>
-          </tr>
-          <tr>
-            <td><code>rowClick</code></td>
-            <td><code>T</code></td>
-            <td>Se emite con el objeto de la fila cuando el usuario hace clic sobre ella.</td>
-          </tr>
-        </tbody>
-      </table>
+      <!-- 2. Especificación de la API -->
+      <section class="doc-section">
+        <h3>2. Propiedades & Inputs (API)</h3>
+        <p class="doc-sub">Parámetros configurables mediante Signals de Angular 22.</p>
+
+        <div class="doc-table-wrapper">
+          <table class="doc-api-table">
+            <thead>
+              <tr>
+                <th>Input</th>
+                <th>Tipo</th>
+                <th>Default</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>columns</code></td>
+                <td><code>TableColumn&lt;T&gt;[]</code></td>
+                <td><code>[]</code></td>
+                <td>Definición de columnas con keys, labels, formato y ordenamiento.</td>
+              </tr>
+              <tr>
+                <td><code>data</code></td>
+                <td><code>T[]</code></td>
+                <td><code>[]</code></td>
+                <td>Conjunto de datos o filas a renderizar en la tabla.</td>
+              </tr>
+              <tr>
+                <td><code>title</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td>Título superior del encabezado de la tabla.</td>
+              </tr>
+              <tr>
+                <td><code>subtitle</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td>Subtítulo descriptivo o contexto del listado.</td>
+              </tr>
+              <tr>
+                <td><code>variant</code></td>
+                <td><code>'default' | 'card' | 'bordered' | 'minimal'</code></td>
+                <td><code>'default'</code></td>
+                <td>Estilo visual del contenedor y los bordes.</td>
+              </tr>
+              <tr>
+                <td><code>density</code></td>
+                <td><code>'compact' | 'normal' | 'relaxed'</code></td>
+                <td><code>'normal'</code></td>
+                <td>Relleno y espaciado vertical de las celdas y filas.</td>
+              </tr>
+              <tr>
+                <td><code>searchable</code></td>
+                <td><code>boolean</code></td>
+                <td><code>true</code></td>
+                <td>Habilita el buscador reactivo integrado en píldora.</td>
+              </tr>
+              <tr>
+                <td><code>pagination</code></td>
+                <td><code>boolean</code></td>
+                <td><code>true</code></td>
+                <td>Habilita la barra inferior de paginación y rango de filas.</td>
+              </tr>
+              <tr>
+                <td><code>pageSize</code></td>
+                <td><code>number</code></td>
+                <td><code>10</code></td>
+                <td>Cantidad inicial de registros por página.</td>
+              </tr>
+              <tr>
+                <td><code>selectionMode</code></td>
+                <td><code>'none' | 'single' | 'multiple'</code></td>
+                <td><code>'none'</code></td>
+                <td>Modo de selección con checkboxes sobrios Nuvex.</td>
+              </tr>
+              <tr>
+                <td><code>striped</code></td>
+                <td><code>boolean</code></td>
+                <td><code>false</code></td>
+                <td>Alterna sombreado suave en filas pares.</td>
+              </tr>
+              <tr>
+                <td><code>loading</code></td>
+                <td><code>boolean</code></td>
+                <td><code>false</code></td>
+                <td>Muestra la barra animada de progreso superior.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 3. Eventos & Outputs -->
+      <section class="doc-section">
+        <h3>3. Eventos & Outputs</h3>
+        <p class="doc-sub">Señales emitidas por interacciones del usuario.</p>
+
+        <div class="doc-table-wrapper">
+          <table class="doc-api-table">
+            <thead>
+              <tr>
+                <th>Output</th>
+                <th>Tipo Emitido</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>sortChange</code></td>
+                <td><code>TableSortState</code></td>
+                <td>Se emite al hacer clic en una cabecera ordenable (columna y 'asc' | 'desc' | null).</td>
+              </tr>
+              <tr>
+                <td><code>pageChange</code></td>
+                <td><code>TablePaginationState</code></td>
+                <td>Se emite al cambiar de página o de tamaño de filas.</td>
+              </tr>
+              <tr>
+                <td><code>searchChange</code></td>
+                <td><code>string</code></td>
+                <td>Se emite al escribir o limpiar el término de búsqueda.</td>
+              </tr>
+              <tr>
+                <td><code>selectionChange</code></td>
+                <td><code>T[]</code></td>
+                <td>Se emite con la lista actualizada de registros seleccionados.</td>
+              </tr>
+              <tr>
+                <td><code>rowClick</code></td>
+                <td><code>T</code></td>
+                <td>Se emite con el objeto de la fila cuando el usuario hace clic sobre ella.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </div>
-  </section>
+  } @else {
+    <div class="doc-content">
+      <section class="doc-section">
+        <h3>1. Ejemplo de Implementación</h3>
+        <p class="doc-sub">Uso directo del componente tabla standalone en Angular.</p>
+        <app-code-snippet [code]="basicUsageCode" language="typescript" title="TypeScript Component" />
+      </section>
+    </div>
+  }
 </div>

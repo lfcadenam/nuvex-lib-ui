@@ -2,6 +2,7 @@
   <header class="doc-header">
     <div class="doc-badge-row">
       <span class="doc-tag">Nuvex Modern Curve</span>
+      <span class="doc-tag doc-tag--new">Nuevo v0.0.4</span>
       <span class="doc-version">nuvex-ui/spotlight-card</span>
     </div>
     <h1 class="doc-title">Spotlight Card</h1>
@@ -105,108 +106,110 @@
       <!-- 3. REFERENCIA DE PROPIEDADES (API) -->
       <section class="doc-section">
         <h3>Referencia de Propiedades (API)</h3>
-        <table class="doc-table">
-          <thead>
-            <tr>
-              <th>Propiedad</th>
-              <th>Tipo</th>
-              <th>Default</th>
-              <th>Descripción</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>name</code></td>
-              <td><code>string</code></td>
-              <td><code>''</code></td>
-              <td>Nombre completo o título del perfil destacado.</td>
-            </tr>
-            <tr>
-              <td><code>role</code></td>
-              <td><code>string</code></td>
-              <td><code>''</code></td>
-              <td>Especialidad, cargo o descripción del profesional.</td>
-            </tr>
-            <tr>
-              <td><code>avatarImage</code></td>
-              <td><code>string | null</code></td>
-              <td><code>null</code></td>
-              <td>URL de la fotografía para el avatar central.</td>
-            </tr>
-            <tr>
-              <td><code>avatarLabel</code></td>
-              <td><code>string</code></td>
-              <td><code>''</code></td>
-              <td>Texto o iniciales para el avatar si no hay foto.</td>
-            </tr>
-            <tr>
-              <td><code>badgeText</code></td>
-              <td><code>string</code></td>
-              <td><code>''</code></td>
-              <td>Etiqueta en píldora superior izquierda (ej. "Disponible Hoy").</td>
-            </tr>
-            <tr>
-              <td><code>badgeVariant</code></td>
-              <td><code>'primary' | 'success' | 'warning' | ...</code></td>
-              <td><code>'success'</code></td>
-              <td>Paleta de color de la píldora superior.</td>
-            </tr>
-            <tr>
-              <td><code>availability</code></td>
-              <td><code>string</code></td>
-              <td><code>''</code></td>
-              <td>Franja horaria o disponibilidad con icono de reloj.</td>
-            </tr>
-            <tr>
-              <td><code>stats</code></td>
-              <td><code>SpotlightStat[]</code></td>
-              <td><code>[]</code></td>
-              <td>Métricas cuantitativas clave (valor + etiqueta).</td>
-            </tr>
-            <tr>
-              <td><code>actionLabel</code></td>
-              <td><code>string</code></td>
-              <td><code>''</code></td>
-              <td>Texto para el botón de acción principal inferior.</td>
-            </tr>
-            <tr>
-              <td><code>showNavigation</code></td>
-              <td><code>boolean</code></td>
-              <td><code>true</code></td>
-              <td>Muestra u oculta los controles de navegación carrusel.</td>
-            </tr>
-            <tr>
-              <td><code>counterText</code></td>
-              <td><code>string</code></td>
-              <td><code>''</code></td>
-              <td>Texto indicador de posición (ej. "1 / 4").</td>
-            </tr>
-            <tr>
-              <td><code>variant</code></td>
-              <td><code>'default' | 'hero' | 'emerald' | 'outlined'</code></td>
-              <td><code>'default'</code></td>
-              <td>Estilo visual de superficie de la tarjeta.</td>
-            </tr>
-            <tr>
-              <td><code>(prev)</code></td>
-              <td><code>EventEmitter&lt;void&gt;</code></td>
-              <td>-</td>
-              <td>Disparado al presionar la flecha izquierda (&lt;).</td>
-            </tr>
-            <tr>
-              <td><code>(next)</code></td>
-              <td><code>EventEmitter&lt;void&gt;</code></td>
-              <td>-</td>
-              <td>Disparado al presionar la flecha derecha (&gt;).</td>
-            </tr>
-            <tr>
-              <td><code>(actionClick)</code></td>
-              <td><code>EventEmitter&lt;void&gt;</code></td>
-              <td>-</td>
-              <td>Disparado al presionar el botón de acción principal.</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="doc-table-wrapper">
+          <table class="doc-api-table">
+            <thead>
+              <tr>
+                <th>Propiedad</th>
+                <th>Tipo</th>
+                <th>Default</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>name</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td>Nombre completo o título del perfil destacado.</td>
+              </tr>
+              <tr>
+                <td><code>role</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td>Especialidad, cargo o descripción del profesional.</td>
+              </tr>
+              <tr>
+                <td><code>avatarImage</code></td>
+                <td><code>string | null</code></td>
+                <td><code>null</code></td>
+                <td>URL de la fotografía para el avatar central.</td>
+              </tr>
+              <tr>
+                <td><code>avatarLabel</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td>Texto o iniciales para el avatar si no hay foto.</td>
+              </tr>
+              <tr>
+                <td><code>badgeText</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td>Etiqueta en píldora superior izquierda (ej. "Disponible Hoy").</td>
+              </tr>
+              <tr>
+                <td><code>badgeVariant</code></td>
+                <td><code>'primary' | 'success' | 'warning' | ...</code></td>
+                <td><code>'success'</code></td>
+                <td>Paleta de color de la píldora superior.</td>
+              </tr>
+              <tr>
+                <td><code>availability</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td>Franja horaria o disponibilidad con icono de reloj.</td>
+              </tr>
+              <tr>
+                <td><code>stats</code></td>
+                <td><code>SpotlightStat[]</code></td>
+                <td><code>[]</code></td>
+                <td>Métricas cuantitativas clave (valor + etiqueta).</td>
+              </tr>
+              <tr>
+                <td><code>actionLabel</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td>Texto para el botón de acción principal inferior.</td>
+              </tr>
+              <tr>
+                <td><code>showNavigation</code></td>
+                <td><code>boolean</code></td>
+                <td><code>true</code></td>
+                <td>Muestra u oculta los controles de navegación carrusel.</td>
+              </tr>
+              <tr>
+                <td><code>counterText</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td>Texto indicador de posición (ej. "1 / 4").</td>
+              </tr>
+              <tr>
+                <td><code>variant</code></td>
+                <td><code>'default' | 'hero' | 'emerald' | 'outlined'</code></td>
+                <td><code>'default'</code></td>
+                <td>Estilo visual de superficie de la tarjeta.</td>
+              </tr>
+              <tr>
+                <td><code>(prev)</code></td>
+                <td><code>EventEmitter&lt;void&gt;</code></td>
+                <td>-</td>
+                <td>Disparado al presionar la flecha izquierda (&lt;).</td>
+              </tr>
+              <tr>
+                <td><code>(next)</code></td>
+                <td><code>EventEmitter&lt;void&gt;</code></td>
+                <td>-</td>
+                <td>Disparado al presionar la flecha derecha (&gt;).</td>
+              </tr>
+              <tr>
+                <td><code>(actionClick)</code></td>
+                <td><code>EventEmitter&lt;void&gt;</code></td>
+                <td>-</td>
+                <td>Disparado al presionar el botón de acción principal.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
     </div>
   } @else {
