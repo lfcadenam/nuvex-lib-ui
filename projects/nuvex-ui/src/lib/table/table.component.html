@@ -1,0 +1,275 @@
+<!-- Nuvex Datatable Component -->
+<div class="nuvex-table">
+  <!-- Toolbar Superior -->
+  <div class="nuvex-table__toolbar" *ngIf="title() || subtitle() || searchable() || true">
+    <div class="nuvex-table__header-text" *ngIf="title() || subtitle()">
+      <h3 class="nuvex-table__title" *ngIf="title()">{{ title() }}</h3>
+      <p class="nuvex-table__subtitle" *ngIf="subtitle()">{{ subtitle() }}</p>
+    </div>
+
+    <div class="nuvex-table__toolbar-controls">
+      <!-- Buscador Integrado -->
+      <div class="nuvex-table__search-wrapper" *ngIf="searchable()">
+        <svg class="nuvex-table__search-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="9" r="6" />
+          <path d="M13.5 13.5L18 18" stroke-linecap="round" />
+        </svg>
+        <input
+          type="text"
+          class="nuvex-table__search-input"
+          [placeholder]="searchPlaceholder()"
+          [value]="searchQuery()"
+          (input)="onSearchInput($event)"
+        />
+        <button
+          type="button"
+          class="nuvex-table__search-clear"
+          *ngIf="searchQuery()"
+          (click)="clearSearch()"
+          aria-label="Limpiar búsqueda"
+        >
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4l8 8M12 4l-8 8" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Filtros Proyectados -->
+      <div class="nuvex-table__filters-slot">
+        <ng-content select="[table-filters]" />
+      </div>
+
+      <!-- Acciones de Cabecera Proyectadas -->
+      <div class="nuvex-table__actions-slot">
+        <ng-content select="[table-actions]" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenedor con Scroll Horizontal -->
+  <div class="nuvex-table__scroll-wrapper">
+    <!-- Indicador de Carga -->
+    <div class="nuvex-table__loading-bar" *ngIf="loading()">
+      <div class="nuvex-table__loading-bar-inner"></div>
+    </div>
+
+    <table class="nuvex-table__native" [class.nuvex-table__native--striped]="striped()">
+      <!-- Encabezado de Columnas -->
+      <thead class="nuvex-table__thead">
+        <tr class="nuvex-table__tr-head">
+          <!-- Columna de Selección -->
+          <th
+            *ngIf="selectionMode() !== 'none'"
+            class="nuvex-table__th nuvex-table__th--select"
+            style="width: 44px; text-align: center"
+          >
+            <label class="nuvex-table__checkbox-label" *ngIf="selectionMode() === 'multiple'">
+              <input
+                type="checkbox"
+                class="nuvex-table__checkbox"
+                [checked]="isAllSelected()"
+                [indeterminate]="isPartiallySelected()"
+                (change)="toggleSelectAll()"
+                aria-label="Seleccionar todas las filas"
+              />
+              <span class="nuvex-table__checkbox-custom"></span>
+            </label>
+          </th>
+
+          <!-- Columnas de Datos -->
+          <th
+            *ngFor="let col of visibleColumns()"
+            class="nuvex-table__th"
+            [class.nuvex-table__th--sortable]="col.sortable"
+            [class.nuvex-table__th--sorted]="sortState().column === col.key"
+            [style.width]="col.width || null"
+            [style.text-align]="col.align || 'left'"
+            (click)="toggleSort(col)"
+          >
+            <div
+              class="nuvex-table__th-content"
+              [style.justify-content]="
+                col.align === 'center'
+                  ? 'center'
+                  : col.align === 'right'
+                  ? 'flex-end'
+                  : 'flex-start'
+              "
+            >
+              <span>{{ col.label }}</span>
+
+              <!-- Icono de Ordenamiento -->
+              <span class="nuvex-table__sort-icon" *ngIf="col.sortable">
+                <svg
+                  *ngIf="sortState().column !== col.key || sortState().direction === null"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  class="nuvex-table__sort-svg nuvex-table__sort-svg--neutral"
+                >
+                  <path d="M5 6.5l3-3 3 3M5 9.5l3 3 3-3" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <svg
+                  *ngIf="sortState().column === col.key && sortState().direction === 'asc'"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  class="nuvex-table__sort-svg nuvex-table__sort-svg--active"
+                >
+                  <path d="M8 12V4M4 8l4-4 4 4" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <svg
+                  *ngIf="sortState().column === col.key && sortState().direction === 'desc'"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  class="nuvex-table__sort-svg nuvex-table__sort-svg--active"
+                >
+                  <path d="M8 4v8M4 8l4 4 4-4" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+            </div>
+          </th>
+        </tr>
+      </thead>
+
+      <!-- Cuerpo de la Tabla -->
+      <tbody class="nuvex-table__tbody">
+        <!-- Estado Vacío -->
+        <tr *ngIf="pagedData().length === 0 && !loading()">
+          <td
+            class="nuvex-table__empty-cell"
+            [attr.colspan]="visibleColumns().length + (selectionMode() !== 'none' ? 1 : 0)"
+          >
+            <div class="nuvex-table__empty-state">
+              <div class="nuvex-table__empty-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-4a2 2 0 00-2 2 2 2 0 01-2 2 2 2 0 01-2-2 2 2 0 00-2-2H4" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <p class="nuvex-table__empty-title">{{ emptyMessage() }}</p>
+              <p class="nuvex-table__empty-hint" *ngIf="searchQuery()">
+                No hay resultados que coincidan con "{{ searchQuery() }}".
+              </p>
+            </div>
+          </td>
+        </tr>
+
+        <!-- Filas de Datos -->
+        <tr
+          *ngFor="let row of pagedData()"
+          class="nuvex-table__tr"
+          [class.nuvex-table__tr--selected]="isRowSelected(row)"
+          [class.nuvex-table__tr--hoverable]="hoverable()"
+          (click)="onRowClick(row)"
+        >
+          <!-- Celda de Selección -->
+          <td
+            *ngIf="selectionMode() !== 'none'"
+            class="nuvex-table__td nuvex-table__td--select"
+            style="width: 44px; text-align: center"
+            (click)="$event.stopPropagation()"
+          >
+            <label class="nuvex-table__checkbox-label">
+              <input
+                type="checkbox"
+                class="nuvex-table__checkbox"
+                [checked]="isRowSelected(row)"
+                (change)="toggleRowSelection(row, $event)"
+                aria-label="Seleccionar fila"
+              />
+              <span class="nuvex-table__checkbox-custom"></span>
+            </label>
+          </td>
+
+          <!-- Celdas de Datos -->
+          <td
+            *ngFor="let col of visibleColumns()"
+            class="nuvex-table__td"
+            [style.text-align]="col.align || 'left'"
+          >
+            <ng-container *ngIf="col.cellTemplate; else defaultCell">
+              <ng-container
+                *ngTemplateOutlet="col.cellTemplate; context: { $implicit: getCellValue(row, col), row: row, column: col }"
+              />
+            </ng-container>
+            <ng-template #defaultCell>
+              <span class="nuvex-table__cell-text">{{ getCellValue(row, col) }}</span>
+            </ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Barra de Paginación y Resumen -->
+  <div class="nuvex-table__footer" *ngIf="pagination() && totalRecords() > 0">
+    <div class="nuvex-table__footer-info">
+      <span class="nuvex-table__range-text">
+        Mostrando <strong>{{ paginationRange().start }}</strong> a <strong>{{ paginationRange().end }}</strong> de <strong>{{ paginationRange().total }}</strong> registros
+      </span>
+
+      <!-- Selector de Tamaño de Página -->
+      <div class="nuvex-table__page-size-selector" *ngIf="pageSizeOptions().length > 1">
+        <label for="nuvex-page-size" class="nuvex-table__page-size-label">Filas:</label>
+        <select
+          id="nuvex-page-size"
+          class="nuvex-table__page-size-select"
+          [value]="currentPageSize()"
+          (change)="onPageSizeChange($event)"
+        >
+          <option *ngFor="let size of pageSizeOptions()" [value]="size">
+            {{ size }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Navegación de Páginas -->
+    <div class="nuvex-table__pagination-controls" *ngIf="totalPages() > 1">
+      <button
+        type="button"
+        class="nuvex-table__page-btn nuvex-table__page-btn--arrow"
+        [disabled]="currentPage() === 1"
+        (click)="goToPage(currentPage() - 1)"
+        aria-label="Página anterior"
+      >
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M10 12L6 8l4-4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+
+      <div class="nuvex-table__page-numbers">
+        <button
+          *ngFor="let page of pageNumbers()"
+          type="button"
+          class="nuvex-table__page-btn"
+          [class.nuvex-table__page-btn--active]="page === currentPage()"
+          (click)="goToPage(page)"
+        >
+          {{ page }}
+        </button>
+      </div>
+
+      <button
+        type="button"
+        class="nuvex-table__page-btn nuvex-table__page-btn--arrow"
+        [disabled]="currentPage() === totalPages()"
+        (click)="goToPage(currentPage() + 1)"
+        aria-label="Página siguiente"
+      >
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Slot Extra Footer -->
+    <div class="nuvex-table__footer-slot">
+      <ng-content select="[table-footer]" />
+    </div>
+  </div>
+</div>

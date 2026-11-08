@@ -43,6 +43,7 @@ export class App {
       items: [
         { name: 'Input', route: '/input', tag: 'Captura' },
         { name: 'Switch', route: '/switch', tag: 'Toggle' },
+        { name: 'Table', route: '/table', tag: 'Datatable' },
       ],
     },
     {

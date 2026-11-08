@@ -1,0 +1,624 @@
+/* ==========================================================================
+   Nuvex Modern Curve UI - Datatable Component
+   ========================================================================== */
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.nuvex-table-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.75rem; /* 28px - Nuvex Curve Standard */
+  background-color: var(--nvl-surface-0, #ffffff);
+  color: var(--nvl-text-color, #0f172a);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04), 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: inherit;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Variantes de contenedor */
+.nuvex-table-container--bordered {
+  box-shadow: none;
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+}
+
+.nuvex-table-container--minimal {
+  border-radius: 1.25rem;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+.nuvex-table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Toolbar Superior
+   -------------------------------------------------------------------------- */
+.nuvex-table__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--nvl-surface-100, #f1f5f9);
+}
+
+.nuvex-table__header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.nuvex-table__title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--nvl-text-color, #0f172a);
+}
+
+.nuvex-table__subtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--nvl-text-secondary, #64748b);
+}
+
+.nuvex-table__toolbar-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* Buscador Integrado Píldora */
+.nuvex-table__search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 240px;
+}
+
+.nuvex-table__search-icon {
+  position: absolute;
+  left: 0.875rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--nvl-text-secondary, #94a3b8);
+  pointer-events: none;
+}
+
+.nuvex-table__search-input {
+  width: 100%;
+  padding: 0.5rem 2.25rem 0.5rem 2.5rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: var(--nvl-text-color, #0f172a);
+  background-color: var(--nvl-surface-50, #f8fafc);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  border-radius: 9999px; /* Pill */
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.nuvex-table__search-input:focus {
+  background-color: var(--nvl-surface-0, #ffffff);
+  border-color: var(--nvl-primary, #00c975);
+  box-shadow: 0 0 0 3px rgba(0, 201, 117, 0.15);
+}
+
+.nuvex-table__search-clear {
+  position: absolute;
+  right: 0.625rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--nvl-text-secondary, #94a3b8);
+  cursor: pointer;
+  border-radius: 9999px;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.nuvex-table__search-clear:hover {
+  color: var(--nvl-text-color, #0f172a);
+  background-color: var(--nvl-surface-200, #e2e8f0);
+}
+
+.nuvex-table__search-clear svg {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.nuvex-table__filters-slot,
+.nuvex-table__actions-slot {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Scroll Wrapper & Tabla Nativa
+   -------------------------------------------------------------------------- */
+.nuvex-table__scroll-wrapper {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Barra de Carga Suave */
+.nuvex-table__loading-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: rgba(0, 201, 117, 0.2);
+  overflow: hidden;
+  z-index: 10;
+}
+
+.nuvex-table__loading-bar-inner {
+  width: 40%;
+  height: 100%;
+  background-color: var(--nvl-primary, #00c975);
+  animation: nuvexTableLoading 1.2s infinite ease-in-out;
+}
+
+@keyframes nuvexTableLoading {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}
+
+.nuvex-table__native {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+/* --------------------------------------------------------------------------
+   Encabezados thead & th
+   -------------------------------------------------------------------------- */
+.nuvex-table__thead {
+  background-color: var(--nvl-surface-50, #f8fafc);
+  border-bottom: 1px solid var(--nvl-surface-200, #e2e8f0);
+}
+
+.nuvex-table__th {
+  padding: 0.875rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--nvl-text-secondary, #64748b);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.nuvex-table__th--sortable {
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.nuvex-table__th--sortable:hover {
+  color: var(--nvl-text-color, #0f172a);
+  background-color: var(--nvl-surface-100, #f1f5f9);
+}
+
+.nuvex-table__th--sorted {
+  color: var(--nvl-primary, #00c975);
+}
+
+.nuvex-table__th-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  width: 100%;
+}
+
+.nuvex-table__sort-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+}
+
+.nuvex-table__sort-svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.nuvex-table__sort-svg--neutral {
+  opacity: 0.35;
+  transition: opacity 0.15s ease;
+}
+
+.nuvex-table__th--sortable:hover .nuvex-table__sort-svg--neutral {
+  opacity: 0.7;
+}
+
+.nuvex-table__sort-svg--active {
+  color: var(--nvl-primary, #00c975);
+}
+
+/* --------------------------------------------------------------------------
+   Cuerpo tbody, tr, td
+   -------------------------------------------------------------------------- */
+.nuvex-table__tbody {
+  background-color: transparent;
+}
+
+.nuvex-table__tr {
+  border-bottom: 1px solid var(--nvl-surface-100, #f1f5f9);
+  transition: background-color 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nuvex-table__tr:last-child {
+  border-bottom: none;
+}
+
+.nuvex-table__tr--hoverable:hover {
+  background-color: var(--nvl-surface-50, #f8fafc);
+}
+
+.nuvex-table__tr--selected {
+  background-color: rgba(0, 201, 117, 0.06) !important;
+}
+
+.nuvex-table__native--striped .nuvex-table__tr:nth-child(even) {
+  background-color: var(--nvl-surface-50, #f8fafc);
+}
+
+.nuvex-table__td {
+  padding: 0.875rem 1.25rem;
+  color: var(--nvl-text-color, #0f172a);
+  vertical-align: middle;
+}
+
+.nuvex-table__cell-text {
+  display: inline-block;
+  line-height: 1.4;
+}
+
+/* Densidades */
+.nuvex-table-container--compact .nuvex-table__th,
+.nuvex-table-container--compact .nuvex-table__td {
+  padding: 0.5rem 0.875rem;
+}
+
+.nuvex-table-container--relaxed .nuvex-table__th,
+.nuvex-table-container--relaxed .nuvex-table__td {
+  padding: 1.125rem 1.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Checkbox Custom Nuvex
+   -------------------------------------------------------------------------- */
+.nuvex-table__checkbox-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0 auto;
+}
+
+.nuvex-table__checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+}
+
+.nuvex-table__checkbox-custom {
+  position: relative;
+  display: inline-block;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 0.375rem; /* 6px */
+  border: 1.5px solid var(--nvl-surface-300, #cbd5e1);
+  background-color: var(--nvl-surface-0, #ffffff);
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.nuvex-table__checkbox:focus-visible + .nuvex-table__checkbox-custom {
+  box-shadow: 0 0 0 3px rgba(0, 201, 117, 0.25);
+  border-color: var(--nvl-primary, #00c975);
+}
+
+.nuvex-table__checkbox:checked + .nuvex-table__checkbox-custom {
+  background-color: var(--nvl-primary, #00c975);
+  border-color: var(--nvl-primary, #00c975);
+}
+
+.nuvex-table__checkbox:checked + .nuvex-table__checkbox-custom::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.nuvex-table__checkbox:indeterminate + .nuvex-table__checkbox-custom {
+  background-color: var(--nvl-primary, #00c975);
+  border-color: var(--nvl-primary, #00c975);
+}
+
+.nuvex-table__checkbox:indeterminate + .nuvex-table__checkbox-custom::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 6px;
+  width: 8px;
+  height: 2px;
+  background-color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Estado Vacío
+   -------------------------------------------------------------------------- */
+.nuvex-table__empty-cell {
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+}
+
+.nuvex-table__empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+.nuvex-table__empty-icon-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  background-color: var(--nvl-surface-100, #f1f5f9);
+  color: var(--nvl-text-secondary, #94a3b8);
+  margin-bottom: 0.5rem;
+}
+
+.nuvex-table__empty-icon-box svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.nuvex-table__empty-title {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--nvl-text-color, #0f172a);
+}
+
+.nuvex-table__empty-hint {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--nvl-text-secondary, #64748b);
+}
+
+/* --------------------------------------------------------------------------
+   Paginación y Footer
+   -------------------------------------------------------------------------- */
+.nuvex-table__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--nvl-surface-100, #f1f5f9);
+  background-color: var(--nvl-surface-0, #ffffff);
+}
+
+.nuvex-table__footer-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.nuvex-table__range-text {
+  font-size: 0.8125rem;
+  color: var(--nvl-text-secondary, #64748b);
+}
+
+.nuvex-table__range-text strong {
+  color: var(--nvl-text-color, #0f172a);
+  font-weight: 600;
+}
+
+.nuvex-table__page-size-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.nuvex-table__page-size-label {
+  font-size: 0.8125rem;
+  color: var(--nvl-text-secondary, #64748b);
+}
+
+.nuvex-table__page-size-select {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  color: var(--nvl-text-color, #0f172a);
+  background-color: var(--nvl-surface-50, #f8fafc);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  border-radius: 0.5rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.nuvex-table__page-size-select:focus {
+  border-color: var(--nvl-primary, #00c975);
+}
+
+.nuvex-table__pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.nuvex-table__page-numbers {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nuvex-table__page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--nvl-text-secondary, #64748b);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nuvex-table__page-btn:hover:not(:disabled) {
+  background-color: var(--nvl-surface-100, #f1f5f9);
+  color: var(--nvl-text-color, #0f172a);
+}
+
+.nuvex-table__page-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.nuvex-table__page-btn--arrow svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.nuvex-table__page-btn--active {
+  background-color: var(--nvl-primary, #00c975) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 201, 117, 0.25);
+}
+
+/* --------------------------------------------------------------------------
+   Dark Mode Support
+   -------------------------------------------------------------------------- */
+:host-context(.dark) .nuvex-table-container,
+.dark .nuvex-table-container {
+  background-color: var(--nvl-surface-900, #0f172a);
+  border-color: var(--nvl-surface-800, #1e293b);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+}
+
+:host-context(.dark) .nuvex-table__toolbar,
+.dark .nuvex-table__toolbar,
+:host-context(.dark) .nuvex-table__footer,
+.dark .nuvex-table__footer {
+  background-color: var(--nvl-surface-900, #0f172a);
+  border-color: var(--nvl-surface-800, #1e293b);
+}
+
+:host-context(.dark) .nuvex-table__thead,
+.dark .nuvex-table__thead {
+  background-color: #162032;
+  border-color: var(--nvl-surface-800, #1e293b);
+}
+
+:host-context(.dark) .nuvex-table__th,
+.dark .nuvex-table__th {
+  color: #94a3b8;
+}
+
+:host-context(.dark) .nuvex-table__th--sortable:hover,
+.dark .nuvex-table__th--sortable:hover {
+  background-color: #1e293b;
+  color: #f8fafc;
+}
+
+:host-context(.dark) .nuvex-table__tr,
+.dark .nuvex-table__tr {
+  border-color: #1e293b;
+}
+
+:host-context(.dark) .nuvex-table__tr--hoverable:hover,
+.dark .nuvex-table__tr--hoverable:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+:host-context(.dark) .nuvex-table__native--striped .nuvex-table__tr:nth-child(even),
+.dark .nuvex-table__native--striped .nuvex-table__tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+:host-context(.dark) .nuvex-table__search-input,
+.dark .nuvex-table__search-input {
+  background-color: #1e293b;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+:host-context(.dark) .nuvex-table__search-input:focus,
+.dark .nuvex-table__search-input:focus {
+  background-color: #0f172a;
+  border-color: var(--nvl-primary, #00c975);
+}
+
+:host-context(.dark) .nuvex-table__checkbox-custom,
+.dark .nuvex-table__checkbox-custom {
+  background-color: #1e293b;
+  border-color: #475569;
+}
+
+:host-context(.dark) .nuvex-table__page-size-select,
+.dark .nuvex-table__page-size-select {
+  background-color: #1e293b;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+:host-context(.dark) .nuvex-table__empty-icon-box,
+.dark .nuvex-table__empty-icon-box {
+  background-color: #1e293b;
+  color: #64748b;
+}

@@ -70,6 +70,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'table',
+    loadComponent: () =>
+      import('./pages/table-doc/table-doc.component').then(
+        (m) => m.TableDocComponent
+      ),
+  },
+  {
     path: 'segmented',
     loadComponent: () =>
       import('./pages/segmented-doc/segmented-doc.component').then(

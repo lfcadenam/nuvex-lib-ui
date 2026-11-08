@@ -22,6 +22,7 @@ export * from './lib/segmented/public-api';
 export * from './lib/drawer/public-api';
 export * from './lib/modal/public-api';
 export * from './lib/spotlight-card/public-api';
+export * from './lib/table/public-api';
 
 // Navegación & Estructura Capsule UI
 export * from './lib/capsule-dock/public-api';
