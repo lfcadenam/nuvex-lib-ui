@@ -42,6 +42,7 @@ export class App {
       title: 'Formularios & Datos',
       items: [
         { name: 'Input', route: '/input', tag: 'Captura' },
+        { name: 'Select', route: '/select', tag: 'Dropdown' },
         { name: 'Switch', route: '/switch', tag: 'Toggle' },
         { name: 'Table', route: '/table', tag: 'Datatable' },
       ],

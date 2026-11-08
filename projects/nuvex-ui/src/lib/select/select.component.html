@@ -1,0 +1,147 @@
+<!-- Nuvex Floating Select / Dropdown Component -->
+<div class="nuvex-select">
+  <!-- Etiqueta Superior -->
+  <label class="nuvex-select__label" *ngIf="label()">
+    {{ label() }}
+  </label>
+
+  <!-- Botón Disparador (Trigger) -->
+  <div
+    class="nuvex-select__trigger"
+    tabindex="0"
+    role="combobox"
+    [attr.aria-expanded]="isOpen()"
+    [attr.aria-disabled]="effectiveDisabled()"
+    (click)="toggleDropdown()"
+    (keydown)="onKeyDown($event)"
+  >
+    <div class="nuvex-select__value-area">
+      <!-- Tags en Selección Múltiple -->
+      <ng-container *ngIf="multiple() && selectedOptions().length > 0">
+        <div class="nuvex-select__tags">
+          <span
+            *ngFor="let opt of selectedOptions()"
+            class="nuvex-select__tag"
+            (click)="$event.stopPropagation()"
+          >
+            <span class="nuvex-select__tag-label">{{ opt.label }}</span>
+            <button
+              type="button"
+              class="nuvex-select__tag-remove"
+              (click)="removeTag(opt, $event)"
+              [disabled]="effectiveDisabled()"
+              aria-label="Remover opción"
+            >
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3.5 3.5l7 7M10.5 3.5l-7 7" stroke-linecap="round" />
+              </svg>
+            </button>
+          </span>
+        </div>
+      </ng-container>
+
+      <!-- Texto en Selección Única -->
+      <ng-container *ngIf="!multiple() || selectedOptions().length === 0">
+        <span
+          class="nuvex-select__display-text"
+          [class.nuvex-select__display-text--placeholder]="!displayLabel()"
+        >
+          {{ displayLabel() || placeholder() }}
+        </span>
+      </ng-container>
+    </div>
+
+    <!-- Acciones del Trigger (Clear & Chevron) -->
+    <div class="nuvex-select__trigger-actions">
+      <!-- Botón Limpiar Selección -->
+      <button
+        type="button"
+        class="nuvex-select__clear-btn"
+        *ngIf="clearable() && selectedOptions().length > 0 && !effectiveDisabled()"
+        (click)="clearSelection($event)"
+        aria-label="Limpiar selección"
+      >
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3.5 3.5l7 7M10.5 3.5l-7 7" stroke-linecap="round" />
+        </svg>
+      </button>
+
+      <!-- Chevron Indicador -->
+      <span class="nuvex-select__chevron" [class.nuvex-select__chevron--open]="isOpen()">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+    </div>
+  </div>
+
+  <!-- Panel Desplegable Flotante -->
+  <div class="nuvex-select__panel" *ngIf="isOpen()" role="listbox">
+    <!-- Buscador Integrado -->
+    <div class="nuvex-select__search-box" *ngIf="searchable()" (click)="$event.stopPropagation()">
+      <svg class="nuvex-select__search-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="9" cy="9" r="6" />
+        <path d="M13.5 13.5L18 18" stroke-linecap="round" />
+      </svg>
+      <input
+        type="text"
+        class="nuvex-select__search-input"
+        [placeholder]="searchPlaceholder()"
+        [value]="searchQuery()"
+        (input)="onSearchInput($event)"
+        (keydown)="onKeyDown($event)"
+        autofocus
+      />
+    </div>
+
+    <!-- Lista de Opciones -->
+    <div class="nuvex-select__options-list">
+      <!-- Opción Vacía -->
+      <div class="nuvex-select__empty" *ngIf="filteredOptions().length === 0">
+        <span>No se encontraron opciones</span>
+      </div>
+
+      <!-- Items de Opción -->
+      <div
+        *ngFor="let opt of filteredOptions(); let i = index"
+        class="nuvex-select__option"
+        [class.nuvex-select__option--selected]="isSelected(opt)"
+        [class.nuvex-select__option--active]="i === activeIndex()"
+        [class.nuvex-select__option--disabled]="opt.disabled"
+        (click)="selectOption(opt, $event)"
+        role="option"
+        [attr.aria-selected]="isSelected(opt)"
+      >
+        <!-- Checkbox para Selección Múltiple -->
+        <span class="nuvex-select__option-checkbox" *ngIf="multiple()">
+          <svg *ngIf="isSelected(opt)" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M3 7.5l3 3 5-6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+
+        <!-- Contenido de Opción -->
+        <div class="nuvex-select__option-content">
+          <span class="nuvex-select__option-label">{{ opt.label }}</span>
+          <span class="nuvex-select__option-desc" *ngIf="opt.description">
+            {{ opt.description }}
+          </span>
+        </div>
+
+        <!-- Checkmark para Selección Única -->
+        <span class="nuvex-select__option-check" *ngIf="!multiple() && isSelected(opt)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M3.5 8.5l3.5 3.5 6-7" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mensajes de Ayuda y Error -->
+  <p class="nuvex-select__helper" *ngIf="helperText() && !errorText()">
+    {{ helperText() }}
+  </p>
+  <p class="nuvex-select__error" *ngIf="errorText()">
+    {{ errorText() }}
+  </p>
+</div>

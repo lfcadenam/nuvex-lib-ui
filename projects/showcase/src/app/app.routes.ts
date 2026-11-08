@@ -49,6 +49,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'select',
+    loadComponent: () =>
+      import('./pages/select-doc/select-doc.component').then(
+        (m) => m.SelectDocComponent
+      ),
+  },
+  {
     path: 'card',
     loadComponent: () =>
       import('./pages/card-doc/card-doc.component').then(

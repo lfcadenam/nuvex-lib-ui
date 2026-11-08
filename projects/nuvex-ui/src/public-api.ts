@@ -15,6 +15,7 @@ export * from './lib/button/public-api';
 export * from './lib/input/public-api';
 export * from './lib/switch/public-api';
 export * from './lib/avatar/public-api';
+export * from './lib/select/public-api';
 
 // Nuvex Modern Curve & Superficies
 export * from './lib/card/public-api';
