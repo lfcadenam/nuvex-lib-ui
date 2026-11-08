@@ -1,0 +1,65 @@
+<div class="nuvex-toast__inner">
+  <!-- Icono sobrio según tipo -->
+  <div class="nuvex-toast__icon-box">
+    <!-- Success -->
+    <svg *ngIf="toast().type === 'success'" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M16.5 6l-8 8.5L4.5 10.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+
+    <!-- Error -->
+    <svg *ngIf="toast().type === 'error'" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="10" cy="10" r="8" />
+      <path d="M12.5 7.5l-5 5M7.5 7.5l5 5" stroke-linecap="round" />
+    </svg>
+
+    <!-- Warning -->
+    <svg *ngIf="toast().type === 'warning'" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M10 3L2 17h16L10 3z" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M10 8v4M10 14.5v.5" stroke-linecap="round" />
+    </svg>
+
+    <!-- Info -->
+    <svg *ngIf="toast().type === 'info'" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="10" cy="10" r="8" />
+      <path d="M10 9v5M10 6.5v.5" stroke-linecap="round" />
+    </svg>
+
+    <!-- Default -->
+    <svg *ngIf="toast().type === 'default'" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M15 14a3 3 0 00-3-3H8a3 3 0 00-3 3v2h10v-2zM10 8a3 3 0 100-6 3 3 0 000 6z" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </div>
+
+  <!-- Contenido Textual -->
+  <div class="nuvex-toast__content">
+    <span class="nuvex-toast__title" *ngIf="toast().title">
+      {{ toast().title }}
+    </span>
+    <span class="nuvex-toast__message">
+      {{ toast().message }}
+    </span>
+  </div>
+
+  <!-- Botón de Acción Opcional -->
+  <button
+    type="button"
+    class="nuvex-toast__action-btn"
+    *ngIf="toast().action"
+    (click)="onActionClick($event)"
+  >
+    {{ toast().action?.label }}
+  </button>
+
+  <!-- Botón de Cerrar -->
+  <button
+    type="button"
+    class="nuvex-toast__close-btn"
+    *ngIf="toast().dismissible"
+    (click)="onClose($event)"
+    aria-label="Cerrar notificación"
+  >
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M4 4l8 8M12 4l-8 8" stroke-linecap="round" />
+    </svg>
+  </button>
+</div>

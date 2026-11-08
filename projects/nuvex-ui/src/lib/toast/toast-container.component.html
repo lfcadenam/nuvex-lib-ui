@@ -1,0 +1,7 @@
+<div class="nuvex-toast-list">
+  <nuvex-toast
+    *ngFor="let toast of toastService.toasts()"
+    [toast]="toast"
+    (dismiss)="onDismiss($event)"
+  />
+</div>

@@ -1,0 +1,164 @@
+<div class="doc-page">
+  <!-- Header -->
+  <header class="doc-header">
+    <div class="doc-header__badge-row">
+      <span class="doc-pill">Feedback & Notificaciones</span>
+      <span class="doc-pill doc-pill--new">Nuevo v0.0.4</span>
+    </div>
+    <h1 class="doc-title">Toast / Notifications</h1>
+    <p class="doc-description">
+      Sistema reactivo de alertas flotantes temporales con curvatura orgánica, sombras soft-clay,
+      iconografía sobria funcional, auto-dismiss, botones de acción y control programático centralizado via servicio.
+    </p>
+  </header>
+
+  <!-- Playground Interactivo -->
+  <section class="doc-section">
+    <div class="doc-tabs">
+      <button
+        class="doc-tab"
+        [class.doc-tab--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        Vista Previa Interactiva
+      </button>
+      <button
+        class="doc-tab"
+        [class.doc-tab--active]="activeTab() === 'code'"
+        (click)="activeTab.set('code')"
+      >
+        Código TypeScript & Servicio
+      </button>
+    </div>
+
+    <!-- Panel de Preview -->
+    <div class="doc-preview" *ngIf="activeTab() === 'preview'">
+      <!-- Selector de Posición en Pantalla -->
+      <div style="margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; background: var(--nvl-surface-50, #f8fafc); padding: 1rem 1.25rem; border-radius: 1rem; border: 1px solid var(--nvl-surface-200, #e2e8f0);">
+        <span style="font-size: 0.8125rem; font-weight: 600; color: var(--nvl-text-secondary, #64748b);">
+          Posición del Contenedor:
+        </span>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.375rem;">
+          <button
+            type="button"
+            *ngFor="let pos of ['top-right', 'top-center', 'top-left', 'bottom-right', 'bottom-center', 'bottom-left']"
+            (click)="setPosition($any(pos))"
+            style="padding: 0.3rem 0.65rem; border-radius: 0.5rem; border: 1px solid var(--nvl-surface-200, #cbd5e1); font-size: 0.75rem; cursor: pointer; transition: all 0.15s ease;"
+            [style.background]="currentPosition() === pos ? 'var(--nvl-primary, #00c975)' : 'var(--nvl-surface-0, #fff)'"
+            [style.color]="currentPosition() === pos ? '#fff' : 'inherit'"
+          >
+            {{ pos }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Disparadores de Toast -->
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <h3 style="font-size: 0.9375rem; font-weight: 600; margin: 0; color: var(--nvl-text-color, #0f172a);">
+          Disparar Variantes de Notificación
+        </h3>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+          <nuvex-button variant="primary" (click)="showSuccess()">
+            Éxito (Success)
+          </nuvex-button>
+
+          <nuvex-button variant="danger" (click)="showError()">
+            Error (Danger)
+          </nuvex-button>
+
+          <nuvex-button variant="secondary" (click)="showWarning()">
+            Advertencia (Warning)
+          </nuvex-button>
+
+          <nuvex-button variant="secondary" (click)="showInfo()">
+            Informativo (Info)
+          </nuvex-button>
+
+          <nuvex-button variant="secondary" (click)="showWithAction()">
+            Con Acción (Deshacer)
+          </nuvex-button>
+
+          <nuvex-button variant="ghost" (click)="clearAll()">
+            Limpiar Todos
+          </nuvex-button>
+        </div>
+      </div>
+
+      <!-- Contenedor Local para la demo (también disponible globalmente) -->
+      <nuvex-toast-container />
+    </div>
+
+    <!-- Panel de Código -->
+    <div class="doc-code" *ngIf="activeTab() === 'code'">
+      <app-code-snippet [code]="basicUsageCode" language="typescript" />
+    </div>
+  </section>
+
+  <!-- Especificación de la API -->
+  <section class="doc-section">
+    <h2 class="doc-section-title">Métodos del Servicio (ToastService)</h2>
+    <div class="doc-table-wrapper">
+      <table class="doc-api-table">
+        <thead>
+          <tr>
+            <th>Método</th>
+            <th>Argumentos</th>
+            <th>Retorno</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>show(options)</code></td>
+            <td><code>ToastOptions</code></td>
+            <td><code>string (id)</code></td>
+            <td>Muestra un toast configurable y retorna su identificador único.</td>
+          </tr>
+          <tr>
+            <td><code>success(message, title?, options?)</code></td>
+            <td><code>string, string?, Partial&lt;ToastOptions&gt;?</code></td>
+            <td><code>string (id)</code></td>
+            <td>Atajo para notificaciones de confirmación con icono esmeralda.</td>
+          </tr>
+          <tr>
+            <td><code>error(message, title?, options?)</code></td>
+            <td><code>string, string?, Partial&lt;ToastOptions&gt;?</code></td>
+            <td><code>string (id)</code></td>
+            <td>Atajo para notificaciones de fallos con icono carmesí.</td>
+          </tr>
+          <tr>
+            <td><code>warning(message, title?, options?)</code></td>
+            <td><code>string, string?, Partial&lt;ToastOptions&gt;?</code></td>
+            <td><code>string (id)</code></td>
+            <td>Atajo para advertencias con icono ámbar.</td>
+          </tr>
+          <tr>
+            <td><code>info(message, title?, options?)</code></td>
+            <td><code>string, string?, Partial&lt;ToastOptions&gt;?</code></td>
+            <td><code>string (id)</code></td>
+            <td>Atajo para mensajes de estado con icono celeste.</td>
+          </tr>
+          <tr>
+            <td><code>dismiss(id)</code></td>
+            <td><code>string</code></td>
+            <td><code>void</code></td>
+            <td>Cierra manualmente una notificación activa por su identificador.</td>
+          </tr>
+          <tr>
+            <td><code>clearAll()</code></td>
+            <td><code>-</code></td>
+            <td><code>void</code></td>
+            <td>Remueve inmediatamente todas las notificaciones en cola.</td>
+          </tr>
+          <tr>
+            <td><code>setPosition(position)</code></td>
+            <td><code>ToastPosition</code></td>
+            <td><code>void</code></td>
+            <td>Modifica dinámicamente la posición del contenedor en pantalla.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

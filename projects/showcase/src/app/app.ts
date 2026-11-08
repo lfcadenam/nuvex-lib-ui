@@ -36,6 +36,7 @@ export class App {
         { name: 'Badge', route: '/badge', tag: 'Pill' },
         { name: 'Avatar', route: '/avatar', tag: 'Nuevo v0.0.4' },
         { name: 'Spinner', route: '/spinner', tag: 'Feedback' },
+        { name: 'Toast', route: '/toast', tag: 'Alerta' },
       ],
     },
     {

@@ -35,6 +35,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'toast',
+    loadComponent: () =>
+      import('./pages/toast-doc/toast-doc.component').then(
+        (m) => m.ToastDocComponent
+      ),
+  },
+  {
     path: 'input',
     loadComponent: () =>
       import('./pages/input-doc/input-doc.component').then(
