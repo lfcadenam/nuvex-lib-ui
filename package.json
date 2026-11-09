@@ -8,7 +8,8 @@
     "build:lib": "ng build nuvex-ui",
     "build:showcase": "ng build showcase",
     "build:all": "npm run build:lib && npm run build:showcase",
-    "publish:lib": "npm run build:lib && npm publish ./dist/nuvex-ui --registry https://npm.nuvex-tecnologia.com/"
+    "publish:lib": "npm run build:lib && npm publish ./dist/nuvex-ui --registry https://npm.nuvex-tecnologia.com/",
+    "publish:auto": "node .agents/skills/nuvex-ui/scripts/publish_lib.mjs"
   },
   "private": true,
   "packageManager": "npm@11.19.1",
