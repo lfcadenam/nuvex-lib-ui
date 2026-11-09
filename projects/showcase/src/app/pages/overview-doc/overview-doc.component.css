@@ -11,10 +11,16 @@
 .overview-hero {
   text-align: center;
   padding: 3rem 1.5rem 4rem 1.5rem;
-  background: radial-gradient(circle at top center, rgba(0, 201, 117, 0.08) 0%, transparent 70%);
+  background: #ffffff;
   border-radius: 32px;
   margin-bottom: 3.5rem;
-  border: 1px solid rgba(0, 201, 117, 0.12);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+}
+
+:host-context(.dark) .overview-hero {
+  background: #1e293b;
+  border-color: #334155;
 }
 
 .hero-badge-row {
@@ -70,10 +76,12 @@
   color: #f8fafc;
 }
 
-.gradient-text {
-  background: linear-gradient(135deg, #00C975 0%, #0284c7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.highlight-text {
+  color: #00a862;
+}
+
+:host-context(.dark) .highlight-text {
+  color: #00C975;
 }
 
 .hero-subtext {
@@ -433,7 +441,8 @@
    FOOTER BANNER
    ======================================== */
 .overview-footer-banner {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  background: #0f172a;
+  border: 1px solid #1e293b;
   border-radius: 32px;
   padding: 3.5rem 2rem;
   text-align: center;
