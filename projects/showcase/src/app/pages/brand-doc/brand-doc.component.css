@@ -1,0 +1,366 @@
+/* ==========================================================================
+   Brand & Foundations - Component Styles (Nuvex UI)
+   ========================================================================== */
+
+/* Hero Banner */
+.brand-hero-card {
+  position: relative;
+  background: linear-gradient(135deg, #111215 0%, #1a1e28 100%);
+  border-radius: 2rem; /* 32px */
+  padding: 3rem 2.5rem;
+  color: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+}
+
+.brand-hero-badge {
+  display: inline-block;
+  background: rgba(0, 201, 117, 0.15);
+  color: #00c975;
+  border: 1px solid rgba(0, 201, 117, 0.3);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 1.25rem;
+}
+
+.brand-hero-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+.brand-hero-text {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: #94a3b8;
+  margin: 0 0 2rem 0;
+}
+
+.brand-hero-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-val {
+  font-size: 1.375rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.metric-lbl {
+  font-size: 0.75rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
+}
+
+.brand-hero-accent {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 201, 117, 0.2) 0%, rgba(0, 210, 255, 0.1) 40%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+/* Sections */
+.section-title {
+  font-size: 1.375rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem 0;
+  color: var(--nvl-text-color, #0f172a);
+}
+
+.section-subtitle {
+  font-size: 0.9375rem;
+  color: var(--nvl-text-secondary, #64748b);
+  margin: 0 0 1.5rem 0;
+}
+
+/* Grid de Pilares */
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.pillar-card {
+  background-color: var(--nvl-surface-0, #ffffff);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  border-radius: 1.75rem; /* 28px */
+  padding: 1.75rem;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pillar-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.08);
+}
+
+.pillar-badge {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.75rem;
+  background-color: rgba(0, 201, 117, 0.1);
+  color: #00a862;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.8125rem;
+  margin-bottom: 1rem;
+}
+
+.pillar-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: var(--nvl-text-color, #0f172a);
+}
+
+.pillar-desc {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--nvl-text-secondary, #64748b);
+  margin: 0;
+}
+
+.pillar-desc code {
+  background: var(--nvl-surface-100, #f1f5f9);
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.375rem;
+  font-size: 0.8125rem;
+  color: #0284c7;
+}
+
+/* Colors Grid */
+.colors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.color-card {
+  background: var(--nvl-surface-0, #ffffff);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  border-radius: 1.5rem; /* 24px */
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.color-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.08);
+}
+
+.color-preview {
+  height: 100px;
+  padding: 1rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  position: relative;
+}
+
+.color-hex {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 700;
+  font-size: 0.875rem;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  color: #ffffff;
+}
+
+.copied-badge {
+  background: #00c975;
+  color: #0f172a;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.color-details {
+  padding: 1.25rem;
+}
+
+.color-name {
+  font-weight: 700;
+  font-size: 0.9375rem;
+  margin-bottom: 0.25rem;
+  color: var(--nvl-text-color, #0f172a);
+}
+
+.color-var {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: #0284c7;
+  background: var(--nvl-surface-100, #f1f5f9);
+  padding: 0.15rem 0.45rem;
+  border-radius: 0.375rem;
+  margin-bottom: 0.5rem;
+}
+
+.color-usage {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--nvl-text-secondary, #64748b);
+  margin: 0;
+}
+
+/* Typography Specimen Box */
+.typo-specimen-box {
+  background: var(--nvl-surface-0, #ffffff);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  border-radius: 2rem;
+  padding: 2rem;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04);
+}
+
+.typo-row {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--nvl-surface-100, #f1f5f9);
+}
+
+.typo-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0.5rem;
+}
+
+.typo-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.typo-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #00c975;
+}
+
+.typo-size {
+  font-size: 0.75rem;
+  color: var(--nvl-text-muted-color, #94a3b8);
+  font-family: ui-monospace, SFMono-Regular, monospace;
+}
+
+.typo-display {
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.typo-h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.typo-h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.typo-body {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  max-width: 720px;
+}
+
+.typo-caption {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--nvl-text-secondary, #64748b);
+}
+
+/* Radii Grid */
+.radii-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+
+.radius-card {
+  background: var(--nvl-surface-0, #ffffff);
+  border: 2px solid var(--nvl-surface-200, #e2e8f0);
+  padding: 1.75rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.radius-card:hover {
+  transform: translateY(-2px);
+  border-color: #00c975;
+}
+
+.radius-card--sm { border-radius: 0.75rem; }
+.radius-card--md { border-radius: 1rem; }
+.radius-card--lg { border-radius: 1.5rem; }
+.radius-card--xl { border-radius: 2rem; }
+.radius-card--full { border-radius: 9999px; }
+
+.radius-token {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #0284c7;
+  margin-bottom: 0.35rem;
+}
+
+.radius-px {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--nvl-text-color, #0f172a);
+  margin-bottom: 0.5rem;
+}
+
+.radius-desc {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--nvl-text-secondary, #64748b);
+}

@@ -1,0 +1,364 @@
+/* ==========================================================================
+   Nuvex UI - SaaS Executive Dashboard Template Styles
+   ========================================================================== */
+
+.template-header-flex {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.fullscreen-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--nvl-surface-100, #f1f5f9);
+  color: var(--nvl-text-color, #0f172a);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  padding: 0.5rem 1rem;
+  border-radius: 9999px; /* Pill */
+  font-size: 0.8125rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.fullscreen-toggle-btn:hover {
+  background-color: #00c975;
+  color: #0f172a;
+  border-color: #00c975;
+  box-shadow: 0 4px 12px rgba(0, 201, 117, 0.25);
+}
+
+/* Fullscreen Mode Container */
+.doc-page--fullscreen {
+  max-width: 100vw !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 9999 !important;
+  background-color: var(--nvl-canvas-bg, #f2f4f7) !important;
+  overflow: auto;
+}
+
+.dashboard-preview-wrapper--fs {
+  height: 100vh;
+  position: relative;
+}
+
+.exit-fs-btn {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 10000;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #111215;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1.125rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease;
+}
+
+.exit-fs-btn:hover {
+  transform: scale(1.03);
+  background-color: #00c975;
+  color: #0f172a;
+}
+
+/* ==========================================================================
+   DASHBOARD SHELL (Nuvex Capsule UI Architecture)
+   ========================================================================== */
+
+.nuvex-dashboard-shell {
+  display: flex;
+  min-height: 720px;
+  background-color: var(--nvl-canvas-bg, #f2f4f7);
+  padding: 1.5rem;
+  gap: 1.5rem;
+  border-radius: 2rem; /* 32px */
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  box-sizing: border-box;
+}
+
+.doc-page--fullscreen .nuvex-dashboard-shell {
+  border-radius: 0;
+  border: none;
+  min-height: 100vh;
+}
+
+/* 1. DOCK VERTICAL FLOTANTE */
+.nuvex-dock-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem 0.5rem;
+  background-color: #111215; /* Obsidiana Nuvex */
+  border-radius: 9999px; /* Cápsula completa */
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.25);
+  height: calc(100vh - 6rem);
+  max-height: 640px;
+  position: sticky;
+  top: 1.5rem;
+  z-index: 20;
+}
+
+.dock-brand-top {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 2. STAGE PRINCIPAL */
+.nuvex-main-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  min-width: 0;
+}
+
+.stage-topbar-wrapper {
+  position: sticky;
+  top: 1.5rem;
+  z-index: 10;
+}
+
+/* Header de Sección */
+.stage-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.stage-overtitle {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #00c975;
+  margin-bottom: 0.25rem;
+}
+
+.stage-heading {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--nvl-text-color, #0f172a);
+  margin: 0;
+}
+
+.stage-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* 3. FILA DE KPI CARDS (3 Columnas Balanceadas) */
+.kpi-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .kpi-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.kpi-card-with-sparkline {
+  position: relative;
+  border-radius: 1.75rem; /* 28px */
+  overflow: hidden;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04);
+}
+
+.kpi-sparkline-overlay {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 1.25rem;
+  right: 1.25rem;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* 4. SECCIÓN PRINCIPAL: TABLA A ANCHO COMPLETO */
+.main-content-split {
+  display: block;
+  width: 100%;
+}
+
+/* Tarjeta Contenedora de Tabla */
+.table-card-container {
+  background-color: var(--nvl-surface-0, #ffffff);
+  border-radius: 2rem; /* 32px */
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04);
+  padding: 1.75rem;
+  overflow: hidden;
+}
+
+.table-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.table-card-title {
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--nvl-text-color, #0f172a);
+}
+
+.table-card-subtitle {
+  font-size: 0.8125rem;
+  color: var(--nvl-text-secondary, #64748b);
+  margin: 0.25rem 0 0 0;
+}
+
+/* Tabla Personalizada Nuvex */
+.table-scroll-box {
+  overflow-x: auto;
+}
+
+.nuvex-custom-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.875rem;
+}
+
+.nuvex-custom-table th {
+  padding: 0.875rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--nvl-text-secondary, #64748b);
+  border-bottom: 1px solid var(--nvl-surface-200, #e2e8f0);
+  text-align: left;
+}
+
+.nuvex-custom-table td {
+  padding: 1.125rem 1rem;
+  border-bottom: 1px solid var(--nvl-surface-100, #f1f5f9);
+  vertical-align: middle;
+}
+
+.nuvex-custom-table tr:last-child td {
+  border-bottom: none;
+}
+
+.tx-id-badge {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0284c7;
+  background: var(--nvl-surface-100, #f1f5f9);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.tx-client-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tx-client-name {
+  font-weight: 700;
+  color: var(--nvl-text-color, #0f172a);
+}
+
+.tx-client-email {
+  font-size: 0.75rem;
+  color: var(--nvl-text-secondary, #64748b);
+}
+
+.tx-plan-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  background-color: var(--nvl-surface-100, #f1f5f9);
+  color: var(--nvl-text-color, #0f172a);
+}
+
+.tx-amount {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-weight: 700;
+  color: var(--nvl-text-color, #0f172a);
+}
+
+.tx-action-btn {
+  background: none;
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--nvl-text-secondary, #64748b);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tx-action-btn:hover {
+  background-color: #00c975;
+  color: #0f172a;
+  border-color: #00c975;
+}
+
+/* Spotlight side */
+.spotlight-side-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Drawer Form Inside */
+.drawer-form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 0.5rem 0;
+}
+
+.drawer-section-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #00c975;
+  padding-top: 0.5rem;
+}
+
+.drawer-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}

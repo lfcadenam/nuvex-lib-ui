@@ -1,0 +1,283 @@
+<div class="doc-page">
+  <!-- ENCABEZADO DE IDENTIDAD -->
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag doc-tag--new">Identidad Oficial</span>
+      <span class="doc-version">Nuvex UI v0.1</span>
+      <span class="doc-tag">Design System</span>
+    </div>
+    <h1 class="doc-title">Brand &amp; Foundations</h1>
+    <p class="doc-description">
+      El núcleo visual y filosófico de Nuvex Tecnología. Define los colores fundacionales,
+      las curvas orgánicas del sistema <strong>Nuvex Capsule UI</strong>, la escala tipográfica
+      y el principio de sobriedad iconográfica.
+    </p>
+
+    <!-- NAVEGACIÓN EN CÁPSULA (TABS) -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        Visión General &amp; Principios
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'tokens'"
+        (click)="activeTab.set('tokens')"
+      >
+        Tokens de Color
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'typography'"
+        (click)="activeTab.set('typography')"
+      >
+        Tipografía &amp; Curvas
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENIDO: TAB 1 - VISIÓN GENERAL & PRINCIPIOS -->
+  @if (activeTab() === 'preview') {
+    <div class="space-y-10">
+      
+      <!-- HERO BANNER DE IDENTIDAD -->
+      <section class="brand-hero-card">
+        <div class="brand-hero-content">
+          <span class="brand-hero-badge">ADN Nuvex</span>
+          <h2 class="brand-hero-title">Elegancia, Fluidez &amp; Sobriedad</h2>
+          <p class="brand-hero-text">
+            Nuvex UI nace para sustituir las interfaces rectangulares rígidas con una experiencia
+            orgánica, basada en cápsulas flotantes desacopladas, curvaturas generosas y microinteracciones
+            placenteras inspiradas en herramientas de alta gama.
+          </p>
+          <div class="brand-hero-metrics">
+            <div class="metric-item">
+              <span class="metric-val">32px</span>
+              <span class="metric-lbl">Curvatura Insignia</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">#00C975</span>
+              <span class="metric-lbl">Verde Esmeralda</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">0 Emojis</span>
+              <span class="metric-lbl">Sobriedad Estricta</span>
+            </div>
+          </div>
+        </div>
+        <div class="brand-hero-accent"></div>
+      </section>
+
+      <!-- LOS 4 PILARES DEL SISTEMA -->
+      <section>
+        <h3 class="section-title">Los 4 Pilares del Diseño Nuvex</h3>
+        <p class="section-subtitle">
+          Reglas mandatorias que rigen todos los componentes y aplicaciones del ecosistema Nuvex.
+        </p>
+
+        <div class="pillars-grid">
+          <!-- Pilar 1 -->
+          <div class="pillar-card">
+            <div class="pillar-badge">01</div>
+            <h4 class="pillar-title">Curvas Orgánicas Amplias</h4>
+            <p class="pillar-desc">
+              Radios generosos entre <code>24px</code> y <code>32px</code> en tarjetas principales, y <code>rounded-full</code>
+              en docks y controles segmentados. Las esquinas afiladas quedan erradicadas.
+            </p>
+          </div>
+
+          <!-- Pilar 2 -->
+          <div class="pillar-card">
+            <div class="pillar-badge">02</div>
+            <h4 class="pillar-title">Docks y Barras en Cápsula</h4>
+            <p class="pillar-desc">
+              La navegación vertical se desacopla del borde de la pantalla en un dock flotante obsidiana (<code>#111215</code>).
+              El topbar flota en una píldora translúcida con desenfoque <code>backdrop-blur-md</code>.
+            </p>
+          </div>
+
+          <!-- Pilar 3 -->
+          <div class="pillar-card">
+            <div class="pillar-badge">03</div>
+            <h4 class="pillar-title">Elevación Soft-Clay</h4>
+            <p class="pillar-desc">
+              La profundidad visual se logra mediante sombras difusas escalonadas y suaves,
+              eliminando bordes duros de 1px que saturen el ojo en jornadas prolongadas.
+            </p>
+          </div>
+
+          <!-- Pilar 4 -->
+          <div class="pillar-card">
+            <div class="pillar-badge">04</div>
+            <h4 class="pillar-title">Sobriedad Iconográfica</h4>
+            <p class="pillar-desc">
+              Prohibido el uso de emojis o stickers decorativos tipo juguete. Los iconos son
+              monocromáticos, lineales finos (1.5px - 1.75px) y con propósito estrictamente funcional.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  }
+
+  <!-- CONTENIDO: TAB 2 - TOKENS DE COLOR -->
+  @if (activeTab() === 'tokens') {
+    <div class="space-y-10">
+      
+      <section>
+        <h3 class="section-title">Paleta Cromática Fundacional</h3>
+        <p class="section-subtitle">
+          Haz clic en cualquier muestra de color para copiar su código HEX al portapapeles.
+        </p>
+
+        <div class="colors-grid">
+          @for (color of brandColors; track color.hex) {
+            <div
+              class="color-card"
+              (click)="copyColor(color)"
+              [title]="'Copiar ' + color.hex"
+            >
+              <div
+                class="color-preview"
+                [style.background-color]="color.hex"
+                [style.color]="color.textColor"
+              >
+                <span class="color-hex">{{ color.hex }}</span>
+                @if (copiedColor() === color.hex) {
+                  <span class="copied-badge">¡Copiado!</span>
+                }
+              </div>
+              <div class="color-details">
+                <div class="color-name">{{ color.name }}</div>
+                <code class="color-var">{{ color.variable }}</code>
+                <p class="color-usage">{{ color.usage }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+
+      <!-- CÓDIGO CSS VARIABLES -->
+      <section>
+        <h3 class="section-title">Variables CSS Oficiales</h3>
+        <p class="section-subtitle">
+          Listas para integrar en tu archivo global <code>styles.css</code> o tema corporativo.
+        </p>
+        <app-code-snippet
+          language="css"
+          title="nuvex-tokens.css"
+          [code]="cssTokensSnippet"
+        ></app-code-snippet>
+      </section>
+
+    </div>
+  }
+
+  <!-- CONTENIDO: TAB 3 - TIPOGRAFÍA & CURVAS -->
+  @if (activeTab() === 'typography') {
+    <div class="space-y-10">
+      
+      <!-- ESCALA TIPOGRÁFICA -->
+      <section>
+        <h3 class="section-title">Tipografía Oficial: Plus Jakarta Sans</h3>
+        <p class="section-subtitle">
+          Diseñada para pantallas digitales de alta resolución. Geometría limpia con excelente contraste y legibilidad.
+        </p>
+
+        <div class="typo-specimen-box">
+          <div class="typo-row">
+            <div class="typo-meta">
+              <span class="typo-label">Display</span>
+              <span class="typo-size">2.25rem (36px) · 800 ExtraBold</span>
+            </div>
+            <div class="typo-sample typo-display">Ecosistema Nuvex Cloud</div>
+          </div>
+
+          <div class="typo-row">
+            <div class="typo-meta">
+              <span class="typo-label">Heading 1</span>
+              <span class="typo-size">1.5rem (24px) · 700 Bold</span>
+            </div>
+            <div class="typo-sample typo-h1">Panel de Control &amp; Analítica</div>
+          </div>
+
+          <div class="typo-row">
+            <div class="typo-meta">
+              <span class="typo-label">Heading 2</span>
+              <span class="typo-size">1.125rem (18px) · 600 SemiBold</span>
+            </div>
+            <div class="typo-sample typo-h2">Rendimiento Operativo en Tiempo Real</div>
+          </div>
+
+          <div class="typo-row">
+            <div class="typo-meta">
+              <span class="typo-label">Body Text</span>
+              <span class="typo-size">0.9375rem (15px) · 400 Regular</span>
+            </div>
+            <div class="typo-sample typo-body">
+              Nuvex proporciona suites analíticas y herramientas SaaS modernas diseñadas para simplificar
+              procesos complejos con la máxima velocidad y elegancia visual.
+            </div>
+          </div>
+
+          <div class="typo-row">
+            <div class="typo-meta">
+              <span class="typo-label">Caption / Overline</span>
+              <span class="typo-size">0.6875rem (11px) · 700 Bold Uppercase</span>
+            </div>
+            <div class="typo-sample typo-caption">MÉTRICAS COMPARATIVAS · ACTUALIZADO HOY</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOKENS DE GEOMETRÍA (CURVAS) -->
+      <section>
+        <h3 class="section-title">Escala de Curvatura (Nuvex Modern Curve)</h3>
+        <p class="section-subtitle">
+          Cada nivel de componente tiene asignado un radio específico para mantener consistencia rítmica.
+        </p>
+
+        <div class="radii-grid">
+          <div class="radius-card radius-card--sm">
+            <span class="radius-token">--nx-radius-sm</span>
+            <span class="radius-px">12px (rounded-xl)</span>
+            <span class="radius-desc">Badges, inputs y botones secundarios</span>
+          </div>
+
+          <div class="radius-card radius-card--md">
+            <span class="radius-token">--nx-radius-md</span>
+            <span class="radius-px">16px (rounded-2xl)</span>
+            <span class="radius-desc">Botones de acción, modales compactos</span>
+          </div>
+
+          <div class="radius-card radius-card--lg">
+            <span class="radius-token">--nx-radius-lg</span>
+            <span class="radius-px">24px (rounded-3xl)</span>
+            <span class="radius-desc">Tarjetas intermedias y contenedores</span>
+          </div>
+
+          <div class="radius-card radius-card--xl">
+            <span class="radius-token">--nx-radius-xl</span>
+            <span class="radius-px">32px (rounded-[32px])</span>
+            <span class="radius-desc">Tarjetas principales Nuvex y Hero cards</span>
+          </div>
+
+          <div class="radius-card radius-card--full">
+            <span class="radius-token">--nx-radius-full</span>
+            <span class="radius-px">9999px (rounded-full)</span>
+            <span class="radius-desc">Docks verticales flotantes y Topbar píldora</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  }
+
+</div>

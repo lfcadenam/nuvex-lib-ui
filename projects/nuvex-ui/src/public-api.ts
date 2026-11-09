@@ -8,6 +8,9 @@ export * from './lib/shared/theme.service';
 export * from './lib/shared/provide-theme';
 export * from './lib/themes/aura';
 
+// Identidad de Marca
+export * from './lib/logo/public-api';
+
 // Componentes Atómicos Base
 export * from './lib/badge/public-api';
 export * from './lib/spinner/public-api';

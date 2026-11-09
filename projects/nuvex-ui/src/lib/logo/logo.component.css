@@ -1,0 +1,49 @@
+/* ==========================================================================
+   Nuvex Logo Component Styles
+   ========================================================================== */
+
+.nuvex-logo-host {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.nuvex-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.2s ease, filter 0.3s ease;
+}
+
+.nuvex-logo__svg {
+  display: block;
+  width: auto;
+  height: 100%;
+}
+
+/* Sizing Presets */
+.nuvex-logo--xs { height: 1.25rem; }  /* 20px */
+.nuvex-logo--sm { height: 1.75rem; }  /* 28px */
+.nuvex-logo--md { height: 2.5rem; }   /* 40px */
+.nuvex-logo--lg { height: 3.75rem; }  /* 60px */
+.nuvex-logo--xl { height: 5.5rem; }   /* 88px */
+
+/* Aspect Ratio / Width adjustments for Icon vs Full */
+.nuvex-logo--icon .nuvex-logo__svg {
+  aspect-ratio: 1.13 / 1;
+}
+
+.nuvex-logo--full .nuvex-logo__svg {
+  aspect-ratio: 563 / 413;
+}
+
+/* Glow Effect */
+.nuvex-logo--glow {
+  filter: drop-shadow(0 4px 16px rgba(0, 210, 255, 0.35)) drop-shadow(0 2px 8px rgba(124, 58, 237, 0.25));
+}
+
+/* Monochrome support */
+.nuvex-logo--monochrome {
+  color: currentColor;
+}

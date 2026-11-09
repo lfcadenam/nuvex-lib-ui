@@ -1,0 +1,366 @@
+<div class="doc-page" [class.doc-page--fullscreen]="isFullscreen()">
+  
+  <!-- CABECERA DE LA PLANTILLA (Solo visible si no está en pantalla completa) -->
+  @if (!isFullscreen()) {
+    <header class="doc-header">
+      <div class="doc-badge-row">
+        <span class="doc-tag doc-tag--new">Plantilla Completa</span>
+        <span class="doc-version">Producción</span>
+        <span class="doc-tag">Nuvex Capsule UI</span>
+      </div>
+      <div class="template-header-flex">
+        <div>
+          <h1 class="doc-title">SaaS Executive Dashboard</h1>
+          <p class="doc-description">
+            Plantilla integral de panel de control ejecutivo. Conecta todos los componentes del sistema
+            (Dock vertical, Topbar en píldora, 4 KPI Cards, Sparklines Bézier, Datatable, Spotlight Card y Slide-Over Drawer).
+          </p>
+        </div>
+
+        <div class="template-actions">
+          <button
+            type="button"
+            class="fullscreen-toggle-btn"
+            (click)="toggleFullscreen()"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/>
+            </svg>
+            <span>Modo Pantalla Completa</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- TABS: VISTA PREVIA VS CÓDIGO -->
+      <div class="doc-tabs">
+        <button
+          type="button"
+          class="doc-tab-btn"
+          [class.doc-tab-btn--active]="activeViewMode() === 'preview'"
+          (click)="activeViewMode.set('preview')"
+        >
+          Vista Previa Interactiva
+        </button>
+        <button
+          type="button"
+          class="doc-tab-btn"
+          [class.doc-tab-btn--active]="activeViewMode() === 'code'"
+          (click)="activeViewMode.set('code')"
+        >
+          Código Fuente Completo
+        </button>
+      </div>
+    </header>
+  }
+
+  <!-- TAB 1: VISTA PREVIA INTERACTIVA -->
+  @if (activeViewMode() === 'preview') {
+    <div class="dashboard-preview-wrapper" [class.dashboard-preview-wrapper--fs]="isFullscreen()">
+      
+      <!-- BOTÓN PARA SALIR DE PANTALLA COMPLETA SI ESTÁ ACTIVO -->
+      @if (isFullscreen()) {
+        <button
+          type="button"
+          class="exit-fs-btn"
+          (click)="toggleFullscreen()"
+          title="Salir de Pantalla Completa (ESC)"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+          <span>Salir de Pantalla Completa</span>
+        </button>
+      }
+
+      <!-- ====================================================================
+           SHELL DEL DASHBOARD OFICIAL NUVEX CAPSULE UI
+           ==================================================================== -->
+      <div class="nuvex-dashboard-shell">
+
+        <!-- 1. DOCK VERTICAL FLOTANTE (Cápsula Obsidiana #111215) -->
+        <aside class="nuvex-dock-container">
+          <div class="dock-brand-top">
+            <nx-logo variant="icon" size="sm" [withGlow]="true"></nx-logo>
+          </div>
+          <nuvex-capsule-dock [items]="dockItems()"></nuvex-capsule-dock>
+        </aside>
+
+        <!-- 2. STAGE PRINCIPAL -->
+        <main class="nuvex-main-stage">
+          
+          <!-- TOPBAR EN PÍLDORA TRANSLÚCIDA -->
+          <header class="stage-topbar-wrapper">
+            <nuvex-topbar
+              brandTitle="Nuvex Cloud"
+              liveMetric="+$1,450 hoy"
+              [tabs]="topbarTabs()"
+              [(activeTabId)]="activeTabId"
+              [user]="currentUser"
+              (onMenuSelect)="handleUserMenu($event)"
+            ></nuvex-topbar>
+          </header>
+
+          <!-- ENCABEZADO DE SECCIÓN + FILTROS SEGMENTADOS -->
+          <div class="stage-header-row">
+            <div>
+              <div class="stage-overtitle">SaaS Analytics Suite · v0.1</div>
+              <h2 class="stage-heading">Rendimiento Operativo</h2>
+            </div>
+
+            <div class="stage-actions">
+              <nuvex-segmented
+                [options]="timeRanges"
+                [(value)]="timeRange"
+                size="sm"
+              ></nuvex-segmented>
+
+              <nuvex-button
+                variant="primary"
+                (onClick)="openNewTransactionDrawer()"
+              >
+                + Nueva Transacción
+              </nuvex-button>
+            </div>
+          </div>
+
+          <!-- 3. FILA DE KPI CARDS CON SPARKLINES BÉZIER -->
+          <section class="kpi-cards-grid">
+            <!-- KPI 1: HERO INVERTIDO EN OBSIDIANA -->
+            <div class="kpi-card-with-sparkline">
+              <nuvex-kpi-card
+                variant="hero"
+                label="Ingresos Recurrentes (MRR)"
+                value="$48,250"
+                trend="+12.4%"
+                trendDirection="up"
+                trendLabel="vs mes ant."
+                helperText="482 suscripciones activas"
+                [hoverable]="true"
+              ></nuvex-kpi-card>
+              <div class="kpi-sparkline-overlay">
+                <nuvex-sparkline
+                  [data]="mrrData"
+                  strokeColor="#00D2FF"
+                  [strokeWidth]="2"
+                  [height]="36"
+                ></nuvex-sparkline>
+              </div>
+            </div>
+
+            <!-- KPI 2: VERDE ESMERALDA NUEVOS CLIENTES -->
+            <div class="kpi-card-with-sparkline">
+              <nuvex-kpi-card
+                variant="emerald"
+                label="Nuevos Clientes"
+                value="128"
+                trend="+8.1%"
+                trendDirection="up"
+                trendLabel="este ciclo"
+                helperText="Meta de 120 cumplida"
+                [hoverable]="true"
+              ></nuvex-kpi-card>
+              <div class="kpi-sparkline-overlay">
+                <nuvex-sparkline
+                  [data]="customersData"
+                  strokeColor="#00C975"
+                  [strokeWidth]="2"
+                  [height]="36"
+                ></nuvex-sparkline>
+              </div>
+            </div>
+
+            <!-- KPI 3: VIOLETA TICKET PROMEDIO -->
+            <div class="kpi-card-with-sparkline">
+              <nuvex-kpi-card
+                variant="purple"
+                label="Ticket Promedio"
+                value="$84.20"
+                trend="+2.3%"
+                trendDirection="up"
+                trendLabel="vs promedio"
+                helperText="Expansión Enterprise"
+                [hoverable]="true"
+              ></nuvex-kpi-card>
+              <div class="kpi-sparkline-overlay">
+                <nuvex-sparkline
+                  [data]="ticketData"
+                  strokeColor="#7C3AED"
+                  [strokeWidth]="2"
+                  [height]="36"
+                ></nuvex-sparkline>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4. CONTENIDO PRINCIPAL: DATATABLE + SPOTLIGHT CARD -->
+          <section class="main-content-split">
+            <!-- TABLA DE TRANSACCIONES -->
+            <div class="table-card-container">
+              <div class="table-card-header">
+                <div>
+                  <h3 class="table-card-title">Transacciones Recientes</h3>
+                  <p class="table-card-subtitle">Flujo de facturación procesado en las últimas 24 horas.</p>
+                </div>
+
+                <div class="table-card-filters">
+                  <nuvex-segmented
+                    [options]="channelFilters"
+                    [(value)]="channelFilter"
+                    size="sm"
+                  ></nuvex-segmented>
+                </div>
+              </div>
+
+              <!-- CONTENEDOR DE LA TABLA -->
+              <div class="table-scroll-box">
+                <table class="nuvex-custom-table">
+                  <thead>
+                    <tr>
+                      <th>Comprobante</th>
+                      <th>Cliente &amp; Empresa</th>
+                      <th>Plan Nuvex</th>
+                      <th class="text-right">Monto</th>
+                      <th>Estado</th>
+                      <th class="text-center">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (tx of transactions(); track tx.id) {
+                      <tr>
+                        <td>
+                          <span class="tx-id-badge">{{ tx.id }}</span>
+                        </td>
+                        <td>
+                          <div class="tx-client-cell">
+                            <nuvex-avatar [label]="tx.avatarText" size="sm"></nuvex-avatar>
+                            <div>
+                              <div class="tx-client-name">{{ tx.customerName }}</div>
+                              <div class="tx-client-email">{{ tx.customerEmail }}</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="tx-plan-tag">{{ tx.plan }}</span>
+                        </td>
+                        <td class="text-right">
+                          <span class="tx-amount">{{ tx.amount }}</span>
+                        </td>
+                        <td>
+                          @if (tx.status === 'Completado') {
+                            <nuvex-badge variant="success" size="sm">Completado</nuvex-badge>
+                          } @else if (tx.status === 'Pendiente') {
+                            <nuvex-badge variant="warning" size="sm">Pendiente</nuvex-badge>
+                          } @else {
+                            <nuvex-badge variant="secondary" size="sm">En Revisión</nuvex-badge>
+                          }
+                        </td>
+                        <td class="text-center">
+                          <button
+                            type="button"
+                            class="tx-action-btn"
+                            (click)="openNewTransactionDrawer()"
+                            title="Ver Ficha Técnica"
+                          >
+                            Ver Ficha
+                          </button>
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+        </main>
+      </div>
+
+      <!-- ====================================================================
+           SLIDE-OVER DRAWER (ESTÁNDAR OFICIAL NUVEX PARA FORMULARIOS)
+           ==================================================================== -->
+      <nuvex-drawer
+        [(isOpen)]="isDrawerOpen"
+        title="Nueva Transacción SaaS"
+        subtitle="Registro de alta de suscripción o pago de cliente"
+        size="md"
+      >
+        <div class="drawer-form-content">
+          <div class="drawer-section-title">1. Datos del Cliente</div>
+          <nuvex-input
+            label="Nombre o Razón Social"
+            placeholder="Ej: Inversiones Los Andes S.A."
+            [ngModel]="drawerModel().clientName"
+            (ngModelChange)="drawerModel().clientName = $event"
+          ></nuvex-input>
+
+          <nuvex-input
+            label="Correo Electrónico de Facturación"
+            placeholder="facturacion@empresa.com"
+            [ngModel]="drawerModel().clientEmail"
+            (ngModelChange)="drawerModel().clientEmail = $event"
+          ></nuvex-input>
+
+          <div class="drawer-section-title">2. Plan &amp; Parámetros</div>
+          <nuvex-select
+            label="Plan Nuvex Cloud"
+            [options]="planOptions"
+            [ngModel]="drawerModel().plan"
+            (ngModelChange)="drawerModel().plan = $event"
+          ></nuvex-select>
+
+          <nuvex-input
+            label="Monto Acordado (USD)"
+            placeholder="$12,450.00"
+            [ngModel]="drawerModel().amount"
+            (ngModelChange)="drawerModel().amount = $event"
+          ></nuvex-input>
+
+          <div class="pt-2">
+            <nuvex-switch
+              label="Facturación Anual Anticipada (20% Descuento Aplicado)"
+              [checked]="drawerModel().annualBilling"
+              (checkedChange)="drawerModel().annualBilling = $event"
+            ></nuvex-switch>
+          </div>
+        </div>
+
+        <!-- FOOTER FIJO (STICKER FOOTER) -->
+        <div footer class="drawer-footer-row">
+          <nuvex-button
+            variant="secondary"
+            (onClick)="isDrawerOpen.set(false)"
+          >
+            Cancelar
+          </nuvex-button>
+
+          <nuvex-button
+            variant="primary"
+            (onClick)="saveTransaction()"
+          >
+            Guardar Transacción
+          </nuvex-button>
+        </div>
+      </nuvex-drawer>
+
+    </div>
+  }
+
+  <!-- TAB 2: CÓDIGO FUENTE COMPLETO -->
+  @if (activeViewMode() === 'code') {
+    <div class="space-y-6">
+      <section>
+        <h3 class="section-title">Plantilla Lista para Copiar y Pegar</h3>
+        <p class="section-subtitle">
+          Esta plantilla integra los módulos <code>capsule-dock</code>, <code>topbar</code>, <code>kpi-card</code>,
+          <code>sparkline</code>, <code>table</code>, <code>spotlight-card</code> y <code>drawer</code>.
+        </p>
+        <app-code-snippet
+          language="html"
+          title="saas-dashboard.component.html"
+          [code]="templateCodeSnippet"
+        ></app-code-snippet>
+      </section>
+    </div>
+  }
+
+</div>

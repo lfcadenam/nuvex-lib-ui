@@ -1,0 +1,264 @@
+<div class="doc-page">
+  <!-- HEADER -->
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag doc-tag--new">Componente Oficial</span>
+      <span class="doc-version">&lt;nx-logo&gt;</span>
+      <span class="doc-tag">SVG Vectorial</span>
+    </div>
+    <h1 class="doc-title">Logo &amp; Isotipo Nuvex</h1>
+    <p class="doc-description">
+      El símbolo oficial de Nuvex Tecnología. Renderizado como vector SVG puro de resolución infinita,
+      con degradados fluidos, soporte para docks flotantes, versiones monocromáticas y efecto de resplandor tecnológico.
+    </p>
+
+    <!-- TABS -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'preview'"
+        (click)="activeTab.set('preview')"
+      >
+        Vista Previa Interactiva
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'code'"
+        (click)="activeTab.set('code')"
+      >
+        Código &amp; API
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'assets'"
+        (click)="activeTab.set('assets')"
+      >
+        Archivos de Corte &amp; Imprenta
+      </button>
+    </div>
+  </header>
+
+  <!-- TAB 1: VISTA PREVIA INTERACTIVA -->
+  @if (activeTab() === 'preview') {
+    <div class="space-y-10">
+      
+      <!-- PLAYGROUND INTERACTIVO -->
+      <section class="logo-playground-card">
+        <div class="playground-controls">
+          <div class="control-group">
+            <label class="control-label">Variante:</label>
+            <div class="control-pill-group">
+              <button
+                type="button"
+                class="ctrl-pill"
+                [class.ctrl-pill--active]="selectedVariant() === 'full'"
+                (click)="selectedVariant.set('full')"
+              >
+                Full Logo
+              </button>
+              <button
+                type="button"
+                class="ctrl-pill"
+                [class.ctrl-pill--active]="selectedVariant() === 'icon'"
+                (click)="selectedVariant.set('icon')"
+              >
+                Solo Isotipo (N)
+              </button>
+              <button
+                type="button"
+                class="ctrl-pill"
+                [class.ctrl-pill--active]="selectedVariant() === 'monochrome'"
+                (click)="selectedVariant.set('monochrome')"
+              >
+                Monocromático
+              </button>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Tamaño:</label>
+            <div class="control-pill-group">
+              <button type="button" class="ctrl-pill" [class.ctrl-pill--active]="selectedSize() === 'sm'" (click)="selectedSize.set('sm')">SM</button>
+              <button type="button" class="ctrl-pill" [class.ctrl-pill--active]="selectedSize() === 'md'" (click)="selectedSize.set('md')">MD</button>
+              <button type="button" class="ctrl-pill" [class.ctrl-pill--active]="selectedSize() === 'lg'" (click)="selectedSize.set('lg')">LG</button>
+              <button type="button" class="ctrl-pill" [class.ctrl-pill--active]="selectedSize() === 'xl'" (click)="selectedSize.set('xl')">XL</button>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Resplandor (Glow):</label>
+            <button
+              type="button"
+              class="ctrl-pill"
+              [class.ctrl-pill--active]="withGlow()"
+              (click)="withGlow.set(!withGlow())"
+            >
+              {{ withGlow() ? 'Activado' : 'Desactivado' }}
+            </button>
+          </div>
+        </div>
+
+        <!-- STAGE DE VISUALIZACIÓN -->
+        <div class="playground-stage">
+          <nx-logo
+            [variant]="selectedVariant()"
+            [size]="selectedSize()"
+            [withGlow]="withGlow()"
+          ></nx-logo>
+        </div>
+      </section>
+
+      <!-- MATRIZ DE TAMAÑOS -->
+      <section>
+        <h3 class="section-title">Escala de Tamaños Estandarizada</h3>
+        <p class="section-subtitle">
+          Proporciones optimizadas para barras de navegación, modales, páginas de inicio de sesión y pie de página.
+        </p>
+
+        <div class="sizes-grid">
+          <div class="size-card">
+            <span class="size-tag">XS · 20px (Topbars compactos)</span>
+            <div class="size-canvas">
+              <nx-logo variant="icon" size="xs"></nx-logo>
+            </div>
+          </div>
+
+          <div class="size-card">
+            <span class="size-tag">SM · 28px (Sidebar Dock Oficial)</span>
+            <div class="size-canvas">
+              <nx-logo variant="icon" size="sm" [withGlow]="true"></nx-logo>
+            </div>
+          </div>
+
+          <div class="size-card">
+            <span class="size-tag">MD · 40px (Modales &amp; Tarjetas)</span>
+            <div class="size-canvas">
+              <nx-logo variant="icon" size="md"></nx-logo>
+            </div>
+          </div>
+
+          <div class="size-card">
+            <span class="size-tag">LG · 60px (Splash &amp; Login)</span>
+            <div class="size-canvas">
+              <nx-logo variant="full" size="lg"></nx-logo>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  }
+
+  <!-- TAB 2: CÓDIGO & API -->
+  @if (activeTab() === 'code') {
+    <div class="space-y-8">
+      <section>
+        <h3 class="section-title">Instalación &amp; Importación</h3>
+        <p class="section-subtitle">
+          Disponible en el sub-entrypoint <code>nuvex-ui/logo</code> o directamente desde <code>nuvex-ui</code>.
+        </p>
+        <app-code-snippet
+          language="typescript"
+          title="Importación en Componente Standalone"
+          [code]="importSnippet"
+        ></app-code-snippet>
+      </section>
+
+      <section>
+        <h3 class="section-title">Propiedades &amp; Entradas (Inputs)</h3>
+        <div class="api-table-wrapper">
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Propiedad</th>
+                <th>Tipo</th>
+                <th>Por Defecto</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>variant</code></td>
+                <td><code>'icon' | 'full' | 'horizontal' | 'monochrome'</code></td>
+                <td><code>'full'</code></td>
+                <td>Define si se muestra solo el isotipo de la cinta N, el logotipo completo o versión monocromática.</td>
+              </tr>
+              <tr>
+                <td><code>size</code></td>
+                <td><code>'xs' | 'sm' | 'md' | 'lg' | 'xl'</code></td>
+                <td><code>'md'</code></td>
+                <td>Ajusta la altura y proporciones del vector manteniendo la escala sin deformar.</td>
+              </tr>
+              <tr>
+                <td><code>withGlow</code></td>
+                <td><code>boolean</code></td>
+                <td><code>false</code></td>
+                <td>Aplica un resplandor ambiental suave (drop-shadow bicromático cian/violeta).</td>
+              </tr>
+              <tr>
+                <td><code>showSubtitle</code></td>
+                <td><code>boolean</code></td>
+                <td><code>true</code></td>
+                <td>Permite ocultar o mostrar el texto <code>&lt; Tecnología /&gt;</code> en la variante full.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  }
+
+  <!-- TAB 3: ARCHIVOS DE CORTE & IMPRENTA -->
+  @if (activeTab() === 'assets') {
+    <div class="space-y-8">
+      <section>
+        <h3 class="section-title">Archivos de Producción Gráfica &amp; Troquel</h3>
+        <p class="section-subtitle">
+          Vectores oficiales exportados y optimizados para plotters de corte, troqueladoras y estampación en vinil.
+        </p>
+
+        <div class="assets-grid">
+          <div class="asset-card">
+            <div class="asset-icon bg-pink-500/10 text-pink-400 border border-pink-500/20">✂️</div>
+            <h4 class="asset-title">Print &amp; Cut (Calcomanía / Troquel)</h4>
+            <p class="asset-desc">
+              Incluye arte a todo color + trazado <strong>CutContour</strong> magenta (0.25 pt) con margen de 2mm.
+            </p>
+            <code class="asset-file">nuvex_print_and_cut.svg</code>
+          </div>
+
+          <div class="asset-card">
+            <div class="asset-icon bg-sky-500/10 text-sky-400 border border-sky-500/20">🎨</div>
+            <h4 class="asset-title">Corte de Vinil por Capas</h4>
+            <p class="asset-desc">
+              Separado en 3 colores planos (Azul Marino, Celeste, Morado) con cruces de registro para calce perfecto.
+            </p>
+            <code class="asset-file">nuvex_corte_vinil_por_capas.svg</code>
+          </div>
+
+          <div class="asset-card">
+            <div class="asset-icon bg-rose-500/10 text-rose-400 border border-rose-500/20">⚡</div>
+            <h4 class="asset-title">Trazados Puros de Corte (Láser/CNC)</h4>
+            <p class="asset-desc">
+              Líneas finas vectoriales cerradas sin relleno para cuchilla directa o grabado láser.
+            </p>
+            <code class="asset-file">nuvex_trazados_corte_puro.svg</code>
+          </div>
+
+          <div class="asset-card">
+            <div class="asset-icon bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">💎</div>
+            <h4 class="asset-title">Vector Maestro Full Color</h4>
+            <p class="asset-desc">
+              Vector de identidad corporativa en alta resolución con degradados originales y fondo transparente.
+            </p>
+            <code class="asset-file">nuvex_master_full_color.svg</code>
+          </div>
+        </div>
+      </section>
+    </div>
+  }
+
+</div>

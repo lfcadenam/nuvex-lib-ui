@@ -1,0 +1,201 @@
+/* ==========================================================================
+   Logo Doc Component Styles
+   ========================================================================== */
+
+.logo-playground-card {
+  background: var(--nvl-surface-0, #ffffff);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  border-radius: 2rem; /* 32px */
+  overflow: hidden;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+}
+
+.playground-controls {
+  padding: 1.5rem 2rem;
+  background-color: var(--nvl-surface-50, #f8fafc);
+  border-bottom: 1px solid var(--nvl-surface-200, #e2e8f0);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.control-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--nvl-text-secondary, #64748b);
+}
+
+.control-pill-group {
+  display: inline-flex;
+  background-color: var(--nvl-surface-200, #e2e8f0);
+  padding: 0.25rem;
+  border-radius: 9999px;
+  gap: 0.25rem;
+}
+
+.ctrl-pill {
+  padding: 0.35rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: var(--nvl-text-secondary, #64748b);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ctrl-pill:hover {
+  color: var(--nvl-text-color, #0f172a);
+}
+
+.ctrl-pill--active {
+  background-color: var(--nvl-surface-0, #ffffff);
+  color: var(--nvl-text-color, #0f172a);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Stage */
+.playground-stage {
+  padding: 4rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+  background-color: var(--nvl-surface-0, #ffffff);
+}
+
+/* Grid de Tamaños */
+.sizes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.size-card {
+  background: var(--nvl-surface-0, #ffffff);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.size-tag {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--nvl-text-secondary, #64748b);
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.size-canvas {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+}
+
+/* Tabla API */
+.api-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  border-radius: 1.5rem;
+}
+
+.api-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+.api-table th {
+  background-color: var(--nvl-surface-50, #f8fafc);
+  padding: 0.875rem 1.25rem;
+  font-weight: 700;
+  color: var(--nvl-text-color, #0f172a);
+  border-bottom: 1px solid var(--nvl-surface-200, #e2e8f0);
+}
+
+.api-table td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--nvl-surface-100, #f1f5f9);
+  color: var(--nvl-text-secondary, #64748b);
+}
+
+.api-table tr:last-child td {
+  border-bottom: none;
+}
+
+.api-table code {
+  background-color: var(--nvl-surface-100, #f1f5f9);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.375rem;
+  font-size: 0.8125rem;
+  color: #0284c7;
+}
+
+/* Assets Grid */
+.assets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.asset-card {
+  background: var(--nvl-surface-0, #ffffff);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.asset-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.asset-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: var(--nvl-text-color, #0f172a);
+}
+
+.asset-desc {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--nvl-text-secondary, #64748b);
+  margin: 0 0 1rem 0;
+  flex: 1;
+}
+
+.asset-file {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.75rem;
+  color: #0284c7;
+  background-color: var(--nvl-surface-100, #f1f5f9);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  width: fit-content;
+}

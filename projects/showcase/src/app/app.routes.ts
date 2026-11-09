@@ -4,7 +4,28 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'button',
+    redirectTo: 'brand',
+  },
+  {
+    path: 'brand',
+    loadComponent: () =>
+      import('./pages/brand-doc/brand-doc.component').then(
+        (m) => m.BrandDocComponent
+      ),
+  },
+  {
+    path: 'logo',
+    loadComponent: () =>
+      import('./pages/logo-doc/logo-doc.component').then(
+        (m) => m.LogoDocComponent
+      ),
+  },
+  {
+    path: 'templates/saas-dashboard',
+    loadComponent: () =>
+      import(
+        './pages/templates/saas-dashboard/saas-dashboard.component'
+      ).then((m) => m.SaasDashboardTemplateComponent),
   },
   {
     path: 'button',

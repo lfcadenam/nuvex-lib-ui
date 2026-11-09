@@ -2,6 +2,7 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ThemeService } from 'nuvex-ui';
+import { LogoComponent } from 'nuvex-ui/logo';
 
 interface NavItem {
   name: string;
@@ -19,7 +20,7 @@ interface NavCategory {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, FormsModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, FormsModule, LogoComponent],
   styleUrl: './app.css',
   templateUrl: './app.html',
 })
@@ -29,6 +30,23 @@ export class App {
   readonly searchQuery = signal('');
 
   readonly categories: NavCategory[] = [
+    {
+      title: 'Fundamentos de Marca',
+      items: [
+        { name: 'Brand & Foundations', route: '/brand', tag: 'Identidad' },
+        { name: 'Logo Oficial', route: '/logo', tag: 'Vector 3D' },
+      ],
+    },
+    {
+      title: 'Plantillas Completas',
+      items: [
+        {
+          name: 'SaaS Executive Dashboard',
+          route: '/templates/saas-dashboard',
+          tag: 'Producción',
+        },
+      ],
+    },
     {
       title: 'Componentes Base',
       items: [
