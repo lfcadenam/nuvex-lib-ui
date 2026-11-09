@@ -31,8 +31,9 @@ export class App {
 
   readonly categories: NavCategory[] = [
     {
-      title: 'Fundamentos de Marca',
+      title: 'Comenzar (Getting Started)',
       items: [
+        { name: 'Instalación & Setup', route: '/installation', tag: 'Guía Rápida' },
         { name: 'Brand & Foundations', route: '/brand', tag: 'Identidad' },
         { name: 'Logo Oficial', route: '/logo', tag: 'Vector 3D' },
       ],

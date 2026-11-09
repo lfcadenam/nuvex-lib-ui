@@ -1,0 +1,143 @@
+/* ==========================================================================
+   Installation & Setup Styles
+   ========================================================================== */
+
+.prereq-card {
+  background-color: var(--nvl-surface-0, #ffffff);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  border-radius: 1.75rem; /* 28px */
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.prereq-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.prereq-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.75rem;
+  background-color: rgba(0, 201, 117, 0.1);
+  color: #00c975;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+}
+
+.prereq-title {
+  font-size: 1rem;
+  font-weight: 800;
+  margin: 0;
+  color: var(--nvl-text-color, #0f172a);
+}
+
+.prereq-text {
+  font-size: 0.8125rem;
+  color: var(--nvl-text-secondary, #64748b);
+  margin: 0.15rem 0 0 0;
+}
+
+.prereq-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.prereq-chip {
+  background-color: var(--nvl-surface-100, #f1f5f9);
+  color: var(--nvl-text-color, #0f172a);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+}
+
+/* Steps Cards */
+.step-card {
+  background-color: var(--nvl-surface-0, #ffffff);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  border-radius: 2rem; /* 32px */
+  padding: 2rem;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04);
+  position: relative;
+}
+
+.step-badge {
+  display: inline-block;
+  background-color: #00c975;
+  color: #0f172a;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
+}
+
+.step-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem 0;
+  color: var(--nvl-text-color, #0f172a);
+}
+
+.step-title code {
+  color: #0284c7;
+  background-color: var(--nvl-surface-100, #f1f5f9);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.375rem;
+  font-size: 1.125rem;
+}
+
+.step-desc {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--nvl-text-secondary, #64748b);
+  margin: 0 0 1.25rem 0;
+}
+
+/* Sub-entrypoints Card */
+.subentry-card {
+  background-color: var(--nvl-surface-0, #ffffff);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  border-radius: 2rem;
+  padding: 2rem;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04);
+}
+
+.subentry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.subentry-item {
+  background-color: var(--nvl-surface-50, #f8fafc);
+  border: 1px solid var(--nvl-surface-200, #e2e8f0);
+  border-radius: 1.25rem;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.subentry-pkg {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #0284c7;
+}
+
+.subentry-desc {
+  font-size: 0.75rem;
+  color: var(--nvl-text-secondary, #64748b);
+  line-height: 1.4;
+}

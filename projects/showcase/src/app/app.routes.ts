@@ -4,7 +4,14 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'brand',
+    redirectTo: 'installation',
+  },
+  {
+    path: 'installation',
+    loadComponent: () =>
+      import('./pages/installation-doc/installation-doc.component').then(
+        (m) => m.InstallationDocComponent
+      ),
   },
   {
     path: 'brand',

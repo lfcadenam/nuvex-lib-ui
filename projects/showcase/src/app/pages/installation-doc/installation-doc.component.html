@@ -1,0 +1,182 @@
+<div class="doc-page">
+  <!-- ENCABEZADO -->
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag doc-tag--new">Guía Oficial</span>
+      <span class="doc-version">Angular 22</span>
+      <span class="doc-tag">Quickstart</span>
+    </div>
+    <h1 class="doc-title">Instalación &amp; Primeros Pasos</h1>
+    <p class="doc-description">
+      Aprende a integrar <strong>Nuvex UI</strong> en tus aplicaciones Angular standalone en menos de 3 minutos.
+      Soporte nativo para tree-shaking, sub-entrypoints independientes y renderizado SSR-safe.
+    </p>
+
+    <!-- TABS -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'npm'"
+        (click)="activeTab.set('npm')"
+      >
+        Registro Privado NPM
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'local'"
+        (click)="activeTab.set('local')"
+      >
+        Workspace Local Nuvex
+      </button>
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'config'"
+        (click)="activeTab.set('config')"
+      >
+        Configuración de Tema
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENIDO GUÍA PASO A PASO -->
+  <div class="space-y-10">
+
+    <!-- REQUISITOS PREVIOS -->
+    <section class="prereq-card">
+      <div class="prereq-header">
+        <div class="prereq-icon">⚡</div>
+        <div>
+          <h4 class="prereq-title">Requisitos del Entorno</h4>
+          <p class="prereq-text">Para garantizar compatibilidad con Signals y componentes Standalone:</p>
+        </div>
+      </div>
+      <div class="prereq-chips">
+        <span class="prereq-chip">Angular &gt;= 19.0 (Recomendado 22.x)</span>
+        <span class="prereq-chip">Node.js &gt;= 20.x / 22.x</span>
+        <span class="prereq-chip">TypeScript &gt;= 5.4+</span>
+        <span class="prereq-chip">Standalone Components (Zoneless Ready)</span>
+      </div>
+    </section>
+
+    <!-- PASO 1: INSTALACIÓN DEL PAQUETE -->
+    <section class="step-card">
+      <div class="step-badge">Paso 1</div>
+      <h3 class="step-title">Instalar el Paquete Nuvex UI</h3>
+      <p class="step-desc">
+        Elige tu método de instalación según si estás en producción o enlazando proyectos locales del monorepo Nuvex:
+      </p>
+
+      @if (activeTab() === 'npm') {
+        <app-code-snippet
+          language="bash"
+          title="Terminal (Registro NPM Nuvex)"
+          [code]="npmInstallSnippet"
+        ></app-code-snippet>
+      } @else if (activeTab() === 'local') {
+        <app-code-snippet
+          language="json"
+          title="package.json (Enlace Local en Monorepo)"
+          [code]="localInstallSnippet"
+        ></app-code-snippet>
+      } @else {
+        <app-code-snippet
+          language="bash"
+          title="Instalación Estándar"
+          [code]="npmInstallSnippet"
+        ></app-code-snippet>
+      }
+    </section>
+
+    <!-- PASO 2: PROVEEDOR DE TEMAS EN APP.CONFIG.TS -->
+    <section class="step-card">
+      <div class="step-badge">Paso 2</div>
+      <h3 class="step-title">Configurar Theme Provider en <code>app.config.ts</code></h3>
+      <p class="step-desc">
+        Registra el proveedor global <code>provideTheme()</code> con el preset oficial <code>auraPreset</code>.
+        Esto inyectará dinámicamente las variables CSS y el soporte automático para modo oscuro:
+      </p>
+
+      <app-code-snippet
+        language="typescript"
+        title="src/app/app.config.ts"
+        [code]="appConfigSnippet"
+      ></app-code-snippet>
+    </section>
+
+    <!-- PASO 3: TIPOGRAFÍA & ESTILOS GLOBALES -->
+    <section class="step-card">
+      <div class="step-badge">Paso 3</div>
+      <h3 class="step-title">Importar Tipografía y Estilos Base en <code>styles.css</code></h3>
+      <p class="step-desc">
+        La identidad de Nuvex UI utiliza <strong>Plus Jakarta Sans</strong> como fuente institucional.
+        Importa la fuente en tu hoja de estilos principal:
+      </p>
+
+      <app-code-snippet
+        language="css"
+        title="src/styles.css"
+        [code]="stylesSnippet"
+      ></app-code-snippet>
+    </section>
+
+    <!-- PASO 4: CONSUMIR TU PRIMER COMPONENTE -->
+    <section class="step-card">
+      <div class="step-badge">Paso 4</div>
+      <h3 class="step-title">Importar Componentes en tus Vistas Standalone</h3>
+      <p class="step-desc">
+        Cada componente de Nuvex UI está empaquetado de forma independiente (sub-entrypoints).
+        Importa únicamente lo que necesitas en el array <code>imports</code> de tu componente:
+      </p>
+
+      <app-code-snippet
+        language="typescript"
+        title="src/app/dashboard/dashboard.component.ts"
+        [code]="firstComponentSnippet"
+      ></app-code-snippet>
+    </section>
+
+    <!-- MEJORES PRÁCTICAS: SUB-ENTRYPOINTS & TREE-SHAKING -->
+    <section class="subentry-card">
+      <h3 class="section-title">Estructura de Sub-Entrypoints (Tree-Shaking)</h3>
+      <p class="section-subtitle">
+        Nuvex UI no genera un bundle monolítico pesado. Cada módulo se resuelve individualmente:
+      </p>
+
+      <div class="subentry-grid">
+        <div class="subentry-item">
+          <code class="subentry-pkg">nuvex-ui/logo</code>
+          <span class="subentry-desc">Isotipo oficial 3D y logotipo completo vectorial</span>
+        </div>
+
+        <div class="subentry-item">
+          <code class="subentry-pkg">nuvex-ui/kpi-card</code>
+          <span class="subentry-desc">Tarjetas de métricas con deltas y variantes hero/color</span>
+        </div>
+
+        <div class="subentry-item">
+          <code class="subentry-pkg">nuvex-ui/capsule-dock</code>
+          <span class="subentry-desc">Dock vertical flotante en cápsula obsidiana</span>
+        </div>
+
+        <div class="subentry-item">
+          <code class="subentry-pkg">nuvex-ui/topbar</code>
+          <span class="subentry-desc">Barra superior en píldora con menú de sesión</span>
+        </div>
+
+        <div class="subentry-item">
+          <code class="subentry-pkg">nuvex-ui/drawer</code>
+          <span class="subentry-desc">Slide-Over lateral para formularios y fichas técnicas</span>
+        </div>
+
+        <div class="subentry-item">
+          <code class="subentry-pkg">nuvex-ui/sparkline</code>
+          <span class="subentry-desc">Curvas Bézier continuas SVG para analítica</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
