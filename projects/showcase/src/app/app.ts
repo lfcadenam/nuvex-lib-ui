@@ -33,7 +33,9 @@ export class App {
     {
       title: 'Comenzar (Getting Started)',
       items: [
+        { name: 'Presentación (Overview)', route: '/overview', tag: 'Inicio' },
         { name: 'Instalación & Setup', route: '/installation', tag: 'Guía Rápida' },
+        { name: 'Guía de Uso & Código', route: '/usage', tag: 'Paso a Paso' },
         { name: 'Brand & Foundations', route: '/brand', tag: 'Identidad' },
         { name: 'Logo Oficial', route: '/logo', tag: 'Vector 3D' },
       ],

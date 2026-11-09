@@ -1,0 +1,346 @@
+.usage-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 5rem 1.5rem;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* ========================================
+   ENCABEZADO
+   ======================================== */
+.usage-header {
+  margin-bottom: 2.5rem;
+}
+
+.header-badge-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.usage-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background: rgba(15, 23, 42, 0.05);
+  color: #475569;
+}
+
+:host-context(.dark) .usage-tag {
+  background: rgba(255, 255, 255, 0.05);
+  color: #94a3b8;
+}
+
+.usage-tag--accent {
+  background: rgba(0, 201, 117, 0.15);
+  color: #00a862;
+}
+
+:host-context(.dark) .usage-tag--accent {
+  color: #00C975;
+}
+
+.usage-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.75rem;
+}
+
+:host-context(.dark) .usage-title {
+  color: #f8fafc;
+}
+
+.usage-subtitle {
+  font-size: 1.05rem;
+  color: #64748b;
+  line-height: 1.6;
+  max-width: 800px;
+  margin-bottom: 1.75rem;
+}
+
+:host-context(.dark) .usage-subtitle {
+  color: #94a3b8;
+}
+
+/* ========================================
+   TABS
+   ======================================== */
+.usage-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  background: rgba(15, 23, 42, 0.03);
+  padding: 0.35rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  width: fit-content;
+}
+
+:host-context(.dark) .usage-tabs {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.tab-btn {
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #64748b;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+:host-context(.dark) .tab-btn {
+  color: #94a3b8;
+}
+
+.tab-btn:hover {
+  color: #0f172a;
+}
+
+:host-context(.dark) .tab-btn:hover {
+  color: #f8fafc;
+}
+
+.tab-btn--active {
+  background: #ffffff;
+  color: #00a862;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+:host-context(.dark) .tab-btn--active {
+  background: #1e293b;
+  color: #00C975;
+}
+
+/* ========================================
+   CONTENEDOR DE PASOS Y CARDS
+   ======================================== */
+.steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.doc-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 28px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+:host-context(.dark) .doc-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.card-step-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #00a862;
+  background: rgba(0, 201, 117, 0.12);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
+}
+
+:host-context(.dark) .card-step-badge {
+  color: #00C975;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+:host-context(.dark) .card-title {
+  color: #f8fafc;
+}
+
+.card-desc {
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+:host-context(.dark) .card-desc {
+  color: #94a3b8;
+}
+
+.card-desc code {
+  background: rgba(15, 23, 42, 0.06);
+  padding: 0.15rem 0.35rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #00a862;
+}
+
+/* ========================================
+   RULES CARD
+   ======================================== */
+.rules-card {
+  background: linear-gradient(135deg, rgba(0, 201, 117, 0.05) 0%, rgba(2, 132, 199, 0.05) 100%);
+  border: 1px solid rgba(0, 201, 117, 0.25);
+  border-radius: 28px;
+  padding: 2rem;
+}
+
+.rules-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #00a862;
+  margin-bottom: 1rem;
+}
+
+:host-context(.dark) .rules-title {
+  color: #00C975;
+}
+
+.rules-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.rules-list li {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #334155;
+}
+
+:host-context(.dark) .rules-list li {
+  color: #cbd5e1;
+}
+
+/* ========================================
+   TABLA DE SUB-ENTRYPOINTS
+   ======================================== */
+.table-container {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+.subentry-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.subentry-table th {
+  padding: 0.85rem 1rem;
+  background: rgba(15, 23, 42, 0.03);
+  color: #475569;
+  font-weight: 700;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+:host-context(.dark) .subentry-table th {
+  background: rgba(255, 255, 255, 0.03);
+  color: #94a3b8;
+  border-color: #334155;
+}
+
+.subentry-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #334155;
+}
+
+:host-context(.dark) .subentry-table td {
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+.subentry-table code {
+  background: rgba(15, 23, 42, 0.06);
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #00a862;
+}
+
+:host-context(.dark) .subentry-table code {
+  background: rgba(255, 255, 255, 0.06);
+  color: #00C975;
+}
+
+.selector-tag {
+  color: #0284c7 !important;
+}
+
+/* ========================================
+   PALETA SEMÁNTICA
+   ======================================== */
+.tokens-summary-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 28px;
+  padding: 2rem;
+}
+
+:host-context(.dark) .tokens-summary-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.palette-swatch {
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+:host-context(.dark) .palette-swatch {
+  border-color: #334155;
+  background: #0f172a;
+}
+
+.swatch-color {
+  height: 60px;
+  width: 100%;
+}
+
+.swatch-info {
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.swatch-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+:host-context(.dark) .swatch-name {
+  color: #f8fafc;
+}
+
+.swatch-hex {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-family: monospace;
+}

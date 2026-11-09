@@ -1,0 +1,242 @@
+<div class="overview-page">
+
+  <!-- =========================================================================
+       HERO PRINCIPAL DE PRESENTACIÓN
+       ========================================================================= -->
+  <section class="overview-hero">
+    <div class="hero-badge-row">
+      <span class="hero-pill-badge hero-pill-badge--accent">Nuvex UI v0.1.0</span>
+      <span class="hero-pill-badge">Angular 22+</span>
+      <span class="hero-pill-badge">Signals &amp; Zoneless</span>
+      <span class="hero-pill-badge">Modern Curve 32px</span>
+    </div>
+
+    <div class="hero-logo-box">
+      <nx-logo variant="horizontal" size="lg" [withGlow]="true"></nx-logo>
+    </div>
+
+    <h1 class="hero-headline">
+      El Sistema de Diseño Oficial para el <span class="gradient-text">Ecosistema Nuvex</span>
+    </h1>
+
+    <p class="hero-subtext">
+      Librería de componentes UI de alto rendimiento para Angular 22. Diseñada meticulosamente
+      para construir dashboards empresariales, backoffices ejecutivos y plataformas SaaS con
+      estética <strong>Capsule &amp; Modern Curve</strong>, total reactividad con Signals y sobriedad iconográfica.
+    </p>
+
+    <!-- CTAS PRINCIPALES -->
+    <div class="hero-actions">
+      <a routerLink="/installation" class="cta-btn cta-btn--primary">
+        <span>Instalación Rápida</span>
+        <svg class="cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+        </svg>
+      </a>
+
+      <a routerLink="/usage" class="cta-btn cta-btn--secondary">
+        <span>Guía de Uso Paso a Paso</span>
+      </a>
+
+      <a routerLink="/templates/saas-dashboard" class="cta-btn cta-btn--ghost">
+        <svg class="cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+        </svg>
+        <span>Ver Plantilla SaaS</span>
+      </a>
+    </div>
+
+    <!-- QUICK INSTALL BAR -->
+    <div class="hero-quick-bar">
+      <div class="quick-terminal">
+        <span class="terminal-prefix">$</span>
+        <span class="terminal-cmd">npm install nuvex-ui --registry https://npm.nuvex-tecnologia.com/</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       MÉTRICAS CLAVE
+       ========================================================================= -->
+  <section class="stats-ribbon">
+    <div class="stat-card">
+      <div class="stat-num">18+</div>
+      <div class="stat-title">Componentes Standalone</div>
+      <div class="stat-desc">Diseñados para Angular 22 con Signals</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">100%</div>
+      <div class="stat-title">Tree-Shaking Real</div>
+      <div class="stat-desc">Sub-entrypoints secundarios independientes</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">0ms</div>
+      <div class="stat-title">Sobrecarga Zoneless</div>
+      <div class="stat-desc">SSR Safe y máxima velocidad de render</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">Dual</div>
+      <div class="stat-title">Light &amp; Dark Theme</div>
+      <div class="stat-desc">Tokens de color verde esmeralda y pizarra</div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       PILARES DE DISEÑO E INGENIERÍA
+       ========================================================================= -->
+  <section class="pillars-section">
+    <div class="section-title-box">
+      <span class="section-kicker">Filosofía Nuvex</span>
+      <h2 class="section-heading">Diseñado bajo los estándares de Nuvex Tecnología</h2>
+      <p class="section-subheading">
+        Cada componente respeta los lineamientos del Cerebro Central de Desarrollo Nuvex.
+      </p>
+    </div>
+
+    <div class="pillars-grid">
+      <!-- PILAR 1 -->
+      <div class="pillar-card">
+        <div class="pillar-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="6" ry="6"/>
+            <path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>
+          </svg>
+        </div>
+        <h3 class="pillar-title">Capsule &amp; Modern Curve UI</h3>
+        <p class="pillar-text">
+          Radios orgánicos generosos (<code>rounded-[28px]</code> a <code>32px</code>), docks flotantes oscuros
+          y sombras difusas suaves que eliminan bordes toscos.
+        </p>
+      </div>
+
+      <!-- PILAR 2 -->
+      <div class="pillar-card">
+        <div class="pillar-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h3 class="pillar-title">Arquitectura Zoneless &amp; Signals</h3>
+        <p class="pillar-text">
+          100% reactividad moderna de Angular 22 sin <code>zone.js</code>. Uso exhaustivo de
+          <code>input()</code>, <code>output()</code> y <code>computed()</code> para alto rendimiento.
+        </p>
+      </div>
+
+      <!-- PILAR 3 -->
+      <div class="pillar-card">
+        <div class="pillar-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+          </svg>
+        </div>
+        <h3 class="pillar-title">Tree-Shaking por Sub-Entrypoints</h3>
+        <p class="pillar-text">
+          Importa <code>nuvex-ui/button</code> o <code>nuvex-ui/kpi-card</code>. Tu aplicación solo
+          incluirá en el bundle de producción el código de los componentes que realmente usas.
+        </p>
+      </div>
+
+      <!-- PILAR 4 -->
+      <div class="pillar-card">
+        <div class="pillar-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <h3 class="pillar-title">Sobriedad Iconográfica</h3>
+        <p class="pillar-text">
+          Prohibición estricta de saturación con emojis o stickers decorativos. Prioridad a la tipografía
+          refinada (Plus Jakarta Sans) y micro-copy elegante.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SHOWCASE EN VIVO: COMPONENTES EN ACCIÓN
+       ========================================================================= -->
+  <section class="live-preview-section">
+    <div class="section-title-box">
+      <span class="section-kicker">Vista Previa Interactiva</span>
+      <h2 class="section-heading">Componentes listos para conectar</h2>
+      <p class="section-subheading">
+        Experimenta la fluidez visual de los componentes oficiales directamente en este visor.
+      </p>
+    </div>
+
+    <div class="preview-cards-grid">
+      <!-- Tarjeta KPI Interactiva -->
+      <div class="preview-item">
+        <div class="preview-item-label">Componente KPI Card (nuvex-ui/kpi-card)</div>
+        <nuvex-kpi-card
+          label="Facturación Mensual"
+          value="$ 48.920.500"
+          trend="+14.2%"
+          trendDirection="up"
+          trendLabel="vs mes anterior"
+          variant="emerald"
+        ></nuvex-kpi-card>
+      </div>
+
+      <!-- Botones Nuvex -->
+      <div class="preview-item">
+        <div class="preview-item-label">Componente Button (nuvex-ui/button)</div>
+        <div class="preview-buttons-stack">
+          <nuvex-button variant="primary">Nuevo Registro</nuvex-button>
+          <nuvex-button variant="secondary">Filtrar Datos</nuvex-button>
+          <nuvex-button variant="ghost">Exportar Excel</nuvex-button>
+        </div>
+      </div>
+
+      <!-- Badges Nuvex -->
+      <div class="preview-item">
+        <div class="preview-item-label">Componente Badge (nuvex-ui/badge)</div>
+        <div class="preview-badges-row">
+          <nuvex-badge variant="success">Activo</nuvex-badge>
+          <nuvex-badge variant="primary">En Proceso</nuvex-badge>
+          <nuvex-badge variant="warning">Pendiente</nuvex-badge>
+          <nuvex-badge variant="danger">Cancelado</nuvex-badge>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       CÓDIGO DE INICIO RÁPIDO
+       ========================================================================= -->
+  <section class="code-preview-section">
+    <div class="section-title-box">
+      <span class="section-kicker">Ejemplo de Uso Rápido</span>
+      <h2 class="section-heading">Cómo se ve en tu código Angular Standalone</h2>
+    </div>
+
+    <div class="code-box-wrapper">
+      <app-code-snippet
+        language="typescript"
+        title="src/app/admin/admin-home.component.ts"
+        [code]="quickStartSnippet"
+      ></app-code-snippet>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       FOOTER BANNER
+       ========================================================================= -->
+  <section class="overview-footer-banner">
+    <div class="banner-content">
+      <nx-logo variant="icon" size="md" [withGlow]="true"></nx-logo>
+      <h2>¿Listo para empezar a crear?</h2>
+      <p>Sigue la guía de instalación y utiliza las plantillas listas para producción en tus proyectos.</p>
+      <div class="banner-actions">
+        <a routerLink="/installation" class="cta-btn cta-btn--primary">
+          Comenzar Instalación
+        </a>
+        <a routerLink="/usage" class="cta-btn cta-btn--secondary">
+          Ver Guía de Uso Completa
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>

@@ -1,0 +1,217 @@
+<div class="usage-page">
+
+  <!-- =========================================================================
+       ENCABEZADO
+       ========================================================================= -->
+  <header class="usage-header">
+    <div class="header-badge-row">
+      <span class="usage-tag usage-tag--accent">Guía de Desarrollo</span>
+      <span class="usage-tag">Angular 22</span>
+      <span class="usage-tag">Signals Ready</span>
+    </div>
+    <h1 class="usage-title">Cómo Usar Nuvex UI en tus Proyectos</h1>
+    <p class="usage-subtitle">
+      Aprende a importar componentes standalone, vincular eventos, manejar estado con Signals y
+      sincronizar el modo claro/oscuro en aplicaciones Nuvex Tecnología.
+    </p>
+
+    <!-- SELECTOR DE PESTAÑAS -->
+    <div class="usage-tabs">
+      <button
+        type="button"
+        class="tab-btn"
+        [class.tab-btn--active]="activeTab() === 'quickstart'"
+        (click)="activeTab.set('quickstart')"
+      >
+        <span>1. Guía Rápida &amp; Código</span>
+      </button>
+      <button
+        type="button"
+        class="tab-btn"
+        [class.tab-btn--active]="activeTab() === 'theming'"
+        (click)="activeTab.set('theming')"
+      >
+        <span>2. Control de Modo Oscuro</span>
+      </button>
+      <button
+        type="button"
+        class="tab-btn"
+        [class.tab-btn--active]="activeTab() === 'subentrypoints'"
+        (click)="activeTab.set('subentrypoints')"
+      >
+        <span>3. Sub-Entrypoints &amp; Tree-Shaking</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       PESTAÑA 1: GUÍA RÁPIDA & CÓDIGO
+       ========================================================================= -->
+  @if (activeTab() === 'quickstart') {
+    <div class="steps-container">
+
+      <!-- PASO 1 -->
+      <section class="doc-card">
+        <div class="card-step-badge">Paso 1</div>
+        <h3 class="card-title">Configurar el Proveedor en <code>app.config.ts</code></h3>
+        <p class="card-desc">
+          En la raíz de tu aplicación Angular standalone, inyecta <code>provideTheme()</code> con el preset
+          institucional <code>auraPreset</code>. Esto garantiza que las variables CSS y el modo de color
+          estén disponibles en todo el árbol de componentes:
+        </p>
+        <app-code-snippet
+          language="typescript"
+          title="src/app/app.config.ts"
+          [code]="setupAppConfigSnippet"
+        ></app-code-snippet>
+      </section>
+
+      <!-- PASO 2 -->
+      <section class="doc-card">
+        <div class="card-step-badge">Paso 2</div>
+        <h3 class="card-title">Importar Componentes en tu Archivo TypeScript</h3>
+        <p class="card-desc">
+          En Angular 22 standalone, cada componente se importa en el arreglo <code>imports</code>.
+          Utiliza los sub-entrypoints individuales (ej: <code>nuvex-ui/button</code>) para que tu compilador
+          haga tree-shaking óptimo:
+        </p>
+        <app-code-snippet
+          language="typescript"
+          title="src/app/dashboard/ventas-dashboard.component.ts"
+          [code]="componentTsSnippet"
+        ></app-code-snippet>
+      </section>
+
+      <!-- PASO 3 -->
+      <section class="doc-card">
+        <div class="card-step-badge">Paso 3</div>
+        <h3 class="card-title">Renderizar los Componentes en tu Plantilla HTML</h3>
+        <p class="card-desc">
+          Combina la estética Capsule &amp; Modern Curve de Nuvex UI en tu HTML. Los componentes
+          reciben Signals directamente como entradas y emiten eventos reactivos estándar:
+        </p>
+        <app-code-snippet
+          language="html"
+          title="src/app/dashboard/ventas-dashboard.component.html"
+          [code]="componentHtmlSnippet"
+        ></app-code-snippet>
+      </section>
+
+      <!-- REGLAS DE ORO DE NUVEX -->
+      <section class="rules-card">
+        <h3 class="rules-title">Reglas de Oro de Nuvex UI</h3>
+        <ul class="rules-list">
+          <li>
+            <strong>Sobriedad Iconográfica:</strong> No utilices emojis decorativos tipo sticker ni badges redundantes.
+            Usa tipografía limpia y contrastada.
+          </li>
+          <li>
+            <strong>Radio Orgánico Nuvex:</strong> Las tarjetas y paneles deben utilizar <code>rounded-2xl</code> a <code>rounded-[32px]</code> con sombras suaves difusas.
+          </li>
+          <li>
+            <strong>Reactividad con Signals:</strong> Prefiere <code>signal()</code> y <code>computed()</code> sobre variables mutables directas o suscripciones manuales a RxJS.
+          </li>
+        </ul>
+      </section>
+
+    </div>
+  }
+
+  <!-- =========================================================================
+       PESTAÑA 2: MODO OSCURO & THEMING
+       ========================================================================= -->
+  @if (activeTab() === 'theming') {
+    <div class="steps-container">
+
+      <section class="doc-card">
+        <div class="card-step-badge">Tema Dual</div>
+        <h3 class="card-title">Inyectar y Consumir <code>ThemeService</code></h3>
+        <p class="card-desc">
+          <code>ThemeService</code> te da acceso a una Signal de solo lectura <code>darkMode</code> y al método
+          <code>toggleMode()</code>. El servicio persiste automáticamente la preferencia del usuario en <code>localStorage</code>:
+        </p>
+        <app-code-snippet
+          language="typescript"
+          title="src/app/components/theme-switcher.component.ts"
+          [code]="themeServiceSnippet"
+        ></app-code-snippet>
+      </section>
+
+      <section class="tokens-summary-card">
+        <h3 class="card-title">Paleta Semántica Nuvex</h3>
+        <div class="palette-grid">
+          <div class="palette-swatch">
+            <div class="swatch-color bg-emerald-500"></div>
+            <div class="swatch-info">
+              <span class="swatch-name">Verde Esmeralda</span>
+              <span class="swatch-hex">#00C975</span>
+            </div>
+          </div>
+          <div class="palette-swatch">
+            <div class="swatch-color bg-slate-900"></div>
+            <div class="swatch-info">
+              <span class="swatch-name">Obsidiana Nuvex</span>
+              <span class="swatch-hex">#0F172A</span>
+            </div>
+          </div>
+          <div class="palette-swatch">
+            <div class="swatch-color bg-slate-800"></div>
+            <div class="swatch-info">
+              <span class="swatch-name">Pizarra Dark</span>
+              <span class="swatch-hex">#1E293B</span>
+            </div>
+          </div>
+          <div class="palette-swatch">
+            <div class="swatch-color bg-slate-50 border border-slate-200"></div>
+            <div class="swatch-info">
+              <span class="swatch-name">Superficie Light</span>
+              <span class="swatch-hex">#F8FAFC</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  }
+
+  <!-- =========================================================================
+       PESTAÑA 3: CATÁLOGO DE SUB-ENTRYPOINTS
+       ========================================================================= -->
+  @if (activeTab() === 'subentrypoints') {
+    <div class="steps-container">
+
+      <section class="doc-card">
+        <h3 class="card-title">Catálogo Completo de Sub-Entrypoints</h3>
+        <p class="card-desc">
+          Cada componente se compila como un módulo autónomo en Angular Package Format (APF)
+          para evitar que tu aplicación descargue código innecesario:
+        </p>
+
+        <div class="table-container">
+          <table class="subentry-table">
+            <thead>
+              <tr>
+                <th>Componente</th>
+                <th>Ruta de Importación (Tree-Shaking)</th>
+                <th>Selector HTML</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (c of componentsList; track c.subpath) {
+                <tr>
+                  <td><strong>{{ c.name }}</strong></td>
+                  <td><code>{{ c.subpath }}</code></td>
+                  <td><code class="selector-tag">{{ c.selector }}</code></td>
+                  <td>{{ c.description }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  }
+
+</div>

@@ -11,17 +11,26 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Determinar raíz de nuvex-lib-ui ya sea dentro del repo o desde el workspace raíz
-let rootLibDir = path.resolve(__dirname, '../../../');
-if (!fs.existsSync(path.join(rootLibDir, 'projects/nuvex-ui/package.json'))) {
-  rootLibDir = path.resolve(__dirname, '../../../../nuvex-lib-ui');
+// Determinar raíz de nuvex-lib-ui buscando hacia arriba
+let currentDir = __dirname;
+let rootLibDir = null;
+while (currentDir && currentDir !== path.dirname(currentDir)) {
+  if (fs.existsSync(path.join(currentDir, 'projects/nuvex-ui/package.json'))) {
+    rootLibDir = currentDir;
+    break;
+  }
+  if (fs.existsSync(path.join(currentDir, 'nuvex-lib-ui/projects/nuvex-ui/package.json'))) {
+    rootLibDir = path.join(currentDir, 'nuvex-lib-ui');
+    break;
+  }
+  currentDir = path.dirname(currentDir);
 }
-const pkgPath = path.join(rootLibDir, 'projects/nuvex-ui/package.json');
 
-if (!fs.existsSync(pkgPath)) {
-  console.error(`[ERROR] No se encontró ${pkgPath}`);
+if (!rootLibDir) {
+  console.error(`[ERROR] No se pudo localizar la carpeta raíz de nuvex-lib-ui`);
   process.exit(1);
 }
+const pkgPath = path.join(rootLibDir, 'projects/nuvex-ui/package.json');
 
 const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
 const currentVersion = pkg.version;
