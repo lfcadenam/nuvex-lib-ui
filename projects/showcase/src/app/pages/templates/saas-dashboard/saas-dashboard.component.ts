@@ -113,9 +113,9 @@ export class SaasDashboardTemplateComponent {
   readonly activeTabId = signal<string>('overview');
 
   readonly currentUser: UserProfile = {
-    name: 'Paola Aguilera',
-    role: 'Directora Comercial',
-    avatarText: 'PA',
+    name: 'Luis Cadena',
+    role: 'Director Comercial',
+    avatarText: 'LC',
   };
 
   // Sparkline data
@@ -243,7 +243,7 @@ export class SaasDashboardTemplateComponent {
         trendLabel="vs mes ant."
         helperText="482 suscripciones activas"
       />
-      
+
       <nuvex-kpi-card
         variant="emerald"
         label="Nuevos Clientes"
