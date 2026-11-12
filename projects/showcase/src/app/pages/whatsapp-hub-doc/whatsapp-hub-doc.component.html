@@ -1,0 +1,606 @@
+<div class="doc-page">
+
+  <!-- ====================================================================
+       CABECERA DE LA PÁGINA: WHATSAPP CLOUD API HUB & MCP
+       ==================================================================== -->
+  <header class="doc-header">
+    <div class="doc-badge-row">
+      <span class="doc-tag doc-tag--new">Ecosistema Nuvex</span>
+      <span class="doc-version">v1.0.0 Producción</span>
+      <span class="doc-tag">Meta Graph API v21.0</span>
+      <span class="doc-tag doc-tag--mcp">Model Context Protocol</span>
+    </div>
+
+    <div class="template-header-flex">
+      <div>
+        <h1 class="doc-title">WhatsApp Cloud API Hub &amp; MCP</h1>
+        <p class="doc-description">
+          Microservicio integral de mensajería empresarial para la API oficial de WhatsApp (Meta Cloud API).
+          Diseñado para operar simultáneamente como <strong>Servidor MCP</strong> para agentes de Inteligencia Artificial
+          (Claude Desktop, Cursor, Antigravity), <strong>API REST</strong> segura para plataformas web (PHP, Laravel, Node.js, Python),
+          y <strong>Dashboard Administrativo</strong> con Nuvex Modern Curve UI.
+        </p>
+      </div>
+    </div>
+
+    <!-- NAVEGACIÓN EN CÁPSULA (TABS) -->
+    <div class="doc-tabs">
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'overview'"
+        (click)="activeTab.set('overview')"
+      >
+        Visión General &amp; Arquitectura
+      </button>
+
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'mcp'"
+        (click)="activeTab.set('mcp')"
+      >
+        Servidor MCP para Agentes IA
+      </button>
+
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'api'"
+        (click)="activeTab.set('api')"
+      >
+        API REST (POST /notify) &amp; Snippets
+      </button>
+
+      <button
+        type="button"
+        class="doc-tab-btn"
+        [class.doc-tab-btn--active]="activeTab() === 'simulator'"
+        (click)="activeTab.set('simulator')"
+      >
+        Simulador Visual de Notificaciones
+      </button>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       TAB 1: VISIÓN GENERAL & ARQUITECTURA
+       ==================================================================== -->
+  @if (activeTab() === 'overview') {
+    <div class="tab-content space-y-10">
+
+      <!-- HERO BANNER DESTACADO -->
+      <section class="brand-hero-card">
+        <div class="brand-hero-content">
+          <span class="brand-hero-badge">Microservicio Oficial Nuvex</span>
+          <h2 class="brand-hero-title">Automatización de WhatsApp Empresarial sin Riesgo de Bloqueo</h2>
+          <p class="brand-hero-text">
+            Conectado de forma directa a la infraestructura oficial de Meta Graph API v21.0.
+            Ofrece un único punto centralizado de despacho con autenticación multi-tenant (`x-api-key`),
+            gestión de plantillas con variables dinámicas, adjuntos multimedia (facturas en PDF, vouchers)
+            y confirmación de entrega en tiempo real mediante webhooks bidireccionales.
+          </p>
+
+          <div class="brand-hero-metrics">
+            <div class="metric-item">
+              <span class="metric-val">100%</span>
+              <span class="metric-lbl">Oficial Meta Cloud API</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">&lt; 850 ms</span>
+              <span class="metric-lbl">Latencia de Notificación</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">Doble Check</span>
+              <span class="metric-lbl">Trazabilidad en Vivo</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">MCP Nativo</span>
+              <span class="metric-lbl">Listo para Agentes IA</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="brand-hero-accent"></div>
+      </section>
+
+      <!-- LOS 4 PILARES DEL MICROSERVICIO -->
+      <section>
+        <div class="section-badge-header">
+          <span class="badge-dot"></span>
+          <span>4 Modos de Operación en una Sola Instancia</span>
+        </div>
+        <h3 class="section-title">Capacidades del Hub</h3>
+
+        <div class="features-grid">
+          <!-- Pilar 1: Servidor MCP -->
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
+              </svg>
+            </div>
+            <h4 class="feature-title">Servidor MCP Nativo</h4>
+            <p class="feature-desc">
+              Permite a agentes autónomos (Claude Desktop, Cursor, Antigravity) ejecutar la herramienta
+              <code>send_whatsapp_notification</code> para enviar mensajes, comprobantes y confirmaciones de forma directa.
+            </p>
+          </div>
+
+          <!-- Pilar 2: API REST -->
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/>
+              </svg>
+            </div>
+            <h4 class="feature-title">API REST Empresarial</h4>
+            <p class="feature-desc">
+              Un único endpoint <code>POST /notify</code> compatible con cualquier stack backend (PHP, Laravel, Node.js, Python)
+              con validación de cabecera <code>x-api-key</code> y respuesta JSON estructurada.
+            </p>
+          </div>
+
+          <!-- Pilar 3: Portal Web -->
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.25 2.25L15 6"/>
+              </svg>
+            </div>
+            <h4 class="feature-title">Dashboard Nuvex Curve UI</h4>
+            <p class="feature-desc">
+              Panel gráfico web en <code>http://localhost:3005</code> con Light/Dark mode, estadísticas KPI,
+              gestor de API Keys independientes por cliente/sistema y sandbox interactivo para pruebas de plantillas.
+            </p>
+          </div>
+
+          <!-- Pilar 4: Webhooks Meta -->
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h4 class="feature-title">Webhooks en Tiempo Real</h4>
+            <p class="feature-desc">
+              Verificación automática del handshake de Meta y captura instantánea de estados:
+              <code>sent</code> (enviado), <code>delivered</code> (entregado) y <code>read</code> (leído con doble check azul).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TARJETA INFORMATIVA DEL REPOSITORIO LOCAL -->
+      <section class="repo-callout-card">
+        <div class="repo-callout-badge">Ubicación en el Workspace</div>
+        <div class="repo-callout-flex">
+          <div>
+            <h4 class="repo-callout-title">Microservicio Listo para Ejecutar</h4>
+            <p class="repo-callout-desc">
+              El código fuente, colección de Postman, Dockerfile y configuración del servidor MCP se encuentran disponibles en tu workspace:
+            </p>
+            <code class="repo-callout-path">d:\Users\Usuario\Documents\Nuvex\whatsapp-notify-mcp</code>
+          </div>
+
+          <div class="repo-callout-actions">
+            <div class="command-pill">
+              <span>docker compose up -d</span>
+            </div>
+            <div class="command-pill">
+              <span>npm run dev (Port 3005)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  }
+
+  <!-- ====================================================================
+       TAB 2: SERVIDOR MCP PARA AGENTES IA
+       ==================================================================== -->
+  @if (activeTab() === 'mcp') {
+    <div class="tab-content space-y-8">
+      
+      <div class="section-badge-header">
+        <span class="badge-dot"></span>
+        <span>Herramientas Nativa para Model Context Protocol</span>
+      </div>
+      <h3 class="section-title">Integración con Claude Desktop, Cursor y Antigravity</h3>
+      <p class="section-subtitle">
+        Al configurar el MCP, los agentes de IA adquieren la capacidad autónoma de notificar a tus clientes,
+        enviar estados de cuenta o confirmar pedidos sin salir del flujo de trabajo conversacional.
+      </p>
+
+      <!-- ESPECIFICACIÓN DE LA TOOL -->
+      <div class="tool-spec-card">
+        <div class="tool-spec-header">
+          <div class="tool-name-badge">
+            <span class="tool-prefix">TOOL:</span>
+            <span class="tool-name">send_whatsapp_notification</span>
+          </div>
+          <span class="tool-status-badge">Producción</span>
+        </div>
+
+        <p class="tool-spec-desc">
+          Envía una notificación por WhatsApp usando una plantilla preaprobada por Meta con variables
+          dinámicas, parámetros para botones de URL y soporte opcional de encabezados multimedia (PDF o imagen).
+        </p>
+
+        <div class="table-container">
+          <table class="mcp-params-table">
+            <thead>
+              <tr>
+                <th>Parámetro</th>
+                <th>Tipo</th>
+                <th>Requerido</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>to</code></td>
+                <td><code>string</code></td>
+                <td><span class="badge-req">Obligatorio</span></td>
+                <td>Número de teléfono con código de país sin '+'. Ej: <code>573001234567</code>.</td>
+              </tr>
+              <tr>
+                <td><code>template</code></td>
+                <td><code>string</code></td>
+                <td>Opcional</td>
+                <td>Nombre de la plantilla aprobada en Meta Graph API (def: <code>hello_world</code>).</td>
+              </tr>
+              <tr>
+                <td><code>lang</code></td>
+                <td><code>string</code></td>
+                <td>Opcional</td>
+                <td>Código de idioma Meta. Ej: <code>es</code>, <code>es_CO</code>, <code>en_US</code>.</td>
+              </tr>
+              <tr>
+                <td><code>variables</code></td>
+                <td><code>string[]</code></td>
+                <td>Opcional</td>
+                <td>Lista de variables del cuerpo del mensaje en orden secuencial (<code>{{1}}</code>, <code>{{2}}</code>).</td>
+              </tr>
+              <tr>
+                <td><code>buttons</code></td>
+                <td><code>string[]</code></td>
+                <td>Opcional</td>
+                <td>Parámetros dinámicos para botones de tipo URL (ej. ID de orden para rastreo).</td>
+              </tr>
+              <tr>
+                <td><code>header</code></td>
+                <td><code>object</code></td>
+                <td>Opcional</td>
+                <td>Encabezado multimedia: <code>type</code> ('document' | 'image'), <code>url</code> pública y <code>filename</code> opcional.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SNIPPET DE CONFIGURACIÓN JSON -->
+      <div class="snippet-card">
+        <div class="snippet-header">
+          <div class="snippet-title">Configuración para Claude Desktop o Cursor (mcp.json)</div>
+          <button
+            type="button"
+            class="copy-btn"
+            (click)="copyToClipboard(mcpConfigSnippet, 'mcp')"
+          >
+            {{ copiedCode() === 'mcp' ? '¡Copiado!' : 'Copiar JSON' }}
+          </button>
+        </div>
+        <pre class="code-block"><code>{{ mcpConfigSnippet }}</code></pre>
+      </div>
+
+      <!-- EJEMPLO DE PROMPT REAL -->
+      <div class="prompt-example-card">
+        <div class="prompt-example-header">
+          <svg class="prompt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v8.018z"/>
+          </svg>
+          <span class="prompt-title">Ejemplo de prompt para el Agente IA:</span>
+        </div>
+        <div class="prompt-bubble">
+          "El cliente Carlos Mendoza acaba de agendar su cita #10452 para Consulta General el 18 de Noviembre a las 9:00 AM.
+          Por favor envía la notificación oficial de confirmación por WhatsApp a su número 573001234567 utilizando la herramienta send_whatsapp_notification."
+        </div>
+      </div>
+
+    </div>
+  }
+
+  <!-- ====================================================================
+       TAB 3: API REST (POST /notify) & SNIPPETS DE CÓDIGO
+       ==================================================================== -->
+  @if (activeTab() === 'api') {
+    <div class="tab-content space-y-8">
+
+      <div class="section-badge-header">
+        <span class="badge-dot"></span>
+        <span>Integración Backend</span>
+      </div>
+      <h3 class="section-title">Consumo de la API REST Empresarial</h3>
+      <p class="section-subtitle">
+        Envía notificaciones desde cualquier lenguaje backend mediante una petición HTTP POST sencilla.
+        Requiere cabecera de autenticación <code>x-api-key</code> generada en el dashboard.
+      </p>
+
+      <!-- SELECTOR DE LENGUAJE -->
+      <div class="lang-selector-tabs">
+        <button
+          type="button"
+          class="lang-tab"
+          [class.lang-tab--active]="activeLang() === 'curl'"
+          (click)="activeLang.set('curl')"
+        >
+          cURL
+        </button>
+        <button
+          type="button"
+          class="lang-tab"
+          [class.lang-tab--active]="activeLang() === 'php'"
+          (click)="activeLang.set('php')"
+        >
+          PHP / Laravel
+        </button>
+        <button
+          type="button"
+          class="lang-tab"
+          [class.lang-tab--active]="activeLang() === 'typescript'"
+          (click)="activeLang.set('typescript')"
+        >
+          Node.js / TypeScript
+        </button>
+        <button
+          type="button"
+          class="lang-tab"
+          [class.lang-tab--active]="activeLang() === 'python'"
+          (click)="activeLang.set('python')"
+        >
+          Python
+        </button>
+      </div>
+
+      <!-- SNIPPETS SEGÚN LENGUAJE SELECCIONADO -->
+      <div class="snippet-card">
+        <div class="snippet-header">
+          <div class="snippet-title">
+            @switch (activeLang()) {
+              @case ('curl') { POST /notify vía cURL }
+              @case ('php') { Integración en PHP con cURL / Guzzle }
+              @case ('typescript') { Integración en Node.js con Fetch / Axios }
+              @case ('python') { Integración en Python con requests }
+            }
+          </div>
+          <button
+            type="button"
+            class="copy-btn"
+            (click)="copyActiveSnippet()"
+          >
+            {{ copiedCode() === activeLang() ? '¡Copiado!' : 'Copiar Código' }}
+          </button>
+        </div>
+
+        <pre class="code-block"><code>@switch (activeLang()) {
+@case ('curl') {
+{{ curlSnippet }}
+}
+@case ('php') {
+{{ phpSnippet }}
+}
+@case ('typescript') {
+{{ tsSnippet }}
+}
+@case ('python') {
+{{ pythonSnippet }}
+}
+}</code></pre>
+      </div>
+
+      <!-- ESTRUCTURA DEL PAYLOAD JSON -->
+      <div class="payload-explainer-card">
+        <h4 class="payload-title">Especificación del Payload JSON</h4>
+        <div class="payload-grid">
+          <div class="payload-col">
+            <span class="payload-tag">Campo</span>
+            <ul class="payload-list">
+              <li><code>to</code>: Destinatario con código de país (57...).</li>
+              <li><code>template</code>: Nombre de la plantilla aprobada en Meta.</li>
+              <li><code>lang</code>: Código ISO de idioma (es, es_CO, en_US).</li>
+              <li><code>variables</code>: Array secuencial con los valores de los tags.</li>
+            </ul>
+          </div>
+          <div class="payload-col">
+            <span class="payload-tag">Opcionales</span>
+            <ul class="payload-list">
+              <li><code>buttons</code>: Parámetros para URLs con botones dinámicos.</li>
+              <li><code>header</code>: Objeto con <code>type: 'document'</code> o <code>'image'</code>, <code>url</code> y <code>filename</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  }
+
+  <!-- ====================================================================
+       TAB 4: SIMULADOR INTERACTIVO DE NOTIFICACIONES WHATSAPP
+       ==================================================================== -->
+  @if (activeTab() === 'simulator') {
+    <div class="tab-content space-y-8">
+      
+      <div class="section-badge-header">
+        <span class="badge-dot"></span>
+        <span>Sandbox Interactivo</span>
+      </div>
+      <h3 class="section-title">Simulador de Notificaciones WhatsApp</h3>
+      <p class="section-subtitle">
+        Modifica las variables y observa cómo se renderizará el mensaje en el teléfono del usuario
+        con la estética auténtica de WhatsApp Business y cómo se genera el payload JSON listo para enviar.
+      </p>
+
+      <div class="simulator-layout">
+        
+        <!-- PANEL DE CONTROL / ENTRADAS -->
+        <div class="sim-controls-card">
+          <h4 class="sim-card-title">Parámetros del Mensaje</h4>
+
+          <div class="sim-form-group">
+            <label class="sim-label">Seleccionar Plantilla</label>
+            <select
+              class="sim-select"
+              [ngModel]="selectedTemplateId()"
+              (ngModelChange)="onTemplateChange($event)"
+            >
+              @for (t of templates; track t.id) {
+                <option [value]="t.id">{{ t.name }} ({{ t.id }})</option>
+              }
+            </select>
+          </div>
+
+          <div class="sim-form-group">
+            <label class="sim-label">Teléfono Destino (con código de país)</label>
+            <input
+              type="text"
+              class="sim-input"
+              [ngModel]="simRecipient()"
+              (ngModelChange)="simRecipient.set($event)"
+              placeholder="573001234567"
+            />
+          </div>
+
+          <!-- Variables dinámicas -->
+          <div class="sim-form-group">
+            <label class="sim-label">Variable 1: Nombre de Cliente / Código</label>
+            <input
+              type="text"
+              class="sim-input"
+              [ngModel]="simVar1()"
+              (ngModelChange)="simVar1.set($event)"
+            />
+          </div>
+
+          @if (selectedTemplateId() !== 'alerta_seguridad') {
+            <div class="sim-form-group">
+              <label class="sim-label">Variable 2: Número de Orden / Cita</label>
+              <input
+                type="text"
+                class="sim-input"
+                [ngModel]="simVar2()"
+                (ngModelChange)="simVar2.set($event)"
+              />
+            </div>
+
+            <div class="sim-form-group">
+              <label class="sim-label">Variable 3: Servicio / Guía de Envío</label>
+              <input
+                type="text"
+                class="sim-input"
+                [ngModel]="simVar3()"
+                (ngModelChange)="simVar3.set($event)"
+              />
+            </div>
+
+            <div class="sim-form-group">
+              <label class="sim-label">Variable 4: Fecha &amp; Hora / Plazo</label>
+              <input
+                type="text"
+                class="sim-input"
+                [ngModel]="simVar4()"
+                (ngModelChange)="simVar4.set($event)"
+              />
+            </div>
+          }
+        </div>
+
+        <!-- VISTA PREVIA SMARTPHONE WHATSAPP -->
+        <div class="phone-mockup-wrapper">
+          <div class="phone-frame">
+            <!-- Barra superior WhatsApp -->
+            <div class="phone-wa-header">
+              <div class="wa-header-avatar">
+                <nx-logo variant="icon" size="sm"></nx-logo>
+              </div>
+              <div class="wa-header-info">
+                <div class="wa-contact-name">Nuvex Cloud Official</div>
+                <div class="wa-contact-status">Cuenta de Empresa Oficial · Meta</div>
+              </div>
+            </div>
+
+            <!-- Área de chat -->
+            <div class="phone-wa-body">
+              <div class="wa-date-pill">HOY</div>
+
+              <!-- Burbuja de mensaje -->
+              <div class="wa-bubble">
+                
+                <!-- Encabezado Multimedia si aplica -->
+                @if (currentTemplate().headerType === 'document') {
+                  <div class="wa-doc-header">
+                    <svg class="wa-doc-icon" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V7.875L14.625 1.5H5.625zM14.25 2.625L19.125 7.5h-4.875V2.625z"/>
+                    </svg>
+                    <div class="wa-doc-info">
+                      <div class="wa-doc-title">{{ currentTemplate().headerPreview }}</div>
+                      <div class="wa-doc-size">148 KB · PDF</div>
+                    </div>
+                  </div>
+                } @else if (currentTemplate().headerType === 'text') {
+                  <div class="wa-text-header">{{ currentTemplate().headerPreview }}</div>
+                }
+
+                <!-- Texto del cuerpo -->
+                <div class="wa-bubble-text" [innerHTML]="formatWaText(simulatedBodyText())"></div>
+
+                <!-- Footer de hora y check azul -->
+                <div class="wa-bubble-footer">
+                  <span class="wa-time">10:35 AM</span>
+                  <!-- Doble check azul de lectura -->
+                  <svg class="wa-check-icon" viewBox="0 0 24 24" fill="none" stroke="#53bdeb" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75l6 6 9-13.5"/>
+                  </svg>
+                </div>
+
+                <!-- Botón Interactivo si aplica -->
+                @if (currentTemplate().hasButton) {
+                  <div class="wa-button-row">
+                    <div class="wa-action-btn">
+                      <svg class="wa-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+                      </svg>
+                      <span>{{ currentTemplate().buttonLabel }}</span>
+                    </div>
+                  </div>
+                }
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PAYLOAD JSON RESULTANTE -->
+      <div class="snippet-card">
+        <div class="snippet-header">
+          <div class="snippet-title">Payload JSON Generado en Tiempo Real</div>
+          <button
+            type="button"
+            class="copy-btn"
+            (click)="copyToClipboard(generatedPayload(), 'payload')"
+          >
+            {{ copiedCode() === 'payload' ? '¡Copiado!' : 'Copiar Payload JSON' }}
+          </button>
+        </div>
+        <pre class="code-block"><code>{{ generatedPayload() }}</code></pre>
+      </div>
+
+    </div>
+  }
+
+</div>

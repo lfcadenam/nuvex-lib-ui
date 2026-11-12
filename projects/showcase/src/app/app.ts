@@ -51,6 +51,17 @@ export class App {
       ],
     },
     {
+      title: 'Ecosistema & APIs Nuvex',
+      items: [
+        {
+          name: 'WhatsApp Cloud API & MCP',
+          route: '/ecosystem/whatsapp-hub',
+          tag: 'Hub & MCP',
+          badge: 'Nuevo',
+        },
+      ],
+    },
+    {
       title: 'Componentes Base',
       items: [
         { name: 'Button', route: '/button', tag: 'Interactivo' },

@@ -52,6 +52,17 @@ export const routes: Routes = [
       ).then((m) => m.SaasDashboardTemplateComponent),
   },
   {
+    path: 'ecosystem/whatsapp-hub',
+    loadComponent: () =>
+      import(
+        './pages/whatsapp-hub-doc/whatsapp-hub-doc.component'
+      ).then((m) => m.WhatsAppHubDocComponent),
+  },
+  {
+    path: 'whatsapp-hub',
+    redirectTo: 'ecosystem/whatsapp-hub',
+  },
+  {
     path: 'button',
     loadComponent: () =>
       import('./pages/button-doc/button-doc.component').then(
