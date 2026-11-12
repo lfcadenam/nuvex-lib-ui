@@ -110,6 +110,16 @@ export class App {
       .filter((cat) => cat.items.length > 0);
   });
 
+  readonly mobileMenuOpen = signal(false);
+
+  toggleMobileMenu() {
+    this.mobileMenuOpen.update((v) => !v);
+  }
+
+  closeMobileMenu() {
+    this.mobileMenuOpen.set(false);
+  }
+
   toggleDark() {
     this.theme.toggleDarkMode();
   }

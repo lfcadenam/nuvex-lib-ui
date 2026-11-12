@@ -77,12 +77,13 @@
            ==================================================================== -->
       <div class="nuvex-dashboard-shell">
 
-        <!-- 1. DOCK VERTICAL FLOTANTE (Cápsula Obsidiana #111215) -->
+        <!-- 1. DOCK FLOTANTE NUVEX UI -->
         <aside class="nuvex-dock-container">
-          <div class="dock-brand-top">
-            <nx-logo variant="icon" size="sm" [withGlow]="true"></nx-logo>
-          </div>
-          <nuvex-capsule-dock [items]="dockItems()"></nuvex-capsule-dock>
+          <nuvex-capsule-dock [items]="dockItems()" variant="dark">
+            <div slot="top" class="dock-brand-top">
+              <nx-logo variant="icon" size="sm" [withGlow]="true"></nx-logo>
+            </div>
+          </nuvex-capsule-dock>
         </aside>
 
         <!-- 2. STAGE PRINCIPAL -->

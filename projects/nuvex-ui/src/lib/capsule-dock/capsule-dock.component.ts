@@ -22,6 +22,7 @@ import { DockItem } from './capsule-dock.types';
     '[class.nuvex-capsule-dock--light]': "variant() === 'light'",
     '[class.nuvex-capsule-dock--dark]': "variant() === 'dark'",
     '[class.nuvex-capsule-dock--horizontal]': "orientation() === 'horizontal'",
+    '[class.nuvex-capsule-dock--vertical]': "orientation() === 'vertical'",
   },
 })
 export class CapsuleDockComponent {

@@ -27,10 +27,10 @@
 :host-context(.dark) .nuvex-capsule-dock__nav,
 .dark .nuvex-capsule-dock__nav,
 .nuvex-capsule-dock__nav--dark {
-  background-color: #111215;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+  background-color: #111215 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5) !important;
 }
 
 /* Modo Claro Forzado */
@@ -59,6 +59,33 @@
 .nuvex-capsule-dock__nav--horizontal .nuvex-capsule-dock__bottom {
   flex-direction: row !important;
   gap: 0.5rem !important;
+}
+
+/* Adaptabilidad Automática en Mobile (cuando no se fuerza vertical) */
+@media (max-width: 1023px) {
+  .nuvex-capsule-dock:not(.nuvex-capsule-dock--vertical) .nuvex-capsule-dock__nav {
+    flex-direction: row !important;
+    width: auto !important;
+    min-height: unset !important;
+    padding: 0.4rem 0.75rem !important;
+    gap: 0.5rem !important;
+  }
+
+  .nuvex-capsule-dock:not(.nuvex-capsule-dock--vertical) .nuvex-capsule-dock__items {
+    flex-direction: row !important;
+    gap: 0.375rem !important;
+  }
+
+  .nuvex-capsule-dock:not(.nuvex-capsule-dock--vertical) .nuvex-capsule-dock__top,
+  .nuvex-capsule-dock:not(.nuvex-capsule-dock--vertical) .nuvex-capsule-dock__bottom {
+    flex-direction: row !important;
+    gap: 0.5rem !important;
+  }
+
+  .nuvex-capsule-dock:not(.nuvex-capsule-dock--vertical) .nuvex-capsule-dock__btn {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+  }
 }
 
 /* Secciones Top y Bottom */
@@ -228,12 +255,31 @@
   transform: translateX(-50%) translateY(4px) !important;
 }
 
+@media (max-width: 1023px) {
+  .nuvex-capsule-dock:not(.nuvex-capsule-dock--vertical) .nuvex-capsule-dock__tooltip {
+    left: 50% !important;
+    top: auto !important;
+    bottom: calc(100% + 12px) !important;
+    transform: translateX(-50%) translateY(4px) !important;
+  }
+}
+
 .nuvex-capsule-dock__nav--horizontal .nuvex-capsule-dock__tooltip::before {
   top: 100% !important;
   left: 50% !important;
   right: auto !important;
   transform: translateX(-50%) !important;
   border-color: #0f172a transparent transparent transparent !important;
+}
+
+@media (max-width: 1023px) {
+  .nuvex-capsule-dock:not(.nuvex-capsule-dock--vertical) .nuvex-capsule-dock__tooltip::before {
+    top: 100% !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    border-color: #0f172a transparent transparent transparent !important;
+  }
 }
 
 :host-context(.dark) .nuvex-capsule-dock__nav--horizontal .nuvex-capsule-dock__tooltip::before,

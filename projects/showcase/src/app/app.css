@@ -237,15 +237,112 @@
   box-sizing: border-box;
 }
 
+/* HEADER MÓVIL (Oculto en Desktop) */
+.showcase-mobile-header {
+  display: none;
+}
+
+.showcase-mobile-backdrop {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 @media (max-width: 768px) {
   .showcase-layout {
     flex-direction: column;
   }
+
+  /* Header Superior en Teléfonos */
+  .showcase-mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background-color: var(--nvl-surface-0, #ffffff);
+    border-bottom: 1px solid var(--nvl-surface-200, #e5e7eb);
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .mobile-header-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+
+  .mobile-header-brand .brand-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--nvl-text-color, #111827);
+  }
+
+  .mobile-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .mobile-theme-btn,
+  .mobile-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.625rem;
+    background-color: var(--nvl-surface-100, #f3f4f6);
+    border: 1px solid var(--nvl-surface-200, #e5e7eb);
+    color: var(--nvl-text-color, #111827);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .mobile-theme-btn:hover,
+  .mobile-menu-toggle:hover {
+    background-color: var(--nvl-surface-200, #e5e7eb);
+  }
+
+  /* Backdrop oscurecido al abrir el drawer */
+  .showcase-mobile-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 998;
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  /* Sidebar convertido en Drawer Off-Canvas */
   .showcase-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 285px;
+    max-width: 85vw;
+    height: 100dvh;
+    z-index: 999;
+    transform: translateX(-100%);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  .showcase-sidebar.showcase-sidebar--open {
+    transform: translateX(0);
+  }
+
+  .showcase-main {
     width: 100%;
-    min-width: 100%;
-    max-width: 100%;
-    height: auto;
-    position: static;
+    min-width: 0;
   }
 }
