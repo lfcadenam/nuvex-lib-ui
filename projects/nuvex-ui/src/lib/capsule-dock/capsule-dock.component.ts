@@ -19,6 +19,9 @@ import { DockItem } from './capsule-dock.types';
   styleUrl: './capsule-dock.component.css',
   host: {
     'class': 'nuvex-capsule-dock',
+    '[class.nuvex-capsule-dock--light]': "variant() === 'light'",
+    '[class.nuvex-capsule-dock--dark]': "variant() === 'dark'",
+    '[class.nuvex-capsule-dock--horizontal]': "orientation() === 'horizontal'",
   },
 })
 export class CapsuleDockComponent {
@@ -26,6 +29,9 @@ export class CapsuleDockComponent {
 
   readonly items = input<DockItem[]>([]);
   readonly activeId = model<string>('');
+  readonly variant = input<'dark' | 'light' | 'auto'>('auto');
+  readonly orientation = input<'vertical' | 'horizontal' | 'auto'>('auto');
+  readonly showTooltip = input<boolean>(true);
 
   readonly onSelect = output<DockItem>();
 

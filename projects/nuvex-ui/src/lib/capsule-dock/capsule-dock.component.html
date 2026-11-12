@@ -1,4 +1,11 @@
-<nav class="nuvex-capsule-dock__nav" aria-label="Dock vertical">
+<nav
+  class="nuvex-capsule-dock__nav"
+  [class.nuvex-capsule-dock__nav--light]="variant() === 'light'"
+  [class.nuvex-capsule-dock__nav--dark]="variant() === 'dark'"
+  [class.nuvex-capsule-dock__nav--horizontal]="orientation() === 'horizontal'"
+  [class.nuvex-capsule-dock__nav--vertical]="orientation() === 'vertical'"
+  aria-label="Dock de navegación"
+>
   <!-- 1. ACCIONES SUPERIORES / LOGO O BÚSQUEDA -->
   <div class="nuvex-capsule-dock__top">
     <ng-content select="[slot=top]"></ng-content>
@@ -9,23 +16,31 @@
     <ng-content></ng-content>
 
     @for (item of items(); track item.id) {
-      <button
-        type="button"
-        class="nuvex-capsule-dock__btn"
-        [class.nuvex-capsule-dock__btn--active]="activeId() === item.id || item.active"
-        [title]="item.label"
-        (click)="selectItem(item)"
-      >
-        @if (item.icon) {
-          <span class="nuvex-capsule-dock__icon" [innerHTML]="getSafeIcon(item.icon)"></span>
-        } @else {
-          <span class="nuvex-capsule-dock__initial">{{ item.label.charAt(0) }}</span>
-        }
+      <div class="nuvex-capsule-dock__item-wrapper">
+        <button
+          type="button"
+          class="nuvex-capsule-dock__btn"
+          [class.nuvex-capsule-dock__btn--active]="activeId() === item.id || item.active"
+          [attr.aria-label]="item.label"
+          (click)="selectItem(item)"
+        >
+          @if (item.icon) {
+            <span class="nuvex-capsule-dock__icon" [innerHTML]="getSafeIcon(item.icon)"></span>
+          } @else {
+            <span class="nuvex-capsule-dock__initial">{{ item.label.charAt(0) }}</span>
+          }
 
-        @if (item.badge) {
-          <span class="nuvex-capsule-dock__badge">{{ item.badge }}</span>
+          @if (item.badge) {
+            <span class="nuvex-capsule-dock__badge">{{ item.badge }}</span>
+          }
+        </button>
+
+        @if (showTooltip() && item.label) {
+          <span class="nuvex-capsule-dock__tooltip" role="tooltip">
+            {{ item.label }}
+          </span>
         }
-      </button>
+      </div>
     }
   </div>
 

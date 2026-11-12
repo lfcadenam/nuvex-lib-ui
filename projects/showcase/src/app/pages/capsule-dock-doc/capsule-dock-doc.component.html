@@ -81,16 +81,48 @@
         </div>
 
         <div style="margin-top: 1rem; text-align: center; font-size: 0.8125rem; color: var(--nvl-text-muted-color);">
-          Módulo activo: <strong>{{ selectedDockId() }}</strong>
+          Módulo activo: <strong>{{ selectedDockId() }}</strong> · <em>Pasa el cursor sobre los botones para ver los tooltips flotantes</em>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: DOCK EN TEMA CLARO -->
+      <section class="doc-section">
+        <h3>2. Variante en Tema Claro (Light Mode)</h3>
+        <p class="doc-sub">Fondo translúcido blanco perla con sombra suave difusa, bordes sutiles y tooltips contrastados.</p>
+
+        <div class="demo-display" style="justify-content: center; padding: 2.5rem; background-color: var(--nvl-canvas-bg, #f2f4f7);">
+          <nuvex-capsule-dock
+            [items]="dockItems"
+            variant="light"
+            [(activeId)]="selectedDockId"
+            (onSelect)="handleDockSelect($event)"
+          ></nuvex-capsule-dock>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: DOCK HORIZONTAL / MÓVIL FLOTANTE -->
+      <section class="doc-section">
+        <h3>3. Orientación Horizontal (Barra Flotante Móvil)</h3>
+        <p class="doc-sub">Diseñado para adaptarse como barra cápsula inferior en smartphones y pantallas compactas.</p>
+
+        <div class="demo-display" style="justify-content: center; padding: 2rem; background-color: var(--nvl-surface-100);">
+          <nuvex-capsule-dock
+            [items]="dockItems"
+            orientation="horizontal"
+            [(activeId)]="selectedDockId"
+            (onSelect)="handleDockSelect($event)"
+          ></nuvex-capsule-dock>
         </div>
       </section>
 
       <section class="doc-section">
-        <h3>2. Principios del Dock Nuvex</h3>
+        <h3>4. Principios del Dock Nuvex</h3>
         <div style="font-size: 0.875rem; line-height: 1.6; color: var(--nvl-text-muted-color);">
           <ul style="padding-left: 1.25rem; margin: 0; display: flex; flex-direction: column; gap: 0.5rem;">
             <li><strong>Desacoplado de la ventana:</strong> Flota de manera autónoma con margen perimetral.</li>
             <li><strong>Sobriedad Iconográfica:</strong> Solo trazos lineales monocromáticos finos (1.75px). Cero emojis o stickers decorativos.</li>
+            <li><strong>Tooltips Flotantes:</strong> Despliegue de etiqueta contextual tipo píldora al hover.</li>
+            <li><strong>Adaptabilidad Móvil:</strong> Pasa fluidamente a barra inferior horizontal sin obstruir el contenido principal.</li>
             <li><strong>Gestión de Sesión Prohibida en el Dock:</strong> Siguiendo el estándar Nuvex, el menú de perfil y logout se ubica exclusivamente en el <code>nuvex-topbar</code>.</li>
           </ul>
         </div>
